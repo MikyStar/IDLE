@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="83.391" height="71.338" viewBox="0 0 83.391 71.338">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_ionic-md-school" data-name="Icon ionic-md-school" class="cls-1" d="M17.146,44.2V59.79l26.046,14.9,26.046-14.9V44.2L43.192,59.1ZM43.192,4.5,2.25,27.9l40.942,23.4,33.5-19.137V59.1h7.439V27.9Z" transform="translate(-1.242 -3.924)"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.947" height="67.592" viewBox="0 0 28.947 67.592">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Icon_ionic-md-woman" data-name="Icon ionic-md-woman" transform="translate(-11.254 -2.243)">
+    <path id="Tracé_11" data-name="Tracé 11" class="cls-1" d="M15.829,13.151,11.4,28.875c-.95,3.437,3.121,4.779,4.116,1.553l3.965-14.5h1.116L13.778,41.4H20.14V60.549a2.419,2.419,0,1,0,4.824,0V41.4h1.508V60.549a2.35,2.35,0,1,0,4.673,0V41.4h6.543L30.723,15.925H31.99l3.965,14.5c.98,3.3,5.02,1.884,4.116-1.538L35.638,13.151c-.6-1.779-2.744-4.915-6.332-5.065H22.175A7.2,7.2,0,0,0,15.829,13.151Z" transform="translate(0 6.685)"/>
+    <path id="Tracé_12" data-name="Tracé 12" class="cls-1" d="M26.462,7.866a5.519,5.519,0,1,0-11.035,0,5.519,5.519,0,1,0,11.035,0Z" transform="translate(4.774 0)"/>
+  </g>
+</svg>

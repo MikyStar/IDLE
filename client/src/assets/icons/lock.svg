@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="62.093" height="70.82" viewBox="0 0 62.093 70.82">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_awesome-lock" data-name="Icon awesome-lock" class="cls-1" d="M54.547,30.546H51.274V20.728a20.728,20.728,0,0,0-41.456,0v9.818H6.546A6.547,6.547,0,0,0,0,37.092V63.275A6.547,6.547,0,0,0,6.546,69.82h48a6.547,6.547,0,0,0,6.546-6.546V37.092A6.547,6.547,0,0,0,54.547,30.546Zm-14.182,0H20.728V20.728a9.818,9.818,0,0,1,19.637,0Z" transform="translate(0.5 0.5)"/>
+</svg>

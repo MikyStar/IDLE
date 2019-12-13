@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64.38" height="70.499" viewBox="0 0 64.38 70.499">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_ionic-md-arrow-round-up" data-name="Icon ionic-md-arrow-round-up" class="cls-1" d="M65.106,32.177,39.522,4.9a5.716,5.716,0,0,0-4.277-1.777h-.076A5.716,5.716,0,0,0,30.891,4.9L5.307,32.177a5.978,5.978,0,0,0,0,8.532,6.163,6.163,0,0,0,8.63,0L29.1,24.316V66.581a6.11,6.11,0,0,0,12.22,0V24.316l15.16,16.392a6.163,6.163,0,0,0,8.63,0A5.978,5.978,0,0,0,65.106,32.177Z" transform="translate(-3.017 -2.625)"/>
+</svg>

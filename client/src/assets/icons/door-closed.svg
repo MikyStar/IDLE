@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80.608" height="69.547" viewBox="0 0 80.608 69.547">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_awesome-door-closed" data-name="Icon awesome-door-closed" class="cls-1" d="M77.618,59.979H63.687V6.8c0-3.751-2.678-6.8-5.971-6.8H21.891C18.6,0,15.92,3.05,15.92,6.8V59.979H1.99A2.07,2.07,0,0,0,0,62.121V66.4a2.07,2.07,0,0,0,1.99,2.142H77.618a2.07,2.07,0,0,0,1.99-2.142V62.121A2.07,2.07,0,0,0,77.618,59.979ZM51.744,38.558a4.3,4.3,0,1,1,3.98-4.284A4.141,4.141,0,0,1,51.744,38.558Z" transform="translate(0.5 0.5)"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44.476" height="70.499" viewBox="0 0 44.476 70.499">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_awesome-bolt" data-name="Icon awesome-bolt" class="cls-1" d="M40.18,21.718H24.516L30.3,4.1A3.271,3.271,0,0,0,27.149,0H7.6A3.263,3.263,0,0,0,4.372,2.823L.028,35.4a3.264,3.264,0,0,0,3.231,3.692H19.371l-6.258,26.4A3.254,3.254,0,0,0,19.1,67.87L42.99,26.605A3.252,3.252,0,0,0,40.18,21.718Z" transform="translate(0.504 0.5)"/>
+</svg>

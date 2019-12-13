@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="55.185" height="70.667" viewBox="0 0 55.185 70.667">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_material-delete" data-name="Icon material-delete" class="cls-1" d="M11.37,66.426a7.763,7.763,0,0,0,7.741,7.741H50.074a7.763,7.763,0,0,0,7.741-7.741V19.981H11.37ZM61.685,8.37H48.139L44.268,4.5H24.917l-3.87,3.87H7.5v7.741H61.685Z" transform="translate(-7 -4)"/>
+</svg>

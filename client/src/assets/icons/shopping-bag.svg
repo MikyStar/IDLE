@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="73.333" height="81.111" viewBox="0 0 73.333 81.111">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3.333px;
+      }
+    </style>
+  </defs>
+  <g id="Icon_feather-shopping-bag" data-name="Icon feather-shopping-bag" transform="translate(-3.333 -1.667)">
+    <path id="Tracé_1" data-name="Tracé 1" class="cls-1" d="M16.667,3.333,5,18.889V73.333a7.778,7.778,0,0,0,7.778,7.778H67.222A7.778,7.778,0,0,0,75,73.333V18.889L63.333,3.333Z" transform="translate(0 0)"/>
+    <path id="Tracé_2" data-name="Tracé 2" class="cls-1" d="M5,10H75" transform="translate(0)"/>
+    <path id="Tracé_3" data-name="Tracé 3" class="cls-1" d="M26.667,16.667a6.667,6.667,0,1,1-13.333,0" transform="translate(20 22.222)"/>
+  </g>
+</svg>

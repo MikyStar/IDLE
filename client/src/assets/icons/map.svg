@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="71" height="55.921" viewBox="0 0 71 55.921">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_awesome-map" data-name="Icon awesome-map" class="cls-1" d="M0,12.91V55A1.945,1.945,0,0,0,2.666,56.8l16.778-7.637V2.5l-17,6.8A3.89,3.89,0,0,0,0,12.91ZM23.333,49.167l23.333,7.778V10.278L23.333,2.5Zm44-46.526L50.556,10.278V56.944l17-6.8A3.888,3.888,0,0,0,70,46.534V4.447A1.945,1.945,0,0,0,67.334,2.641Z" transform="translate(0.5 -1.761)"/>
+</svg>
