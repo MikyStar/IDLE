@@ -13,10 +13,11 @@ export default class TestGrid extends React.Component
 			{ i: 'b', x: 1, y: 5, w: 3, h: 2, static : true },
 			{ i: 'c', x: 4, y: 0, w: 1, h: 3, static : true },
 			{ i: 'd', x: 4, y: 0, w: 6, h: 3, static : true },
-			{ i: 'e', x: 5, y: 10, w: 7, h: 2, static : true }
+			{ i: 'e', x: 10, y: 0, w: 6, h: 2, static : true }
 		];
 
 		return	(
+					<>
 					<GridLayout
 						style={{ backgroundColor : 'purple' }}
 						className="layout"
@@ -29,14 +30,23 @@ export default class TestGrid extends React.Component
 						<div key="a" style={{ backgroundColor : 'red' }}>a</div>
 						<div key="b" style={{ backgroundColor : 'blue' }}>b</div>
 						<div key="c" style={{ backgroundColor : 'green' }}>c</div>
-						<div key="d" style={{ backgroundColor : 'pink' }}>
-							<p>1</p>
+						<div key="d" style={{ backgroundColor : 'pink', color : 'cyan', fontSize : '15px', fontWeight : "bolder" }}>
+							<p>D1</p>
 							<p>2</p>
 							<p>3</p>
 							<p>4</p>
 						</div>
-						<div key="e" style={{ backgroundColor : 'cornflowerblue' }}>--<EmbededGrid /></div>
+						<div key="e" style={{ backgroundColor : 'cornflowerblue' }}>
+							<div style={{ backgroundColor: 'brown', padding : '20px' }}>
+								<EmbededGrid />
+							</div>
+						</div>
 					</GridLayout>
+
+					<div style={{ backgroundColor: 'orange', padding : '20px' }}>
+						<EmbededGrid />
+					</div>
+					</>
 				);
 	}
 }
