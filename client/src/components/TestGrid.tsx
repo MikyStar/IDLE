@@ -1,5 +1,5 @@
 import React from 'react';
-import GridLayout from 'react-grid-layout';
+import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -18,34 +18,38 @@ export default class TestGrid extends React.Component
 
 		return	(
 					<>
-					<GridLayout
-						style={{ backgroundColor : 'purple' }}
-						className="layout"
-						layout={layout}
-						cols={ 12 }
-						rowHeight={30}
-						width={1000}
-						isDraggable={ false }
-					>
-						<div key="a" style={{ backgroundColor : 'red' }}>a</div>
-						<div key="b" style={{ backgroundColor : 'blue' }}>b</div>
-						<div key="c" style={{ backgroundColor : 'green' }}>c</div>
-						<div key="d" style={{ backgroundColor : 'pink', color : 'cyan', fontSize : '15px', fontWeight : "bolder" }}>
-							<p>D1</p>
-							<p>2</p>
-							<p>3</p>
-							<p>4</p>
+						<div style={{ backgroundColor: 'red', padding : '20px' }}>
+							<ResponsiveTest />
 						</div>
-						<div key="e" style={{ backgroundColor : 'cornflowerblue' }}>
-							<div style={{ backgroundColor: 'brown', padding : '20px' }}>
-								<EmbededGrid />
-							</div>
-						</div>
-					</GridLayout>
 
-					<div style={{ backgroundColor: 'orange', padding : '20px' }}>
-						<EmbededGrid />
-					</div>
+						<GridLayout
+							style={{ backgroundColor : 'purple' }}
+							className="layout"
+							layout={layout}
+							cols={ 12 }
+							rowHeight={30}
+							width={1000}
+							isDraggable={ false }
+						>
+							<div key="a" style={{ backgroundColor : 'red' }}>a</div>
+							<div key="b" style={{ backgroundColor : 'blue' }}>b</div>
+							<div key="c" style={{ backgroundColor : 'green' }}>c</div>
+							<div key="d" style={{ backgroundColor : 'pink', color : 'cyan', fontSize : '15px', fontWeight : "bolder" }}>
+								<p>D1</p>
+								<p>2</p>
+								<p>3</p>
+								<p>4</p>
+							</div>
+							<div key="e" style={{ backgroundColor : 'cornflowerblue' }}>
+								<div style={{ backgroundColor: 'brown', padding : '20px' }}>
+									<EmbededGrid />
+								</div>
+							</div>
+						</GridLayout>
+
+						<div style={{ backgroundColor: 'orange', padding : '20px' }}>
+							<EmbededGrid />
+						</div>
 					</>
 				);
 	}
@@ -77,4 +81,35 @@ const EmbededGrid = () =>
 						<div key="h" style={{ backgroundColor : 'darkgreen' }}>h</div>
 					</GridLayout>
 				);
+}
+
+//////////////////////////////////////////////////////////////////////
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const ResponsiveTest = () =>
+{
+	const layouts =
+	{
+		lg :
+		[
+			{ i: 'i', x: 0, y: 0, w: 1, h: 1, static : true },
+			{ i: 'j', x: 1, y: 5, w: 2, h: 2, static : true },
+			{ i: 'k', x: 2, y: 0, w: 5, h: 2, static : true },
+		]
+	}
+
+	return	(
+				<ResponsiveGridLayout
+					className="layout"
+					layouts={layouts}
+					breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+					rowHeight={ 30 }
+					cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}
+				>
+					<div key="i" style={{ backgroundColor : 'aqua' }}>i</div>
+					<div key="j" style={{ backgroundColor : 'chartreuse' }}>j</div>
+					<div key="k" style={{ backgroundColor : 'darkcyan' }}>k</div>
+				</ResponsiveGridLayout>
+			)
 }
