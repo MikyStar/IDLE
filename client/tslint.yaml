@@ -19,4 +19,4 @@ rules :
     max-line-length : false
     no-console : false
     no-var-requires : false
-    quotemark : false
+    member-access : false

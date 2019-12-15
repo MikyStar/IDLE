@@ -5,9 +5,9 @@ import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
 
 export default class TestGrid extends React.Component
 {
-	render()
+	render = () =>
 	{
-		const layout =
+		const layouts : GridLayout.Layout[] =
 		[
 			{ i: 'a', x: 0, y: 0, w: 1, h: 1, static : true },
 			{ i: 'b', x: 1, y: 5, w: 3, h: 2, static : true },
@@ -18,14 +18,14 @@ export default class TestGrid extends React.Component
 
 		return	(
 					<>
-						<div style={{ backgroundColor: 'red', padding : '20px' }}>
+						<div style={{ backgroundColor: 'teal', padding : '20px', color : 'black' }}>
 							<ResponsiveTest />
 						</div>
 
 						<GridLayout
 							style={{ backgroundColor : 'purple' }}
 							className="layout"
-							layout={layout}
+							layout={layouts}
 							cols={ 12 }
 							rowHeight={30}
 							width={1000}
@@ -34,13 +34,14 @@ export default class TestGrid extends React.Component
 							<div key="a" style={{ backgroundColor : 'red' }}>a</div>
 							<div key="b" style={{ backgroundColor : 'blue' }}>b</div>
 							<div key="c" style={{ backgroundColor : 'green' }}>c</div>
-							<div key="d" style={{ backgroundColor : 'pink', color : 'cyan', fontSize : '15px', fontWeight : "bolder" }}>
+							<div key="d" style={{ backgroundColor : 'pink', color : 'black', fontSize : '15px', fontWeight : "bolder" }}>
 								<p>D1</p>
 								<p>2</p>
 								<p>3</p>
 								<p>4</p>
 							</div>
-							<div key="e" style={{ backgroundColor : 'cornflowerblue' }}>
+							<div key="e" style={{ backgroundColor : 'violet' }}>
+								e
 								<div style={{ backgroundColor: 'brown', padding : '20px' }}>
 									<EmbededGrid />
 								</div>
@@ -68,7 +69,7 @@ const EmbededGrid = () =>
 
 		return	(
 					<GridLayout
-						style={{ backgroundColor : 'white' }}
+						style={{ backgroundColor : 'steelblue' }}
 						className="layout"
 						layout={layout}
 						cols={ 12 }
@@ -109,7 +110,7 @@ const ResponsiveTest = () =>
 				>
 					<div key="i" style={{ backgroundColor : 'aqua' }}>i</div>
 					<div key="j" style={{ backgroundColor : 'chartreuse' }}>j</div>
-					<div key="k" style={{ backgroundColor : 'darkcyan' }}>k</div>
+					<div key="k" style={{ backgroundColor : 'yellowgreen' }}>k</div>
 				</ResponsiveGridLayout>
 			)
 }
