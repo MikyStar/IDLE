@@ -12,7 +12,7 @@ interface ContainerProps
 	padding ?: number,
 	vertical ?: boolean,
 	noBorder ?: boolean,
-	title ?: string
+	title ?: string,
 
 	children : ReactNode
 }
@@ -27,25 +27,38 @@ interface Center
 
 const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickness, color, center, dashed, children, padding } : ContainerProps ) =>
 {
-	return	(
-				<div style=	{{
-								border : ( !noBorder ) ? ( `${ dashed ? 'dashed' : 'solid' } ${ thickness || '3' }px ${ color || 'white' }` ) : '',
-								borderRadius : ( !noBorder ) ? ( radius ? `${ radius }px` : '20px' ) : '',
-								position : center ? 'relative' : 'absolute',
-								padding : padding ? `${ padding }px` : '10px'
-							}}
-					title={ title || '' }
-				>
-					<div style=	{{
-									float : 'left',
-									top : ( center && center.Y ) ? '50%' : '0%',
-									left : ( center && center.X ) ? '50%' : '0%',
-									transform : `translate( ${ ( center && center.X ) ? '-50%' : '0%' }, ${ ( center && center.Y ) ? '-50%' : '0%' } )`
+	const Tooltip = ( props: { children: React.ReactNode } ) => <div title={ title || '' }>{ props.children }</div>;
+
+	const Border = ( props: { children: React.ReactNode } ) =>
+	{
+		return	(
+					<div style={{
+									border : ( !noBorder ) ? ( `${ dashed ? 'dashed' : 'solid' } ${ thickness || '3' }px ${ color || 'white' }` ) : '',
+									borderRadius : ( !noBorder ) ? ( radius ? `${ radius }px` : '20px' ) : ''
 								}}
-					>
-						{ children }
-					</div>
-				</div>
+					>{ props.children }</div>
+				)
+	};
+
+	const Padding = ( props: { children: React.ReactNode } ) => <div style={{ padding : padding || '10px' }}>{ props.children }</div>
+
+	/*
+	float : 'left',
+	top : ( center && center.Y ) ? '50%' : '0%',
+	left : ( center && center.X ) ? '50%' : '0%',
+	transform : `translate( ${ ( center && center.X ) ? '-50%' : '0%' }, ${ ( center && center.Y ) ? '-50%' : '0%' } )`
+	*/
+
+	//////////////////////////////////////////////////////////////////
+
+	return	(
+				<Tooltip>
+					<Border>
+						<Padding>
+							{ children }
+						</Padding>
+					</Border>
+				</Tooltip>
 			);
 }
 

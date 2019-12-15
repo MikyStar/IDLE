@@ -20,3 +20,4 @@ rules :
     no-console : false
     no-var-requires : false
     member-access : false
+    no-any : false
