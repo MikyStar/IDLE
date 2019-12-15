@@ -62,7 +62,7 @@ const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickn
 
 	const Padding = ( props: { children: React.ReactNode } ) => <div style={{ padding : padding || '10px' }}>{ props.children }</div>
 
-	const WrapContent = ( props: { children: React.ReactNode } ) => <div style={{ float : 'left' }}>{ props.children }</div>
+	const WrapContent = ( props: { children: React.ReactNode } ) => <div style={{ float : 'left', position : 'initial', width : '100%' }}>{ props.children }</div>
 
 	const Centered = ( props: { children: React.ReactNode, X : boolean, Y : boolean } ) =>
 	{
@@ -79,15 +79,20 @@ const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickn
 			margin : '0 auto'
 		}
 
-		return	(
-					/*<div style={{ position : 'relative' }}>
-						<div style={{ margin : 0, position : 'absolute', top : '50%', msTransform : 'translateY(-50%)', transform : 'translateY(-50%)' }}
-						>
-						{ props.children }
-					</div>
-				</div>*/
-					<div style={{ ...styleForHorizontal, ...styleForVertical }}>{ props.children }</div>
-				)
+		const finalStyle = ( () =>
+		{
+			let final = {};
+
+			if( props.X )
+				final = { ...final, ...styleForHorizontal }
+
+			if( props.Y )
+				final = { ...final, ...styleForVertical }
+
+			return final;
+		})()
+
+		return <div style={{ ...finalStyle }}>{ props.children }</div>
 	};
 
 	/*
