@@ -17,7 +17,7 @@ interface BuildingProps
 	level : number,
 	workers : number,
 	productionRate : number,
-	upgradePrice : string, // TODO make type with value and unit
+	upgradePrice : string, // TODO make type with value and unit and if should be crossed
 }
 
 export enum BuildingType
@@ -69,7 +69,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 						<img key='productionIcon' src={ productionIconSVG } alt={ `${ type }` } title={ `${ type }` } />
 						<div key='productionRate'>{ productionRate } / s</div>
 
-						<div key='upgrade' className='border-normal' style={{ fontWeight : 'bolder', fontSize : '20px', padding : '5px', position : 'relative' }}>
+						<div key='upgrade' className='border-normal' style={{ fontWeight : 'bolder', fontSize : '20px', padding : '5px', position : 'relative', cursor : 'pointer' }}>
 							<div style={{ alignItems : 'center', display : 'flex', float : 'left', position : 'absolute', top : '50%', left : '50%', transform : 'translate(-50%, -50%)' }}>
 								<img src={ arrowUp } alt='Upgrade' title='Upgrade' height='30px' style={{ padding : '5px' }}/>
 								<div style={{ padding : '5px' }}>{ upgradePrice }</div>

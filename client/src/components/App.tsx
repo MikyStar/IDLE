@@ -1,8 +1,9 @@
 import React from 'react';
 
+import '../styles/css/App.css';
 import TestGrid from './TestGrid';
 import Building, { BuildingType } from './containers/Building';
-import '../styles/css/App.css';
+import Container from './utils/Container';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -18,6 +19,11 @@ const App:  React.FC = () =>
 						productionRate={ 3 }
 						upgradePrice={ '5k' }
 					/>
+
+					<Container>
+						<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+						<div>Illo provident consequuntur incidunt possimus tempora impedit, magni, amet suscipit aliquid iste veritatis quaerat commodi qui harum nostrum eveniet saepe? </div>
+					</Container>
 				</>
 			);
 }
