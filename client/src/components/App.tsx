@@ -20,7 +20,7 @@ const App:  React.FC = () =>
 						upgradePrice={ '5k' }
 					/>
 
-					<Container>
+					<Container title='Test'>
 						<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
 						<div>Illo provident consequuntur incidunt possimus tempora impedit, magni, amet suscipit aliquid iste veritatis quaerat commodi qui harum nostrum eveniet saepe? </div>
 					</Container>

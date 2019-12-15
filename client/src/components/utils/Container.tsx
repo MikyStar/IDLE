@@ -11,7 +11,8 @@ interface ContainerProps
 	dashed ?: boolean,
 	padding ?: number,
 	vertical ?: boolean,
-	noBorder ?: boolean
+	noBorder ?: boolean,
+	title ?: string
 
 	children : ReactNode
 }
@@ -24,7 +25,7 @@ interface Center
 
 //////////////////////////////////////////////////////////////////////
 
-const Container : React.FC<ContainerProps> = ( { noBorder, radius, thickness, color, center, dashed, children, padding } : ContainerProps ) =>
+const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickness, color, center, dashed, children, padding } : ContainerProps ) =>
 {
 	return	(
 				<div style=	{{
@@ -33,6 +34,7 @@ const Container : React.FC<ContainerProps> = ( { noBorder, radius, thickness, co
 								position : center ? 'relative' : 'absolute',
 								padding : padding ? `${ padding }px` : '10px'
 							}}
+					title={ title || '' }
 				>
 					<div style=	{{
 									float : 'left',
