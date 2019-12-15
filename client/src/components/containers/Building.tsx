@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import GridLayout ,{ Responsive, WidthProvider } from 'react-grid-layout';
+import GridLayout from 'react-grid-layout';
 
-//////////////////////////////////////////////////////////////////////
-
-const ResponsiveGridLayout = WidthProvider( Responsive );
+import '../../styles/css/Building.css';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -19,22 +17,28 @@ interface BuildingProps
 
 //////////////////////////////////////////////////////////////////////
 
+const WIDTH = 400;
+
+//////////////////////////////////////////////////////////////////////
+
 const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice } : BuildingProps ) =>
 (
 	<>
 		<GridLayout
-			className={ 'layout' }
+			className={ 'layout border' }
+			style={{ width : `${ WIDTH }px` }}
 			layout=	{[
 						{ i: 'type', x: 0, y: 0, w: 1, h: 1, static : true },
 						{ i: 'material', x: 4, y: 0, w: 1, h: 1, static : true },
 						{ i: 'level', x: 4, y: 2, w: 1, h: 1, static : true },
 						{ i: 'workers', x: 4, y: 4, w: 1, h: 1, static : true },
 						{ i: 'productionRate', x: 4, y: 6, w: 1, h: 1, static : true },
-						{ i: 'upgradePrice', x: 8, y: 4, w: 1, h: 1, static : true },
+						{ i: 'upgradePrice', x: 8, y: 3, w: 1, h: 1, static : true },
 					]}
 			rowHeight={ 20 }
-			cols={ 12 }
-			width={ 300 }
+			cols={ 8 }
+			width={ WIDTH }
+			autoSize
 		>
 			<div key='type'>Type : { type }</div>
 			<div key='material'>Material : { material }</div>
