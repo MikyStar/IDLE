@@ -22,7 +22,7 @@ const App:  React.FC = () =>
 
 					<Container title='Test' center={{ X : true }}>
 						<div style={{ height : '200px' }}></div>
-						<Container center><div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div></Container>
+						<Container center noBorder><div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div></Container>
 						<div>Illo provident consequuntur incidunt possimus tempora impedit, magni, amet suscipit aliquid iste veritatis quaerat commodi qui harum nostrum eveniet saepe? </div>
 					</Container>
 				</>
