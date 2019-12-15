@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TestGrid from './TestGrid';
-import Building from './containers/Building';
+import Building, { BuildingType } from './containers/Building';
 import '../styles/css/App.css';
 
 //////////////////////////////////////////////////////////////////////
@@ -11,8 +11,8 @@ const App:  React.FC = () =>
 	return 	(
 				<>
 					<Building
-						type='mine'
-						material='coal'
+						type={ BuildingType.FACTORY }
+						material='Coal'
 						level={ 1 }
 						workers={ 1 }
 						productionRate={ 3 }
