@@ -34,13 +34,15 @@ const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickn
 		return	(
 					<div style={{
 									border : ( !noBorder ) ? ( `${ dashed ? 'dashed' : 'solid' } ${ thickness || '3' }px ${ color || 'white' }` ) : '',
-									borderRadius : ( !noBorder ) ? ( radius ? `${ radius }px` : '20px' ) : ''
+									borderRadius : ( !noBorder ) ? ( radius ? `${ radius }px` : '20px' ) : '',
 								}}
 					>{ props.children }</div>
 				)
 	};
 
 	const Padding = ( props: { children: React.ReactNode } ) => <div style={{ padding : padding || '10px' }}>{ props.children }</div>
+
+	const WrapContent = ( props: { children: React.ReactNode } ) => <div style={{ float : 'left' }}>{ props.children }</div>
 
 	/*
 	float : 'left',
@@ -52,13 +54,15 @@ const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickn
 	//////////////////////////////////////////////////////////////////
 
 	return	(
-				<Tooltip>
-					<Border>
-						<Padding>
-							{ children }
-						</Padding>
-					</Border>
-				</Tooltip>
+				<WrapContent>
+					<Tooltip>
+						<Border>
+							<Padding>
+								{ children }
+							</Padding>
+						</Border>
+					</Tooltip>
+				</WrapContent>
 			);
 }
 
