@@ -24,22 +24,23 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 		const innerFlex : React.CSSProperties =
 		{
 			display : 'flex',
-			justifyContent : 'space-between',
+			justifyContent : 'center',
 			width : width || '100px'
 		}
 
 		const imageStyle : React.CSSProperties =
 		{
 			cursor : 'pointer',
-			marginRight : '10px'
 		}
 
-		const Line = () => <div style={ ( props.index === index ) ? { borderLeft : '5px solid white' } : {} }></div>
+		const lineStyle : React.CSSProperties =
+		{
+			borderLeft : ( props.index === index ) ? '5px solid white' : ''
+		}
 
 		//////////////////////////////////////////////////////////////
 
-		return	<div style={ innerFlex }>
-					<Line />
+		return	<div style={{ ...innerFlex, ...lineStyle }}>
 					<img
 						key={ index }
 						src={ icon }
