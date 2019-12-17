@@ -7,12 +7,13 @@ import routes, { RouteType } from '../../routes/routes';
 interface NavBarProps
 {
 	width ?: string,
-	index : number
+	index : number,
+	onClick : ( index : number ) => void
 }
 
 //////////////////////////////////////////////////////////////////////
 
-const NavBar : React.FC<NavBarProps> = ( { width , index } : NavBarProps ) =>
+const NavBar : React.FC<NavBarProps> = ( { width , index, onClick } : NavBarProps ) =>
 {
 	const style : React.CSSProperties =
 	{
@@ -22,7 +23,7 @@ const NavBar : React.FC<NavBarProps> = ( { width , index } : NavBarProps ) =>
 		alignItems : 'space-between'
 	}
 
-	const NavBarItems = ( props : { route : RouteType, selected : boolean }  ) =>
+	const NavBarItems = ( props : { route : RouteType, index : number }  ) =>
 	{
 		const { icon, name, path } = props.route;
 
@@ -33,16 +34,19 @@ const NavBar : React.FC<NavBarProps> = ( { width , index } : NavBarProps ) =>
 			width : width || '100px'
 		}
 
+		const cursor : React.CSSProperties = { cursor : 'pointer' }
+
 		//////////////////////////////////////////////////////////////
 
 		return	<div style={ flex }>
-					<div style={ props.selected ? { borderLeft : '5px solid white' } : {} }></div>
+					<div style={ ( props.index === index ) ? { borderLeft : '5px solid white' } : {} }></div>
 					<img
-						key={ name }
+						key={ index }
 						src={ icon }
 						alt={ name }
 						title={ name }
-						style={ props.selected ? {} : { opacity : 0.2 } }
+						style={ ( props.index === index ) ? { ...cursor } : { opacity : 0.2, ...cursor } }
+						onClick={ () => onClick( props.index ) }
 					/>
 				</div>
 	}
@@ -51,7 +55,7 @@ const NavBar : React.FC<NavBarProps> = ( { width , index } : NavBarProps ) =>
 
 	return	(
 				<div style={ style }>
-					{ routes.map( ( route, i ) => <NavBarItems route={ route } selected={ i === index } /> ) }
+					{ routes.map( ( route, i ) => <NavBarItems route={ route } index={ i } /> ) }
 				</div>
 			);
 }

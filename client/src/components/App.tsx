@@ -33,7 +33,10 @@ const App:  React.FC = () =>
 						/>
 					 */}
 
-					<NavBar index={ 1 } />
+					<NavBar
+						index={ 1 }
+						onClick={ index => console.log( index ) }
+					/>
 
 					<Container title='Test' center={{ Y : true }} style={{ width : '1500px' }}>
 						<div style={{ height : '200px', width : '300px', backgroundColor : 'green' }}></div>
