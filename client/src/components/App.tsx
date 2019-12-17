@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import '../styles/css/App.css';
 import TestGrid from './TestGrid';
@@ -8,8 +8,16 @@ import Container from './utils/Container';
 
 //////////////////////////////////////////////////////////////////////
 
+const DEFAULT_TAB_INDEX = 1;
+
+//////////////////////////////////////////////////////////////////////
+
 const App:  React.FC = () =>
 {
+	const [ tabSelectedIndex, setSelectedTabIndex ] = useState( DEFAULT_TAB_INDEX )
+
+	//////////////////////////////////////////////////////////////////
+
 	const mainStyle : React.CSSProperties =
 	{
 		height : '100%',
@@ -18,6 +26,7 @@ const App:  React.FC = () =>
 		color: '#f5f5f5',
 		fontFamily: 'Courier New, Courier, monospace'
 	}
+
 	//////////////////////////////////////////////////////////////////
 
 	return	(
@@ -34,8 +43,8 @@ const App:  React.FC = () =>
 					 */}
 
 					<NavBar
-						index={ 1 }
-						onClick={ index => console.log( index ) }
+						index={ tabSelectedIndex }
+						onClick={ index => setSelectedTabIndex( index ) }
 					/>
 
 					<Container title='Test' center={{ Y : true }} style={{ width : '1500px' }}>
