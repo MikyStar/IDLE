@@ -13,7 +13,6 @@ const App:  React.FC = () =>
 	const mainStyle : React.CSSProperties =
 	{
 		height : '100%',
-		position: 'relative',
 		border: '1px solid red',
 		backgroundColor: '#212121',
 		color: '#f5f5f5',

@@ -6,12 +6,12 @@ import routes, { RouteType } from '../../routes/routes';
 
 interface NavBarProps
 {
-
+	width ?: string
 }
 
 //////////////////////////////////////////////////////////////////////
 
-const NavBar : React.FC<NavBarProps> = ( {} : NavBarProps ) =>
+const NavBar : React.FC<NavBarProps> = ( { width } : NavBarProps ) =>
 {
 	const style : React.CSSProperties =
 	{
@@ -21,16 +21,34 @@ const NavBar : React.FC<NavBarProps> = ( {} : NavBarProps ) =>
 		alignItems : 'space-between'
 	}
 
-	const NavBarItems = ( {}  ) =>
+	const NavBarItems = ( props : { route : RouteType }  ) =>
 	{
+		const { icon, name, path } = props.route;
 
+		const flex : React.CSSProperties =
+		{
+			display : 'flex',
+			justifyContent : 'space-between',
+			width : width || '100px'
+		}
+
+		const border : React.CSSProperties =
+		{
+			borderLeft : '5px solid white',
+		}
+
+
+		return	<div style={ flex }>
+					<div style={ border }></div>
+					<img key={ name } src={ icon } alt={ name } title={ name } />
+				</div>
 	}
 
 	//////////////////////////////////////////////////////////////////
 
 	return	(
 				<div style={ style }>
-					{ routes.map( route => <img key={ route.name } src={ route.icon } alt={ route.name } title={ route.name } /> ) }
+					{ routes.map( route => <NavBarItems route={ route } /> ) }
 				</div>
 			);
 }
