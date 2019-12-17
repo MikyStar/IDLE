@@ -18,17 +18,6 @@ const App:  React.FC = () =>
 
 	//////////////////////////////////////////////////////////////////
 
-	const mainStyle : React.CSSProperties =
-	{
-		height : '100%',
-		border: '1px solid red',
-		backgroundColor: '#212121',
-		color: '#f5f5f5',
-		fontFamily: 'Courier New, Courier, monospace'
-	}
-
-	//////////////////////////////////////////////////////////////////
-
 	return	(
 				<div style={ mainStyle }>
 					{/*
@@ -54,6 +43,16 @@ const App:  React.FC = () =>
 					</Container>
 				</div>
 			);
+}
+
+//////////////////////////////////////////////////////////////////
+
+const mainStyle : React.CSSProperties =
+{
+	border: '1px solid red',
+	backgroundColor: '#212121',
+	color: '#f5f5f5',
+	fontFamily: 'Courier New, Courier, monospace'
 }
 
 //////////////////////////////////////////////////////////////////////
