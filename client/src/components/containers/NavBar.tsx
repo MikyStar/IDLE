@@ -33,15 +33,17 @@ const NavBar : React.FC<NavBarProps> = ( { width , index } : NavBarProps ) =>
 			width : width || '100px'
 		}
 
-		const border : React.CSSProperties =
-		{
-			borderLeft : '5px solid white',
-		}
-
+		//////////////////////////////////////////////////////////////
 
 		return	<div style={ flex }>
-					<div style={ ( props.selected === true ) ? border : {} }></div>
-					<img key={ name } src={ icon } alt={ name } title={ name } />
+					<div style={ props.selected ? { borderLeft : '5px solid white' } : {} }></div>
+					<img
+						key={ name }
+						src={ icon }
+						alt={ name }
+						title={ name }
+						style={ props.selected ? {} : { opacity : 0.2 } }
+					/>
 				</div>
 	}
 

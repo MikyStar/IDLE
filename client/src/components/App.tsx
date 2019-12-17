@@ -16,11 +16,11 @@ const App:  React.FC = () =>
 		border: '1px solid red',
 		backgroundColor: '#212121',
 		color: '#f5f5f5',
-		fontFamily: "Courier New, Courier, monospace"
+		fontFamily: 'Courier New, Courier, monospace'
 	}
 	//////////////////////////////////////////////////////////////////
 
-	return 	(
+	return	(
 				<div style={ mainStyle }>
 					{/*
 						<Building
