@@ -14,12 +14,12 @@ const DEFAULT_TAB_INDEX = 1;
 
 const App:  React.FC = () =>
 {
-	const [ tabSelectedIndex, setSelectedTabIndex ] = useState( DEFAULT_TAB_INDEX )
+	const [ tabSelectedIndex, setSelectedTabIndex ] = useState( DEFAULT_TAB_INDEX );
 
 	//////////////////////////////////////////////////////////////////
 
 	return	(
-				<div style={ mainStyle }>
+				<div style={{ ...mainStyle, ...mainGrid }}>
 					{/*
 						<Building
 							type={ BuildingType.FACTORY }
@@ -32,9 +32,12 @@ const App:  React.FC = () =>
 					 */}
 
 					<NavBar
+						style={{ gridArea : 'nav' }}
 						index={ tabSelectedIndex }
 						onClick={ index => setSelectedTabIndex( index ) }
 					/>
+					<div style={{ backgroundColor : 'green', gridArea : 'status' }}></div>
+					<div style={{ backgroundColor : 'red', gridArea : 'content' }}></div>
 				</div>
 			);
 }
@@ -49,6 +52,17 @@ const mainStyle : React.CSSProperties =
 	backgroundColor: '#212121',
 	color: '#f5f5f5',
 	fontFamily: 'Courier New, Courier, monospace'
+}
+
+const mainGrid : React.CSSProperties =
+{
+	display : 'grid',
+	gridTemplateColumns : '100px auto',
+	gridTemplateRows : '10% auto',
+	gridTemplateAreas :	`
+							'nav status'
+							'nav content'
+						`
 }
 
 //////////////////////////////////////////////////////////////////////

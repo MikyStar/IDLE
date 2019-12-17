@@ -8,14 +8,16 @@ interface NavBarProps
 {
 	width ?: string,
 	index : number,
-	onClick : ( index : number ) => void
+	onClick : ( index : number ) => void,
+	className ?: string,
+	style ?: React.CSSProperties
 }
 
 //////////////////////////////////////////////////////////////////////
 
-const NavBar : React.FC<NavBarProps> = ( { width , index, onClick } : NavBarProps ) =>
+const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, style } : NavBarProps ) =>
 {
-	const style : React.CSSProperties =
+	const flexStyle : React.CSSProperties =
 	{
 		height : '100%',
 		display : 'flex',
@@ -54,7 +56,7 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick } : NavBarProp
 	//////////////////////////////////////////////////////////////////
 
 	return	(
-				<div style={ style }>
+				<div style={{ ...flexStyle, ...style }} className={ className }>
 					{ routes.map( ( route, i ) => <NavBarItems route={ route } index={ i } /> ) }
 				</div>
 			);
