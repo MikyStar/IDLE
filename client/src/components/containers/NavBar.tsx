@@ -17,37 +17,35 @@ interface NavBarProps
 
 const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, style } : NavBarProps ) =>
 {
-	const flexStyle : React.CSSProperties =
-	{
-		height : '100%',
-		display : 'flex',
-		flexDirection : 'column',
-		alignItems : 'space-between'
-	}
-
 	const NavBarItems = ( props : { route : RouteType, index : number }  ) =>
 	{
 		const { icon, name, path } = props.route;
 
-		const flex : React.CSSProperties =
+		const innerFlex : React.CSSProperties =
 		{
 			display : 'flex',
 			justifyContent : 'space-between',
 			width : width || '100px'
 		}
 
-		const cursor : React.CSSProperties = { cursor : 'pointer' }
+		const imageStyle : React.CSSProperties =
+		{
+			cursor : 'pointer',
+			marginRight : '10px'
+		}
+
+		const Line = () => <div style={ ( props.index === index ) ? { borderLeft : '5px solid white' } : {} }></div>
 
 		//////////////////////////////////////////////////////////////
 
-		return	<div style={ flex }>
-					<div style={ ( props.index === index ) ? { borderLeft : '5px solid white' } : {} }></div>
+		return	<div style={ innerFlex }>
+					<Line />
 					<img
 						key={ index }
 						src={ icon }
 						alt={ name }
 						title={ name }
-						style={ ( props.index === index ) ? { ...cursor } : { opacity : 0.2, ...cursor } }
+						style={ ( props.index === index ) ? { ...imageStyle } : { opacity : 0.2, ...imageStyle } }
 						onClick={ () => onClick( props.index ) }
 					/>
 				</div>
@@ -57,9 +55,18 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 
 	return	(
 				<div style={{ ...flexStyle, ...style }} className={ className }>
-					{ routes.map( ( route, i ) => <NavBarItems route={ route } index={ i } /> ) }
+					{ routes.map( ( route, i ) => <NavBarItems key={ i } route={ route } index={ i } /> ) }
 				</div>
 			);
+}
+
+//////////////////////////////////////////////////////////////////////
+
+const flexStyle : React.CSSProperties =
+{
+	display : 'flex',
+	flexDirection : 'column',
+	justifyContent : 'space-around'
 }
 
 //////////////////////////////////////////////////////////////////////
