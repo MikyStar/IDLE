@@ -33,7 +33,7 @@ const App:  React.FC = () =>
 						/>
 					 */}
 
-					<NavBar />
+					<NavBar index={ 1 } />
 
 					<Container title='Test' center={{ Y : true }} style={{ width : '1500px' }}>
 						<div style={{ height : '200px', width : '300px', backgroundColor : 'green' }}></div>

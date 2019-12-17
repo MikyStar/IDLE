@@ -6,12 +6,13 @@ import routes, { RouteType } from '../../routes/routes';
 
 interface NavBarProps
 {
-	width ?: string
+	width ?: string,
+	index : number
 }
 
 //////////////////////////////////////////////////////////////////////
 
-const NavBar : React.FC<NavBarProps> = ( { width } : NavBarProps ) =>
+const NavBar : React.FC<NavBarProps> = ( { width , index } : NavBarProps ) =>
 {
 	const style : React.CSSProperties =
 	{
@@ -21,7 +22,7 @@ const NavBar : React.FC<NavBarProps> = ( { width } : NavBarProps ) =>
 		alignItems : 'space-between'
 	}
 
-	const NavBarItems = ( props : { route : RouteType }  ) =>
+	const NavBarItems = ( props : { route : RouteType, selected : boolean }  ) =>
 	{
 		const { icon, name, path } = props.route;
 
@@ -39,7 +40,7 @@ const NavBar : React.FC<NavBarProps> = ( { width } : NavBarProps ) =>
 
 
 		return	<div style={ flex }>
-					<div style={ border }></div>
+					<div style={ ( props.selected === true ) ? border : {} }></div>
 					<img key={ name } src={ icon } alt={ name } title={ name } />
 				</div>
 	}
@@ -48,7 +49,7 @@ const NavBar : React.FC<NavBarProps> = ( { width } : NavBarProps ) =>
 
 	return	(
 				<div style={ style }>
-					{ routes.map( route => <NavBarItems route={ route } /> ) }
+					{ routes.map( ( route, i ) => <NavBarItems route={ route } selected={ i === index } /> ) }
 				</div>
 			);
 }
