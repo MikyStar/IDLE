@@ -35,12 +35,6 @@ const App:  React.FC = () =>
 						index={ tabSelectedIndex }
 						onClick={ index => setSelectedTabIndex( index ) }
 					/>
-
-					<Container title='Test' center={{ Y : true }} style={{ width : '1500px' }}>
-						<div style={{ height : '200px', width : '300px', backgroundColor : 'green' }}></div>
-						<Container  noBorder><div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div></Container>
-						<Container noBorder center={{ X : true }}><div>Illo provident consequuntur incidunt possimus tempora impedit, magni, </div></Container>
-					</Container>
 				</div>
 			);
 }
@@ -49,7 +43,9 @@ const App:  React.FC = () =>
 
 const mainStyle : React.CSSProperties =
 {
-	border: '1px solid red',
+	height : '100vh',
+	padding : 0,
+	margin : 0,
 	backgroundColor: '#212121',
 	color: '#f5f5f5',
 	fontFamily: 'Courier New, Courier, monospace'
