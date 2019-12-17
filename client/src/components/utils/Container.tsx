@@ -60,7 +60,7 @@ const Container : React.FC<ContainerProps> = ( { noBorder, style, title, vertica
 	{
 		display: 'flex',
 		flexDirection : vertical ? 'row' : 'column',
-		justifyContent : howCentered.X ? 'center' : 'flex-start',
+		justifyContent : ( howCentered.X) ? 'center' : 'flex-start',
 		alignItems : howCentered.Y ? 'center' : 'flex-start'
 	}
 
