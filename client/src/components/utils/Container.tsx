@@ -13,6 +13,7 @@ interface ContainerProps
 	vertical ?: boolean,
 	noBorder ?: boolean,
 	title ?: string,
+	style ?: React.CSSProperties,
 
 	children : ReactNode
 }
@@ -25,7 +26,7 @@ interface Center
 
 //////////////////////////////////////////////////////////////////////
 
-const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickness, color, center, dashed, children, padding } : ContainerProps ) =>
+const Container : React.FC<ContainerProps> = ( { noBorder, style, title, vertical, radius, thickness, color, center, dashed, children, padding } : ContainerProps ) =>
 {
 	const howCentered : { X : boolean, Y : boolean } = ( () =>
 	{
@@ -47,74 +48,38 @@ const Container : React.FC<ContainerProps> = ( { noBorder, title, radius, thickn
 
 	//////////////////////////////////////////////////////////////////
 
-	const Tooltip = ( props: { children: React.ReactNode } ) => <div title={ title || '' }>{ props.children }</div>;
-
-	const Border = ( props: { children: React.ReactNode } ) =>
+	const border : React.CSSProperties =
 	{
-		return	(
-					<div style={{
-									border : ( !noBorder ) ? ( `${ dashed ? 'dashed' : 'solid' } ${ thickness || '3' }px ${ color || 'white' }` ) : '',
-									borderRadius : ( !noBorder ) ? ( radius ? `${ radius }px` : '20px' ) : '',
-								}}
-					>{ props.children }</div>
-				)
-	};
+		border : ( !noBorder ) ? ( `${ dashed ? 'dashed' : 'solid' } ${ thickness || '3' }px ${ color || 'white' }` ) : '',
+		borderRadius : ( !noBorder ) ? ( radius ? `${ radius }px` : '20px' ) : '',
+	}
 
-	const Padding = ( props: { children: React.ReactNode } ) => <div style={{ padding : padding || '10px' }}>{ props.children }</div>
+	const mPadding : React.CSSProperties = { padding : padding || '10px' }
 
-	const WrapContent = ( props: { children: React.ReactNode } ) => <div style={{ float : 'left', position : 'initial', width : '100%' }}>{ props.children }</div>
-
-	const Centered = ( props: { children: React.ReactNode, X : boolean, Y : boolean } ) =>
+	const centerFlex : React.CSSProperties =
 	{
-		const styleForVertical : React.CSSProperties =
-		{
-			display: 'flex',
-			justifyContent: 'center',
-			flexDirection: 'column'
-		}
-
-		const styleForHorizontal : React.CSSProperties =
-		{
-			textAlign : 'center',
-			margin : '0 auto'
-		}
-
-		const finalStyle = ( () =>
-		{
-			let final = {};
-
-			if( props.X )
-				final = { ...final, ...styleForHorizontal }
-
-			if( props.Y )
-				final = { ...final, ...styleForVertical }
-
-			return final;
-		})()
-
-		return <div style={{ ...finalStyle }}>{ props.children }</div>
-	};
-
-	/*
-	top : ( center && center.Y ) ? '50%' : '0%',
-	left : ( center && center.X ) ? '50%' : '0%',
-	transform : `translate( ${ ( center && center.X ) ? '-50%' : '0%' }, ${ ( center && center.Y ) ? '-50%' : '0%' } )`
-	*/
+		display: 'flex',
+		flexDirection : vertical ? 'row' : 'column',
+		justifyContent : howCentered.X ? 'center' : 'flex-start',
+		alignItems : howCentered.Y ? 'center' : 'flex-start'
+	}
 
 	//////////////////////////////////////////////////////////////////
 
 	return	(
-				<Centered X={ howCentered.X } Y={ howCentered.Y }>
-					<WrapContent>
-						<Tooltip>
-							<Border>
-								<Padding>
-									{ children }
-								</Padding>
-							</Border>
-						</Tooltip>
-					</WrapContent>
-				</Centered>
+				<>
+					<div
+						title={ title }
+						style=	{{
+									...style,
+									...border,
+									...mPadding,
+									...centerFlex
+								}}
+					>
+						{ children }
+					</div>
+				</>
 			);
 }
 

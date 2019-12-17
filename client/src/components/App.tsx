@@ -11,19 +11,21 @@ const App:  React.FC = () =>
 {
 	return 	(
 				<>
-					<Building
-						type={ BuildingType.FACTORY }
-						material='Coal'
-						level={ 1 }
-						workers={ 1 }
-						productionRate={ 3 }
-						upgradePrice={ '5k' }
-					/>
+					{/*
+						<Building
+							type={ BuildingType.FACTORY }
+							material='Coal'
+							level={ 1 }
+							workers={ 1 }
+							productionRate={ 3 }
+							upgradePrice={ '5k' }
+						/>
+					 */}
 
-					<Container title='Test' /*center={{ X : true }}*/>
-						<div style={{ height : '200px' }}></div>
-						<Container center noBorder><div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div></Container>
-						<Container noBorder><div>Illo provident consequuntur incidunt possimus tempora impedit, magni, amet suscipit aliquid iste veritatis quaerat commodi qui harum nostrum eveniet saepe?</div></Container>
+					<Container title='Test' center style={{ width : '1500px' }}>
+						<div style={{ height : '200px', width : '300px', backgroundColor : 'green' }}></div>
+						<Container  noBorder><div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div></Container>
+						<Container noBorder center={{ X : true }}><div>Illo provident consequuntur incidunt possimus tempora impedit, magni, </div></Container>
 					</Container>
 				</>
 			);
