@@ -8,7 +8,7 @@ import arrowLeft from '../../assets/icons/arrow-left.svg'
 interface Props
 {
 	tabName : string,
-	onTabNameClick : () => void,
+	onTabNameClick ?: () => void,
 	totalMoney : string,
 	productionRate : string
 	style ?: React.CSSProperties
@@ -19,12 +19,14 @@ interface Props
 const TopStatus : React.FC<Props> = ( { tabName, onTabNameClick, totalMoney, productionRate, style } : Props ) =>
 {
 	return	(
-				<div style={{ ...mainStyle, ...style }}>
+				<div style={{ ...mainStyle, ...style }} title={ onTabNameClick && 'Go back' } >
 
 					<div onClick={ onTabNameClick }>
-						<Icon file={ arrowLeft } />
-						<div>{ tabName }</div>
+						{ onTabNameClick && <Icon file={  arrowLeft } /> }
+						<div style={{ fontSize : '30px', fontWeight : 'lighter' }}>{ tabName }</div>
 					</div>
+
+					<div></div>
 
 				</div>
 			);
@@ -35,7 +37,14 @@ const TopStatus : React.FC<Props> = ( { tabName, onTabNameClick, totalMoney, pro
 const mainStyle : React.CSSProperties =
 {
 	display : 'flex',
-	justifyContent : 'space-between'
+	justifyContent : 'space-between',
+	alignItems : 'center',
+	padding : '10px'
+}
+
+const productionStyle : React.CSSProperties =
+{
+	display : 'flex'
 }
 
 //////////////////////////////////////////////////////////////////////

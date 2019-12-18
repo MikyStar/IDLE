@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-import TestGrid from './TestGrid';
 import Building, { BuildingType } from './containers/Building';
 import NavBar from './containers/NavBar';
-import Container from './utils/Container';
+import TopStatus from './containers/TopStatus';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -29,7 +28,14 @@ const App:  React.FC = () =>
 						index={ tabSelectedIndex }
 						onClick={ index => setSelectedTabIndex( index ) }
 					/>
-					<div style={{ backgroundColor : 'green', gridArea : 'status' }}></div>
+
+					<TopStatus
+						tabName='CHANGE ME'
+						productionRate='me too'
+						totalMoney='here also'
+						style={{ gridArea : 'status' }}
+					/>
+
 					<div style={{ backgroundColor : 'darkslateblue', gridArea : 'content' }}>
 						<Building
 							style={{ width : BUILDING_WIDTH }}
