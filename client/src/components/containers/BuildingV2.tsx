@@ -39,8 +39,18 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 	const Upgrade = () =>
 	{
 		return	(
-					<div key='upgrade' className='border-normal' style={{ fontWeight : 'bolder', fontSize : '20px', padding : '5px', position : 'relative', cursor : 'pointer' }}>
-						<div style={{ alignItems : 'center', display : 'flex', float : 'left', position : 'absolute', top : '50%', left : '50%', transform : 'translate(-50%, -50%)' }}>
+					<div style={{
+									display : 'flex',
+									flexDirection : 'column',
+									justifyContent : 'center',
+									fontWeight : 'bolder',
+									fontSize : '20px',
+									padding : '5px',
+									cursor : 'pointer',
+									borderRadius : '20px',
+									borderStyle : '3px solid white'
+								}}>
+						<div style={{ display : 'flex', justifyContent : 'space-around' }}>
 							<img src={ arrowUp } alt='Upgrade' title='Upgrade' height='30px' style={{ padding : '5px' }} />
 							<div style={{ padding : '5px' }}>{ upgradePrice }</div>
 						</div>
@@ -56,7 +66,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 					<div style={{ fontWeight : 'bolder', textAlign : 'center' }}>{ type }</div>
 					<div style={{ fontStyle : 'italic' }}>{ material }</div>
 
-					<div style={{ display : 'flex', flexBasis : 'row', justifyContent : 'center', gridColumn : 3, gridRow : '1/4' }} >
+					<div style={{ display : 'flex', flexBasis : 'row', justifyContent : 'center', gridColumn : 3, gridRow : '1/5' }} >
 						<Upgrade />
 					</div>
 
