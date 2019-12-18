@@ -1,5 +1,4 @@
 import React from 'react'
-import GridLayout from 'react-grid-layout';
 
 import '../../styles/css/utils/Borders.css';
 import star from '../../assets/icons/star.svg';
@@ -18,6 +17,8 @@ interface BuildingProps
 	workers : number,
 	productionRate : number,
 	upgradePrice : string, // TODO make type with value and unit and if should be crossed
+	style ?: React.CSSProperties,
+	imageRatio ?: string
 }
 
 export enum BuildingType
@@ -26,58 +27,100 @@ export enum BuildingType
 	FACTORY = 'Factory'
 }
 
+interface IIcon
+{
+	name : string,
+	file : string
+}
+
 //////////////////////////////////////////////////////////////////////
 
-const WIDTH = 400;
-
-//////////////////////////////////////////////////////////////////////
-
-const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice } : BuildingProps ) =>
+const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style, imageRatio } : BuildingProps ) =>
 {
 	const productionIconSVG = type === BuildingType.FACTORY ? bolt : hammer;
 
-	return	(
-				<>
-					<GridLayout
-						className={ 'layout border-normal' }
-						style={{ width : `${ WIDTH }px` }}
-						layout=	{[
-									{ i: 'type', x: 2, y: 0, w: 2, h: 1, static : true },
-									{ i: 'material', x: 6, y: 0, w: 2, h: 1, static : true },
-									{ i: 'levelIcon', x: 0, y: 2, w: 2, h: 1, static : true },
-									{ i: 'level', x: 4, y: 2, w: 2, h: 1, static : true },
-									{ i: 'workersIcon', x: 0, y: 4, w: 2, h: 1, static : true },
-									{ i: 'workers', x: 4, y: 4, w: 2, h: 1, static : true },
-									{ i: 'productionIcon', x: 0, y: 6, w: 2, h: 1, static : true },
-									{ i: 'productionRate', x: 4, y: 6, w: 2, h: 1, static : true },
-									{ i: 'upgrade', x: 8, y: 3, w: 3, h: 2, static : true },
-								]}
-						rowHeight={ 20 }
-						cols={ 12 }
-						width={ WIDTH }
-						autoSize
+	const icons : IIcon[] =
+	[
+		{ name : 'Level', file : star },
+		{ name : 'Staff', file : people },
+		{ name : 'Production', file : hammer },
+		{ name : 'Production', file : bolt },
+		{ name : 'Upgrade', file : arrowUp },
+	]
+
+	const Icon = ( props : { icon : IIcon, style ?: React.CSSProperties } ) => 	<img
+																					src={ props.icon.file }
+																					alt={ props.icon.name }
+																					title={ props.icon.name }
+																					style={{ ...props.style, height : imageRatio, width : imageRatio }}
+																				/>
+
+	const Upgrade = () =>
+	{
+		return	(
+					<div style={{
+									display : 'flex',
+									flexDirection : 'column',
+									justifyContent : 'center',
+									fontWeight : 'bolder',
+									fontSize : '20px',
+									padding : '5px',
+									cursor : 'pointer'
+								}}
 					>
-						<div key='type' style={{ fontWeight : 'bolder', textAlign : 'center' }}>{ type }</div>
-						<div key='material' style={{ fontStyle : 'italic' }}>{ material }</div>
-
-						<img key='levelIcon' src={ star } alt='Level' title='Level' />
-						<div key='level'>{ level } / 5</div>
-
-						<img key='workersIcon' src={ people } alt='Workers' title='Workers' />
-						<div key='workers'>{ workers } / 3</div>
-
-						<img key='productionIcon' src={ productionIconSVG } alt={ `${ type }` } title={ `${ type }` } />
-						<div key='productionRate'>{ productionRate } / s</div>
-
-						<div key='upgrade' className='border-normal' style={{ fontWeight : 'bolder', fontSize : '20px', padding : '5px', position : 'relative', cursor : 'pointer' }}>
-							<div style={{ alignItems : 'center', display : 'flex', float : 'left', position : 'absolute', top : '50%', left : '50%', transform : 'translate(-50%, -50%)' }}>
-								<img src={ arrowUp } alt='Upgrade' title='Upgrade' height='30px' style={{ padding : '5px' }}/>
-								<div style={{ padding : '5px' }}>{ upgradePrice }</div>
-							</div>
+						<div style=	{{
+										display : 'flex',
+										justifyContent :'space-around',
+										borderRadius : '20px',
+										border : '3px solid white',
+										padding : '5px'
+									}}
+						>
+							<Icon icon={ icons[ 4 ] } style={{ padding : '5px' }} />
+							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%' }}>{ upgradePrice }</div>
 						</div>
-					</GridLayout>
-				</>
+					</div>
+				);
+	}
+
+	//////////////////////////////////////////////////////////////////////
+
+	return	(
+				<div style={{ ...mainGrid, ...border, ...style }}>
+
+					<div style={{ fontWeight : 'bolder', textAlign : 'center' }}>{ type }</div>
+					<div style={{ fontStyle : 'italic' }}>{ material }</div>
+
+					<div style={{ display : 'flex', flexBasis : 'row', justifyContent : 'center', gridColumn : 3, gridRow : '1/5' }} >
+						<Upgrade />
+					</div>
+
+					<Icon icon={ icons[ 0 ] } />
+					<div key='level'>{ level } / 5</div>
+
+					<Icon icon={ icons[ 1 ] } />
+					<div key='workers'>{ workers } / 3</div>
+
+					<Icon icon={ icons[ type === BuildingType.FACTORY ? 3 : 4 ] } />
+					<div key='productionRate'>{ productionRate } / s</div>
+
+				</div>
 			);
+}
+
+//////////////////////////////////////////////////////////////////////
+
+const mainGrid : React.CSSProperties =
+{
+	display : 'grid',
+	gridTemplateColumns : 'repeat(3, 1fr)',
+	gridTemplateRows : 'repeat(4, 1fr)',
+}
+
+const border : React.CSSProperties =
+{
+	borderStyle : '3px solid white',
+	borderRadius : '20px'
 }
 
 //////////////////////////////////////////////////////////////////////

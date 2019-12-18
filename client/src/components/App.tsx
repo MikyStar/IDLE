@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import TestGrid from './TestGrid';
-import Building, { BuildingType } from './containers/BuildingV2';
+import Building, { BuildingType } from './containers/Building';
 import NavBar from './containers/NavBar';
 import Container from './utils/Container';
 
