@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Icon,{ IIcon } from '../utils/Icon';
 import star from '../../assets/icons/star.svg';
 import people from '../../assets/icons/people.svg';
 import hammer from '../../assets/icons/hammer.svg';
@@ -26,18 +27,10 @@ export enum BuildingType
 	FACTORY = 'Factory'
 }
 
-interface IIcon
-{
-	name : string,
-	file : string
-}
-
 //////////////////////////////////////////////////////////////////////
 
 const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style, imageRatio } : BuildingProps ) =>
 {
-	const productionIconSVG = type === BuildingType.FACTORY ? bolt : hammer;
-
 	const icons : IIcon[] =
 	[
 		{ name : 'Level', file : star },
@@ -46,14 +39,6 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 		{ name : 'Production', file : bolt },
 		{ name : 'Upgrade', file : arrowUp },
 	]
-
-	const Icon = ( props : { icon : IIcon, style ?: React.CSSProperties } ) =>
-		<img
-			src={ props.icon.file }
-			alt={ props.icon.name }
-			title={ props.icon.name }
-			style={{ ...props.style, height : imageRatio, width : imageRatio }}
-		/>
 
 	const Upgrade = () =>
 	{
