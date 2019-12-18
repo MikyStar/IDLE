@@ -1,12 +1,12 @@
 import React from 'react';
 
 //////////////////////////////////////////////////////////////////////
-
-export interface IIcon
+interface Props
 {
-	name : string,
+	name ?: string,
 	file : string,
-	ratio ?: number
+	ratio ?: number,
+	style ?: React.CSSProperties
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -15,12 +15,12 @@ const DEFAULT_RATIO = '30px';
 
 //////////////////////////////////////////////////////////////////////
 
-const Icon = ( props : { icon : IIcon, style ?: React.CSSProperties, ratio ?: number } ) =>
+const Icon : React.FC<Props> = ( { name, file, style, ratio } : Props ) =>
 	<img
-		src={ props.icon.file }
-		alt={ props.icon.name }
-		title={ props.icon.name }
-		style={{ ...props.style, height : props.ratio || DEFAULT_RATIO, width : props.ratio || DEFAULT_RATIO }}
+		src={ file }
+		alt={ name }
+		title={ name }
+		style={{ ...style, height : ratio || DEFAULT_RATIO, width : ratio || DEFAULT_RATIO }}
 	/>
 
 //////////////////////////////////////////////////////////////////////

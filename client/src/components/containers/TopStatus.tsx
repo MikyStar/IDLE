@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Icon from '../utils/Icon';
+import arrowLeft from '../../assets/icons/arrow-left.svg'
+
 //////////////////////////////////////////////////////////////////////
 
 interface Props
@@ -19,6 +22,7 @@ const TopStatus : React.FC<Props> = ( { tabName, onTabNameClick, totalMoney, pro
 				<div style={{ ...mainStyle, ...style }}>
 
 					<div onClick={ onTabNameClick }>
+						<Icon file={ arrowLeft } />
 						<div>{ tabName }</div>
 					</div>
 

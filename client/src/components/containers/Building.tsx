@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Icon,{ IIcon } from '../utils/Icon';
+import Icon from '../utils/Icon';
 import star from '../../assets/icons/star.svg';
 import people from '../../assets/icons/people.svg';
 import hammer from '../../assets/icons/hammer.svg';
@@ -31,15 +31,6 @@ export enum BuildingType
 
 const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style, imageRatio } : BuildingProps ) =>
 {
-	const icons : IIcon[] =
-	[
-		{ name : 'Level', file : star },
-		{ name : 'Staff', file : people },
-		{ name : 'Production', file : hammer },
-		{ name : 'Production', file : bolt },
-		{ name : 'Upgrade', file : arrowUp },
-	]
-
 	const Upgrade = () =>
 	{
 		return	(
@@ -62,7 +53,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 										padding : '5px',
 									}}
 						>
-							<Icon icon={ icons[ 4 ] } style={{ padding : '5px' }} />
+							<Icon name='Upgrade' file={ arrowUp } />
 							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%', margin : 'auto' }}>{ upgradePrice }</div>
 						</div>
 					</div>
@@ -81,13 +72,13 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 						<Upgrade />
 					</div>
 
-					<Icon icon={ icons[ 0 ] } />
+					<Icon name='Level' file={ star } />
 					<div key='level'>{ level } / 5</div>
 
-					<Icon icon={ icons[ 1 ] } />
+					<Icon name='Staff' file={ people } />
 					<div key='workers'>{ workers } / 3</div>
 
-					<Icon icon={ icons[ type === BuildingType.FACTORY ? 3 : 4 ] } />
+					<Icon name='Production' file={ type === BuildingType.FACTORY ? bolt : hammer } />
 					<div key='productionRate'>{ productionRate } / s</div>
 
 				</div>
