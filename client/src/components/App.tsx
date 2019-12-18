@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import TestGrid from './TestGrid';
-import Building, { BuildingType } from './containers/Building';
+import Building, { BuildingType } from './containers/BuildingV2';
 import NavBar from './containers/NavBar';
 import Container from './utils/Container';
 
@@ -20,16 +20,6 @@ const App:  React.FC = () =>
 
 	return	(
 				<div style={{ ...mainStyle, ...mainGrid }}>
-					{/*
-						<Building
-							type={ BuildingType.FACTORY }
-							material='Coal'
-							level={ 1 }
-							workers={ 1 }
-							productionRate={ 3 }
-							upgradePrice={ '5k' }
-						/>
-					 */}
 
 					<NavBar
 						width={ NAVBAR_WIDTH }
@@ -38,7 +28,17 @@ const App:  React.FC = () =>
 						onClick={ index => setSelectedTabIndex( index ) }
 					/>
 					<div style={{ backgroundColor : 'green', gridArea : 'status' }}></div>
-					<div style={{ backgroundColor : 'darkslateblue', gridArea : 'content' }}></div>
+					<div style={{ backgroundColor : 'darkslateblue', gridArea : 'content' }}>
+						<Building
+							type={ BuildingType.FACTORY }
+							material='Coal'
+							level={ 1 }
+							workers={ 1 }
+							productionRate={ 3 }
+							upgradePrice={ '5k' }
+						/>
+					</div>
+
 				</div>
 			);
 }
