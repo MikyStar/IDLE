@@ -14,6 +14,7 @@ const FONT_SIZE_PRODUCTION = '20px';
 interface Props
 {
 	tabName : string,
+	canGoBack ?: boolean,
 	onTabNameClick ?: () => void,
 	totalMoney : string,
 	productionRate : string
@@ -22,14 +23,14 @@ interface Props
 
 //////////////////////////////////////////////////////////////////////
 
-const TopStatus : React.FC<Props> = ( { tabName, onTabNameClick, totalMoney, productionRate, style } : Props ) =>
+const TopStatus : React.FC<Props> = ( { tabName, onTabNameClick, totalMoney, productionRate, style, canGoBack } : Props ) =>
 {
 	return	(
-				<div style={{ ...mainStyle, ...style }} title={ onTabNameClick && 'Go back' } >
+				<div style={{ ...mainStyle, ...style}} title={ canGoBack ? 'Go back' : '' } >
 
-					<div onClick={ onTabNameClick }>
-						{ onTabNameClick && <Icon file={  arrowLeft } /> }
-						<div style={{ fontSize : '30px', fontWeight : 'lighter' }}>{ tabName }</div>
+					<div onClick={ onTabNameClick } style={{ display : 'flex', alignItems : 'center', justifyContent : 'space-between', cursor : canGoBack ? 'pointer' : 'auto'  }}>
+						{ canGoBack && <Icon file={  arrowLeft } /> }
+						<div style={{ fontSize : '30px', fontWeight : 'lighter', marginLeft : FONT_SIZE_PRODUCTION }}>{ tabName }</div>
 					</div>
 
 					<div style={ productionStyle }>

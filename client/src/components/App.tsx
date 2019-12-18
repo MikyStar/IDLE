@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Building, { BuildingType } from './containers/Building';
 import NavBar from './containers/NavBar';
 import TopStatus from './containers/TopStatus';
+import routes from '../routes/routes';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -23,17 +24,18 @@ const App:  React.FC = () =>
 				<div style={{ ...mainStyle, ...mainGrid }}>
 
 					<NavBar
-						width={ NAVBAR_WIDTH }
 						style={{ gridArea : 'nav' }}
 						index={ tabSelectedIndex }
 						onClick={ index => setSelectedTabIndex( index ) }
 					/>
 
 					<TopStatus
-						tabName='CHANGE ME'
+						canGoBack
+						tabName={ routes[ tabSelectedIndex ].name }
 						productionRate='me too'
 						totalMoney='here also'
 						style={{ gridArea : 'status' }}
+						onTabNameClick={ () => console.log( 'back' ) }
 					/>
 
 					<div style={{ backgroundColor : 'darkslateblue', gridArea : 'content' }}>

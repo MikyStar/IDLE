@@ -1,6 +1,6 @@
 import React from 'react';
 
-import routes, { RouteType } from '../../routes/routes';
+import routes from '../../routes/routes';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -17,7 +17,7 @@ interface NavBarProps
 
 const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, style } : NavBarProps ) =>
 {
-	const NavBarItems = ( props : { route : RouteType, index : number }  ) =>
+	const NavBarItems = ( props : { route : any , index : number }  ) =>
 	{
 		const { icon, name, path } = props.route;
 

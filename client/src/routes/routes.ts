@@ -7,7 +7,7 @@ import settings from '../assets/icons/settings.svg';
 
 //////////////////////////////////////////////////////////////////////
 
-export interface RouteType
+interface RouteType
 {
 	name : string,
 	icon : string,
