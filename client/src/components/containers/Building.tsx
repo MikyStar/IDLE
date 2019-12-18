@@ -78,7 +78,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 									}}
 						>
 							<Icon icon={ icons[ 4 ] } style={{ padding : '5px' }} />
-							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%' }}>{ upgradePrice }</div>
+							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%', margin : 'auto' }}>{ upgradePrice }</div>
 						</div>
 					</div>
 				);
