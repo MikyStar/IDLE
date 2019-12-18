@@ -50,7 +50,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 										justifyContent :'space-around',
 										borderRadius : '20px',
 										border : '3px solid white',
-										padding : '5px',
+										padding : '10px',
 									}}
 						>
 							<Icon name='Upgrade' file={ arrowUp } ratio='20px' />
