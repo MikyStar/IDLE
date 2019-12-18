@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import '../styles/css/App.css';
 import TestGrid from './TestGrid';
 import Building, { BuildingType } from './containers/Building';
 import NavBar from './containers/NavBar';

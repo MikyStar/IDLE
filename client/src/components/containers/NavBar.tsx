@@ -28,11 +28,6 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 			width : width || '100px'
 		}
 
-		const imageStyle : React.CSSProperties =
-		{
-			cursor : 'pointer',
-		}
-
 		const lineStyle : React.CSSProperties =
 		{
 			borderLeft : ( props.index === index ) ? '5px solid white' : ''
@@ -40,13 +35,13 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 
 		//////////////////////////////////////////////////////////////
 
-		return	<div style={{ ...innerFlex, ...lineStyle }}>
+		return	<div style={{ ...innerFlex, ...lineStyle, cursor : 'pointer' }}>
 					<img
 						key={ index }
 						src={ icon }
 						alt={ name }
 						title={ name }
-						style={ ( props.index === index ) ? { ...imageStyle } : { opacity : 0.2, ...imageStyle } }
+						style={ ( props.index === index ) ? {} : { opacity : 0.2 } }
 						onClick={ () => onClick( props.index ) }
 					/>
 				</div>
