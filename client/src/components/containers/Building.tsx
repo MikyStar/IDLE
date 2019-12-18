@@ -53,7 +53,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 										padding : '5px',
 									}}
 						>
-							<Icon name='Upgrade' file={ arrowUp } />
+							<Icon name='Upgrade' file={ arrowUp } ratio='20px' />
 							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%', margin : 'auto' }}>{ upgradePrice }</div>
 						</div>
 					</div>

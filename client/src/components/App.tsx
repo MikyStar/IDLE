@@ -38,7 +38,7 @@ const App:  React.FC = () =>
 						onTabNameClick={ () => console.log( 'back' ) }
 					/>
 
-					<div style={{ backgroundColor : 'darkslateblue', gridArea : 'content' }}>
+					<div style={{ gridArea : 'content' }}>
 						<Building
 							style={{ width : BUILDING_WIDTH }}
 							imageRatio={ IMAGE_RATIO_BUILDING }
