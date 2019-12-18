@@ -5,7 +5,7 @@ interface Props
 {
 	name ?: string,
 	file : string,
-	ratio ?: number,
+	ratio ?: string,
 	style ?: React.CSSProperties
 }
 
