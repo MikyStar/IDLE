@@ -36,9 +36,17 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 {
 	const productionIconSVG = type === BuildingType.FACTORY ? bolt : hammer;
 
-	const Row = ( props : { children : JSX.Element[] }  ) =>	<div style={{ display : 'flex', justifyContent : 'space-arround' }}>
-																	{ props.children }
-																</div>
+	const Upgrade = () =>
+	{
+		return	(
+					<div key='upgrade' className='border-normal' style={{ fontWeight : 'bolder', fontSize : '20px', padding : '5px', position : 'relative', cursor : 'pointer' }}>
+						<div style={{ alignItems : 'center', display : 'flex', float : 'left', position : 'absolute', top : '50%', left : '50%', transform : 'translate(-50%, -50%)' }}>
+							<img src={ arrowUp } alt='Upgrade' title='Upgrade' height='30px' style={{ padding : '5px' }} />
+							<div style={{ padding : '5px' }}>{ upgradePrice }</div>
+						</div>
+					</div>
+				);
+	}
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -48,27 +56,18 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 					<div style={{ fontWeight : 'bolder', textAlign : 'center' }}>{ type }</div>
 					<div style={{ fontStyle : 'italic' }}>{ material }</div>
 
-					<div style={{ width : '1fr' }} ></div>
+					<div style={{ display : 'flex', flexBasis : 'row', justifyContent : 'center', gridColumn : 3, gridRow : '1/4' }} >
+						<Upgrade />
+					</div>
 
 					<img key='levelIcon' src={ star } alt='Level' title='Level' />
 					<div key='level'>{ level } / 5</div>
 
-					<div style={{ width : '1fr' }} ></div>
-
 					<img key='workersIcon' src={ people } alt='Workers' title='Workers' />
 					<div key='workers'>{ workers } / 3</div>
 
-					<div key='upgrade' className='border-normal' style={{ fontWeight : 'bolder', fontSize : '20px', padding : '5px', position : 'relative', cursor : 'pointer' }}>
-						<div style={{ alignItems : 'center', display : 'flex', float : 'left', position : 'absolute', top : '50%', left : '50%', transform : 'translate(-50%, -50%)' }}>
-							<img src={ arrowUp } alt='Upgrade' title='Upgrade' height='30px' style={{ padding : '5px' }}/>
-							<div style={{ padding : '5px' }}>{ upgradePrice }</div>
-						</div>
-					</div>
-
 					<img key='productionIcon' src={ productionIconSVG } alt={ `${ type }` } title={ `${ type }` } />
 					<div key='productionRate'>{ productionRate } / s</div>
-
-					<div style={{ width : '1fr' }} ></div>
 
 				</div>
 			);
