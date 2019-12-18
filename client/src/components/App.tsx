@@ -11,6 +11,7 @@ const DEFAULT_TAB_INDEX = 1;
 const NAVBAR_WIDTH = '100px';
 const BUILDING_WIDTH = '250px';
 const IMAGE_RATIO_BUILDING = '30px';
+const IMAGE_RATIO_NAVBAR = '45px';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -24,6 +25,7 @@ const App:  React.FC = () =>
 				<div style={{ ...mainStyle, ...mainGrid }}>
 
 					<NavBar
+						iconRatio={ IMAGE_RATIO_NAVBAR }
 						style={{ gridArea : 'nav' }}
 						index={ tabSelectedIndex }
 						onClick={ index => setSelectedTabIndex( index ) }

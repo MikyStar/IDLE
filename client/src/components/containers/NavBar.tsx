@@ -1,6 +1,7 @@
 import React from 'react';
 
 import routes from '../../routes/routes';
+import Icon from '../utils/Icon';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -8,6 +9,7 @@ interface NavBarProps
 {
 	width ?: string,
 	index : number,
+	iconRatio ?: string,
 	onClick : ( index : number ) => void,
 	className ?: string,
 	style ?: React.CSSProperties
@@ -15,7 +17,7 @@ interface NavBarProps
 
 //////////////////////////////////////////////////////////////////////
 
-const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, style } : NavBarProps ) =>
+const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, style, iconRatio } : NavBarProps ) =>
 {
 	const NavBarItems = ( props : { route : any , index : number }  ) =>
 	{
@@ -36,13 +38,12 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 		//////////////////////////////////////////////////////////////
 
 		return	<div style={{ ...innerFlex, ...lineStyle, cursor : 'pointer' }}>
-					<img
-						key={ index }
-						src={ icon }
-						alt={ name }
-						title={ name }
+					<Icon
+						file={ icon }
+						name={ name }
 						style={ ( props.index === index ) ? {} : { opacity : 0.2 } }
 						onClick={ () => onClick( props.index ) }
+						ratio={ iconRatio || '50px' }
 					/>
 				</div>
 	}
