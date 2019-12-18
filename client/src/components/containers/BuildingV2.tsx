@@ -17,7 +17,8 @@ interface BuildingProps
 	workers : number,
 	productionRate : number,
 	upgradePrice : string, // TODO make type with value and unit and if should be crossed
-	style ?: React.CSSProperties
+	style ?: React.CSSProperties,
+	imageRatio ?: string
 }
 
 export enum BuildingType
@@ -26,15 +27,33 @@ export enum BuildingType
 	FACTORY = 'Factory'
 }
 
+interface IIcon
+{
+	name : string,
+	file : string
+}
+
 //////////////////////////////////////////////////////////////////////
 
-const WIDTH = 400;
-
-//////////////////////////////////////////////////////////////////////
-
-const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style } : BuildingProps ) =>
+const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style, imageRatio } : BuildingProps ) =>
 {
 	const productionIconSVG = type === BuildingType.FACTORY ? bolt : hammer;
+
+	const icons : IIcon[] =
+	[
+		{ name : 'Level', file : star },
+		{ name : 'Staff', file : people },
+		{ name : 'Production', file : hammer },
+		{ name : 'Production', file : bolt },
+		{ name : 'Upgrade', file : arrowUp },
+	]
+
+	const Icon = ( props : { icon : IIcon, style ?: React.CSSProperties } ) => 	<img
+																					src={ props.icon.file }
+																					alt={ props.icon.name }
+																					title={ props.icon.name }
+																					style={{ ...props.style, height : imageRatio, width : imageRatio }}
+																				/>
 
 	const Upgrade = () =>
 	{
@@ -46,13 +65,19 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 									fontWeight : 'bolder',
 									fontSize : '20px',
 									padding : '5px',
-									cursor : 'pointer',
-									borderRadius : '20px',
-									borderStyle : '3px solid white'
-								}}>
-						<div style={{ display : 'flex', justifyContent : 'space-around' }}>
-							<img src={ arrowUp } alt='Upgrade' title='Upgrade' height='30px' style={{ padding : '5px' }} />
-							<div style={{ padding : '5px' }}>{ upgradePrice }</div>
+									cursor : 'pointer'
+								}}
+					>
+						<div style=	{{
+										display : 'flex',
+										justifyContent :'space-around',
+										borderRadius : '20px',
+										border : '3px solid white',
+										padding : '5px'
+									}}
+						>
+							<Icon icon={ icons[ 4 ] } style={{ padding : '5px' }} />
+							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%' }}>{ upgradePrice }</div>
 						</div>
 					</div>
 				);
@@ -70,13 +95,13 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 						<Upgrade />
 					</div>
 
-					<img key='levelIcon' src={ star } alt='Level' title='Level' />
+					<Icon icon={ icons[ 0 ] } />
 					<div key='level'>{ level } / 5</div>
 
-					<img key='workersIcon' src={ people } alt='Workers' title='Workers' />
+					<Icon icon={ icons[ 1 ] } />
 					<div key='workers'>{ workers } / 3</div>
 
-					<img key='productionIcon' src={ productionIconSVG } alt={ `${ type }` } title={ `${ type }` } />
+					<Icon icon={ icons[ type === BuildingType.FACTORY ? 3 : 4 ] } />
 					<div key='productionRate'>{ productionRate } / s</div>
 
 				</div>

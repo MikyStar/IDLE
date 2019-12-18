@@ -8,7 +8,9 @@ import Container from './utils/Container';
 //////////////////////////////////////////////////////////////////////
 
 const DEFAULT_TAB_INDEX = 1;
-const NAVBAR_WIDTH = '100px'
+const NAVBAR_WIDTH = '100px';
+const BUILDING_WIDTH = '200px';
+const IMAGE_RATIO_BUILDING = '30px';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -30,6 +32,8 @@ const App:  React.FC = () =>
 					<div style={{ backgroundColor : 'green', gridArea : 'status' }}></div>
 					<div style={{ backgroundColor : 'darkslateblue', gridArea : 'content' }}>
 						<Building
+							style={{ width : BUILDING_WIDTH }}
+							imageRatio={ IMAGE_RATIO_BUILDING }
 							type={ BuildingType.FACTORY }
 							material='Coal'
 							level={ 1 }
