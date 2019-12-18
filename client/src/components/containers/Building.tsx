@@ -65,7 +65,8 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 									fontWeight : 'bolder',
 									fontSize : '20px',
 									padding : '5px',
-									cursor : 'pointer'
+									cursor : 'pointer',
+									alignItems : 'center'
 								}}
 					>
 						<div style=	{{
@@ -73,7 +74,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 										justifyContent :'space-around',
 										borderRadius : '20px',
 										border : '3px solid white',
-										padding : '5px'
+										padding : '5px',
 									}}
 						>
 							<Icon icon={ icons[ 4 ] } style={{ padding : '5px' }} />
@@ -117,7 +118,9 @@ const mainGrid : React.CSSProperties =
 	gridTemplateRows : 'repeat(4, 1fr)',
 	border : '3px solid white',
 	borderRadius : '20px',
-	padding : '10px'
+	padding : '10px',
+	alignItems : 'center',
+	textAlign : 'center'
 }
 
 //////////////////////////////////////////////////////////////////////
