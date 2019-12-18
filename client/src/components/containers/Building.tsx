@@ -1,6 +1,5 @@
 import React from 'react'
 
-import '../../styles/css/utils/Borders.css';
 import star from '../../assets/icons/star.svg';
 import people from '../../assets/icons/people.svg';
 import hammer from '../../assets/icons/hammer.svg';
@@ -48,12 +47,13 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 		{ name : 'Upgrade', file : arrowUp },
 	]
 
-	const Icon = ( props : { icon : IIcon, style ?: React.CSSProperties } ) => 	<img
-																					src={ props.icon.file }
-																					alt={ props.icon.name }
-																					title={ props.icon.name }
-																					style={{ ...props.style, height : imageRatio, width : imageRatio }}
-																				/>
+	const Icon = ( props : { icon : IIcon, style ?: React.CSSProperties } ) =>
+		<img
+			src={ props.icon.file }
+			alt={ props.icon.name }
+			title={ props.icon.name }
+			style={{ ...props.style, height : imageRatio, width : imageRatio }}
+		/>
 
 	const Upgrade = () =>
 	{
@@ -86,7 +86,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 	//////////////////////////////////////////////////////////////////////
 
 	return	(
-				<div style={{ ...mainGrid, ...border, ...style }}>
+				<div style={{ ...mainGrid, ...style }}>
 
 					<div style={{ fontWeight : 'bolder', textAlign : 'center' }}>{ type }</div>
 					<div style={{ fontStyle : 'italic' }}>{ material }</div>
@@ -115,12 +115,9 @@ const mainGrid : React.CSSProperties =
 	display : 'grid',
 	gridTemplateColumns : 'repeat(3, 1fr)',
 	gridTemplateRows : 'repeat(4, 1fr)',
-}
-
-const border : React.CSSProperties =
-{
-	borderStyle : '3px solid white',
-	borderRadius : '20px'
+	border : '3px solid white',
+	borderRadius : '20px',
+	padding : '10px'
 }
 
 //////////////////////////////////////////////////////////////////////

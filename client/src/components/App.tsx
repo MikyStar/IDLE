@@ -9,7 +9,7 @@ import Container from './utils/Container';
 
 const DEFAULT_TAB_INDEX = 1;
 const NAVBAR_WIDTH = '100px';
-const BUILDING_WIDTH = '200px';
+const BUILDING_WIDTH = '250px';
 const IMAGE_RATIO_BUILDING = '30px';
 
 //////////////////////////////////////////////////////////////////////
