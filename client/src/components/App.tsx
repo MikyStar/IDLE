@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Building, { BuildingType } from './containers/Building';
 import NavBar from './containers/NavBar';
@@ -20,34 +20,36 @@ const App:  React.FC = () =>
 {
 	const [ tabSelectedIndex, setSelectedTabIndex ] = useState( DEFAULT_TAB_INDEX );
 
-	const Page = routes[ tabSelectedIndex ].page;
-
 	//////////////////////////////////////////////////////////////////
 
 	return	(
-				<div style={{ ...mainStyle, ...mainGrid }}>
+					<div style={{ ...mainStyle, ...mainGrid }}>
 
-					<NavBar
-						iconRatio={ IMAGE_RATIO_NAVBAR }
-						style={{ gridArea : 'nav' }}
-						index={ tabSelectedIndex }
-						onClick={ index => setSelectedTabIndex( index ) }
-					/>
+						<Router>
+							<NavBar
+								iconRatio={ IMAGE_RATIO_NAVBAR }
+								style={{ gridArea : 'nav' }}
+								index={ tabSelectedIndex }
+								onClick={ index => setSelectedTabIndex( index ) }
+							/>
 
-					<TopStatus
-						canGoBack
-						tabName={ routes[ tabSelectedIndex ].name }
-						productionRate='me too'
-						totalMoney='here also'
-						style={{ gridArea : 'status' }}
-						onTabNameClick={ () => console.log( 'back' ) }
-					/>
+							<TopStatus
+								canGoBack
+								tabName={ routes[ tabSelectedIndex ].name }
+								productionRate='me too'
+								totalMoney='here also'
+								style={{ gridArea : 'status' }}
+								onTabNameClick={ () => console.log( 'back' ) }
+							/>
 
-					<div style={{ gridArea : 'content' }}>
-						<Page />
+							<div style={{ gridArea : 'content' }}>
+								<Switch>
+									{ routes.map( ( route, index ) => <Route exact key={ index } path={ route.path } component={ route.page } /> ) }
+								</Switch>
+							</div>
+						</Router>
+
 					</div>
-
-				</div>
 			);
 }
 

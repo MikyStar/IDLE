@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, BrowserRouter } from 'react-router-dom';
 
 import routes, { RouteType } from '../pages/routes';
 import Icon from '../utils/Icon';
@@ -37,15 +38,17 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 
 		//////////////////////////////////////////////////////////////
 
-		return	<div style={{ ...innerFlex, ...lineStyle, cursor : 'pointer' }}>
-					<Icon
-						file={ icon }
-						name={ name }
-						style={ ( props.index === index ) ? {} : { opacity : 0.2 } }
-						onClick={ () => onClick( props.index ) }
-						ratio={ iconRatio || '50px' }
-					/>
-				</div>
+		return	<Link to={ path }>
+					<div style={{ ...innerFlex, ...lineStyle, cursor : 'pointer' }}>
+						<Icon
+							file={ icon }
+							name={ name }
+							style={ ( props.index === index ) ? {} : { opacity : 0.2 } }
+							onClick={ () => onClick( props.index ) }
+							ratio={ iconRatio || '50px' }
+						/>
+					</div>
+				</Link>
 	}
 
 	//////////////////////////////////////////////////////////////////
