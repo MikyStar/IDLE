@@ -1,7 +1,8 @@
 import React from 'react';
 
-import routes from '../../routes/routes';
+import routes, { RouteType } from '../../routes/routes';
 import Icon from '../utils/Icon';
+import { Link } from 'react-router-dom';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -19,7 +20,7 @@ interface NavBarProps
 
 const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, style, iconRatio } : NavBarProps ) =>
 {
-	const NavBarItems = ( props : { route : any , index : number }  ) =>
+	const NavBarItems = ( props : { route : RouteType , index : number }  ) =>
 	{
 		const { icon, name, path } = props.route;
 
@@ -37,15 +38,17 @@ const NavBar : React.FC<NavBarProps> = ( { width , index, onClick, className, st
 
 		//////////////////////////////////////////////////////////////
 
-		return	<div style={{ ...innerFlex, ...lineStyle, cursor : 'pointer' }}>
-					<Icon
-						file={ icon }
-						name={ name }
-						style={ ( props.index === index ) ? {} : { opacity : 0.2 } }
-						onClick={ () => onClick( props.index ) }
-						ratio={ iconRatio || '50px' }
-					/>
-				</div>
+		return	<Link to={ path }>
+					<div style={{ ...innerFlex, ...lineStyle, cursor : 'pointer' }}>
+						<Icon
+							file={ icon }
+							name={ name }
+							style={ ( props.index === index ) ? {} : { opacity : 0.2 } }
+							onClick={ () => onClick( props.index ) }
+							ratio={ iconRatio || '50px' }
+						/>
+					</div>
+				</Link>
 	}
 
 	//////////////////////////////////////////////////////////////////
