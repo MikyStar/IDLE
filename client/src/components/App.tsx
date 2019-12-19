@@ -4,13 +4,7 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import Building, { BuildingType } from './containers/Building';
 import NavBar from './containers/NavBar';
 import TopStatus from './containers/TopStatus';
-import routes from '../routes/routes';
-import Dashboard from './pages/Dashboard';
-import Items from './pages/Items';
-import Map from './pages/Map';
-import Research from './pages/Research';
-import Settings from './pages/Settings';
-import Staff from './pages/Staff';
+import routes from '../components/pages/routes';
 
 //////////////////////////////////////////////////////////////////////
 
@@ -26,53 +20,34 @@ const App:  React.FC = () =>
 {
 	const [ tabSelectedIndex, setSelectedTabIndex ] = useState( DEFAULT_TAB_INDEX );
 
+	const Page = routes[ tabSelectedIndex ].page;
+
 	//////////////////////////////////////////////////////////////////
 
 	return	(
-				<Router>
-					<div style={{ ...mainStyle, ...mainGrid }}>
+				<div style={{ ...mainStyle, ...mainGrid }}>
 
-						<NavBar
-							iconRatio={ IMAGE_RATIO_NAVBAR }
-							style={{ gridArea : 'nav' }}
-							index={ tabSelectedIndex }
-							onClick={ index => setSelectedTabIndex( index ) }
-						/>
+					<NavBar
+						iconRatio={ IMAGE_RATIO_NAVBAR }
+						style={{ gridArea : 'nav' }}
+						index={ tabSelectedIndex }
+						onClick={ index => setSelectedTabIndex( index ) }
+					/>
 
-						<TopStatus
-							canGoBack
-							tabName={ routes[ tabSelectedIndex ].name }
-							productionRate='me too'
-							totalMoney='here also'
-							style={{ gridArea : 'status' }}
-							onTabNameClick={ () => console.log( 'back' ) }
-						/>
+					<TopStatus
+						canGoBack
+						tabName={ routes[ tabSelectedIndex ].name }
+						productionRate='me too'
+						totalMoney='here also'
+						style={{ gridArea : 'status' }}
+						onTabNameClick={ () => console.log( 'back' ) }
+					/>
 
-						<div style={{ gridArea : 'content' }}>
-							{/*<Building
-								style={{ width : BUILDING_WIDTH }}
-								imageRatio={ IMAGE_RATIO_BUILDING }
-								type={ BuildingType.FACTORY }
-								material='Coal'
-								level={ 1 }
-								workers={ 1 }
-								productionRate={ 3 }
-								upgradePrice={ '5k' }
-								onUpgrade={ () => console.log( 'upgrade' ) }
-							/>*/}
-
-							<Switch>
-								<Route path='/'>
-									<Dashboard />
-								</Route>
-								<Route path='/map'>
-									<Map />
-								</Route>
-							</Switch>
-						</div>
-
+					<div style={{ gridArea : 'content' }}>
+						<Page />
 					</div>
-				</Router>
+
+				</div>
 			);
 }
 
