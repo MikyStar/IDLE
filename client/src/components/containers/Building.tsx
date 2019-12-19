@@ -18,7 +18,8 @@ interface BuildingProps
 	productionRate : number,
 	upgradePrice : string, // TODO make type with value and unit and if should be crossed
 	style ?: React.CSSProperties,
-	imageRatio ?: string
+	imageRatio ?: string,
+	onUpgrade : () => void
 }
 
 export enum BuildingType
@@ -29,12 +30,13 @@ export enum BuildingType
 
 //////////////////////////////////////////////////////////////////////
 
-const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style, imageRatio } : BuildingProps ) =>
+const Building : React.FC<BuildingProps> = ( { type, material, level, workers, productionRate, upgradePrice, style, imageRatio, onUpgrade } : BuildingProps ) =>
 {
 	const Upgrade = () =>
 	{
 		return	(
-					<div style={{
+					<div
+						style=	{{
 									display : 'flex',
 									flexDirection : 'column',
 									justifyContent : 'center',
@@ -44,6 +46,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 									cursor : 'pointer',
 									alignItems : 'center'
 								}}
+						onClick={ onUpgrade }
 					>
 						<div style=	{{
 										display : 'flex',
@@ -53,7 +56,7 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 										padding : '10px',
 									}}
 						>
-							<Icon name='Upgrade' file={ arrowUp } ratio='20px' />
+							<Icon name='Upgrade' file={ arrowUp } ratio={ imageRatio || '20px'} />
 							<div style={{ verticalAlign : 'middle', textAlign : 'center', height : '100%', margin : 'auto' }}>{ upgradePrice }</div>
 						</div>
 					</div>
@@ -72,13 +75,13 @@ const Building : React.FC<BuildingProps> = ( { type, material, level, workers, p
 						<Upgrade />
 					</div>
 
-					<Icon name='Level' file={ star } />
+					<Icon name='Level' file={ star } ratio={ imageRatio } />
 					<div key='level'>{ level } / 5</div>
 
-					<Icon name='Staff' file={ people } />
+					<Icon name='Staff' file={ people } ratio={ imageRatio } />
 					<div key='workers'>{ workers } / 3</div>
 
-					<Icon name='Production' file={ type === BuildingType.FACTORY ? bolt : hammer } />
+					<Icon name='Production' file={ type === BuildingType.FACTORY ? bolt : hammer } ratio={ imageRatio } />
 					<div key='productionRate'>{ productionRate } / s</div>
 
 				</div>

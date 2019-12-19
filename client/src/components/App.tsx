@@ -50,6 +50,7 @@ const App:  React.FC = () =>
 							workers={ 1 }
 							productionRate={ 3 }
 							upgradePrice={ '5k' }
+							onUpgrade={ () => console.log( 'upgrade' ) }
 						/>
 					</div>
 
