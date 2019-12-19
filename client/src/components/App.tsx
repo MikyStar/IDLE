@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Building, { BuildingType } from './containers/Building';
+import { DEFAULT_TAB_INDEX, NAVBAR_WIDTH, IMAGE_RATIO_NAVBAR } from '../constants/index.json'
 import NavBar from './containers/NavBar';
 import TopStatus from './containers/TopStatus';
 import routes from '../components/pages/routes';
-
-//////////////////////////////////////////////////////////////////////
-
-const DEFAULT_TAB_INDEX = 0;
-const NAVBAR_WIDTH = '100px';
-const BUILDING_WIDTH = '250px';
-const IMAGE_RATIO_BUILDING = '30px';
-const IMAGE_RATIO_NAVBAR = '45px';
 
 //////////////////////////////////////////////////////////////////////
 

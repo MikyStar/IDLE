@@ -1,13 +1,10 @@
 import React from 'react';
 
+import { FONT_SIZE_PRODUCTION } from '../../constants/index.json'
 import Icon from '../utils/Icon';
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import arrowRight from '../../assets/icons/arrow-right.svg'
 import dollar from '../../assets/icons/dollar.svg'
-
-//////////////////////////////////////////////////////////////////////
-
-const FONT_SIZE_PRODUCTION = '20px';
 
 //////////////////////////////////////////////////////////////////////
 
