@@ -7,3 +7,4 @@ css/
 coverage/
 .vscode/
 .DS_Store
+.env
