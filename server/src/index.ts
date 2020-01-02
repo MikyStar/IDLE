@@ -4,11 +4,17 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
+import fileSystem from 'fs';
+
+import account from './routes/account';
+import progression from './routes/progression';
+import shop from './routes/shop';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 const DEFAULT_PORT = 4000;
-dotenv.config();
+const API_BASE_NAME = '/api';
+const ROUTES = [ account, progression, shop ];
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -37,12 +43,21 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 		});
 	}
 
+	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
+
+	const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
+
 	////////////////////////////////////////////////////////////////////////////
+
+	dotenv.config();
+	installSourceMapSupport();
 
 	allowJSONBodyHandling();
 	enableCORS();
 
 	launchServer();
+	setupTestRoute();
+	setupRoutes();
 
 	process.on( "uncaughtException", onError );
 	process.on( "unhandledRejection", onError );
@@ -50,5 +65,4 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 ///////////////////////////////////////////////////////////////////////////////
 
-installSourceMapSupport();
-main(process.argv);
+main( process.argv );
