@@ -12,7 +12,7 @@ import shop from './routes/shop';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const DEFAULT_PORT = 4000;
+const DEFAULT_PORT = 5001;
 const API_BASE_NAME = '/api';
 const ROUTES = [ account, progression, shop ];
 
@@ -20,7 +20,6 @@ const ROUTES = [ account, progression, shop ];
 
 export const main = async ( argv: string[] ) : Promise<void> =>
 {
-
 	const app = express();
 
 	////////////////////////////////////////////////////////////////////////////
@@ -37,9 +36,11 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const launchServer = () =>
 	{
-		app.listen( process.env.port || DEFAULT_PORT, () =>
+		const port = process.env.port || DEFAULT_PORT;
+
+		app.listen( port, () =>
 		{
-			console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode.` );
+			console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode, port ${ port }` );
 		});
 	}
 
@@ -56,6 +57,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 	enableCORS();
 
 	launchServer();
+
 	setupTestRoute();
 	setupRoutes();
 

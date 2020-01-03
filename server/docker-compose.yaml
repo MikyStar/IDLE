@@ -1,0 +1,28 @@
+version : "3.6"
+
+services :
+
+    nodets-back :
+        restart : unless-stopped
+        container_name : nodets-back
+        build : .
+        ports :
+            - "5001:5001"
+        depends_on :
+            - "mongo"
+        links :
+            - "mongo"
+
+    mongo :
+        container_name : mongodb
+        image : "mongo"
+        restart : unless-stopped
+        volumes :
+            - mongo-data:/data/db
+        env_file :
+            ./.env.mongo
+        expose :
+            - "27017"
+
+volumes :
+    mongo-data:
