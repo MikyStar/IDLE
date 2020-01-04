@@ -38,10 +38,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 	{
 		const port = process.env.port || DEFAULT_PORT;
 
-		app.listen( port, () =>
-		{
-			console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode, port ${ port }` );
-		});
+		app.listen( port, () =>  console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode, port ${ port }` ) );
 	}
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );

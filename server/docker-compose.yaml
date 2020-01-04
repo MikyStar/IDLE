@@ -12,6 +12,8 @@ services :
             - "mongo"
         links :
             - "mongo"
+        env_file :
+            - .env
 
     mongo :
         container_name : mongodb
@@ -20,7 +22,7 @@ services :
         volumes :
             - mongo-data:/data/db
         env_file :
-            ./.env.mongo
+          - .env.mongo
         expose :
             - "27017"
 
