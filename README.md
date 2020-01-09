@@ -26,5 +26,5 @@
 cd server && docker-compose up
 
 # To run the client
-docker build -t reactts . && docker run -it reactts
+cd client && docker build -t reactts . && docker run -it reactts
 ```
