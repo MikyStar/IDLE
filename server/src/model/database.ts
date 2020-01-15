@@ -1,7 +1,38 @@
-export const connectToDB = async ( url : string ) : Promise<void> =>
+interface IDB
 {
-	return new Promise( ( resolve , reject ) =>
+	readonly url : string;
+	launchDB : () => Promise<void>;
+	connectToDB : () => Promise<void>;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+export class DataBase implements IDB
+{
+	readonly url : string;
+	
+	////////////////////////////////////////////////////////////////////////////
+
+	constructor( url : string ) 
 	{
-		console.log( 'TODO' );
-	});
+		this.url = url;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	async launchDB() : Promise<void>
+	{
+		return new Promise( ( resolve, reject ) =>
+		{
+			console.log( 'TODO' );
+		});
+	}
+
+	async connectToDB() : Promise<void>
+	{
+		return new Promise( ( resolve, reject ) =>
+		{
+			console.log( 'TODO' );
+		});
+	}
 }

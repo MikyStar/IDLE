@@ -22,7 +22,7 @@ services :
         volumes :
             - mongo-data:/data/db
         env_file :
-          - .env.mongo
+          - .mongo.env
         expose :
             - "27017"
 

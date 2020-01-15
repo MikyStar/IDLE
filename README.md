@@ -19,7 +19,7 @@
 
 ## Running it
 
-`You'll need the .env files obviously need commited but also Docker and docker-compose`
+`You'll need the .env files obviously not commited but also Docker and docker-compose`
 
 ```sh
 # To run the server
