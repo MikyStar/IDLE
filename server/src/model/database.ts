@@ -1,21 +1,25 @@
 interface IDB
 {
 	readonly url : string;
+	readonly port : string;
+
 	launchDB : () => Promise<void>;
 	connectToDB : () => Promise<void>;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export class DataBase implements IDB
+export default class DataBase implements IDB
 {
 	readonly url : string;
+	readonly port : string;
 	
 	////////////////////////////////////////////////////////////////////////////
 
-	constructor( url : string ) 
+	constructor( url : string, port : string )
 	{
 		this.url = url;
+		this.port = port;
 	}
 
 	////////////////////////////////////////////////////////////////////////////

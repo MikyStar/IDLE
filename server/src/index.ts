@@ -9,6 +9,7 @@ import fileSystem from 'fs';
 import account from './routes/account';
 import progression from './routes/progression';
 import shop from './routes/shop';
+import DataBase from './model/DataBase';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -21,6 +22,7 @@ const ROUTES = [ account, progression, shop ];
 export const main = async ( argv: string[] ) : Promise<void> =>
 {
 	const app = express();
+	const dataBase = new DataBase( '', String( process.env.port || DEFAULT_PORT ) ); // TODO add real url from .env
 
 	////////////////////////////////////////////////////////////////////////////
 
@@ -36,9 +38,8 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const launchServer = () =>
 	{
-		const port = process.env.port || DEFAULT_PORT;
-
-		app.listen( port, () =>  console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode, port ${ port }` ) );
+		// TODO launch database
+		app.listen( dataBase.port, () =>  console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode, port ${ dataBase.port }` ) );
 	}
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
