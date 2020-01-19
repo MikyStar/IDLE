@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt } from 'graphql';
 import _ from 'lodash';
 
 ////////////////////////////////////////////////////////////////////////////
@@ -9,7 +9,11 @@ const BuildingType = new GraphQLObjectType(
 	fields : () =>
 	({
 		id : { type : GraphQLString },
-		name : { type : GraphQLString }
+		name : { type : GraphQLString },
+		maxLevel : { type : GraphQLInt },
+		currentLevel : { type : GraphQLInt },
+		basePrice : { type : GraphQLInt },
+		productionRate : { type : GraphQLInt }
 	})
 });
 
