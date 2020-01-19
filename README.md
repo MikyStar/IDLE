@@ -6,6 +6,7 @@
 
 - React
 - TypeScript
+- Apollo
 - CSS' FlexBox & GridLayout system
 - Docker
 
@@ -15,6 +16,7 @@
 - TypeScript
 - MongoDB
 - GraphQL
+- GraphiQL
 - Docker
 
 ## Running it
