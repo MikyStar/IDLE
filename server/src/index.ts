@@ -4,12 +4,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
-import fileSystem from 'fs';
+import graphqlHTTP from 'express-graphql';
 
 import account from './routes/account';
 import progression from './routes/progression';
 import shop from './routes/shop';
 import DataBase from './model/DataBase';
+import { appendFile } from 'fs';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,6 +47,8 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
 
+	const setupGraphQL = () => app.use( '/graphql', graphqlHTTP({}) )
+
 	////////////////////////////////////////////////////////////////////////////
 
 	dotenv.config();
@@ -58,6 +61,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	setupTestRoute();
 	setupRoutes();
+	setupGraphQL();
 
 	process.on( "uncaughtException", onError );
 	process.on( "unhandledRejection", onError );
