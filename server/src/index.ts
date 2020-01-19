@@ -10,7 +10,6 @@ import account from './routes/account';
 import progression from './routes/progression';
 import shop from './routes/shop';
 import DataBase from './model/DataBase';
-import { appendFile } from 'fs';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +46,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
 
-	const setupGraphQL = () => app.use( '/graphql', graphqlHTTP({}) )
+	const setupGraphQL = () => app.use( '/graphql', graphqlHTTP({}) );
 
 	////////////////////////////////////////////////////////////////////////////
 
