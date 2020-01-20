@@ -9,14 +9,14 @@ import arrowUp from '../../assets/icons/arrow-up.svg';
 
 //////////////////////////////////////////////////////////////////////
 
-interface BuildingProps
+export interface BuildingProps
 {
 	type : BuildingType,
 	material : string, // TODO there too
 	level : number,
 	workers : number,
 	productionRate : number,
-	upgradePrice : string, // TODO make type with value and unit and if should be crossed
+	upgradePrice : number, // TODO make type with value and unit and if should be crossed
 	style ?: React.CSSProperties,
 	imageRatio ?: string,
 	onUpgrade : () => void

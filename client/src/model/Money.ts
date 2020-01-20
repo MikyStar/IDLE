@@ -24,13 +24,18 @@ export default class Money
 
 		if( a.unit === b.unit )
 		{
-			if( !amIgoingToANewUnit( a, b) )
-				return { value : ( a.value + b.value ), unit : a.unit }
+			return amIgoingToANewUnit( a, b )
+				? { value : newValue, unit : getNextUnit( a.unit ) }
+				: { value : newValue, unit : a.unit }
 		}
 		else
 		{
 			const highestUnit = ( howManyZeros( a.unit ) > howManyZeros( b.unit ) ) ? a.unit : b.unit;
 
+			if( howManyZeros( a.unit ) )
+			{
+				// TODO
+			}
 		}
 
 		return { unit : Unit.G, value : 2 }
@@ -38,12 +43,15 @@ export default class Money
 
 	static substract( toMe : IMoney, thatQuantity : IMoney ) : IMoney
 	{
-		return { unit : Unit.k, value : 0 }
+		return { unit : Unit.k, value : 0 } // TODO
 	}
 
 	static isGreater( isThis : IMoney, greaterThan : IMoney ) : boolean
 	{
-		return false;
+		if( isThis.unit === greaterThan.unit )
+			return isThis.value > greaterThan.value;
+		else
+			return howManyZeros( isThis.unit ) > howManyZeros( greaterThan.unit );
 	}
 }
 
@@ -78,4 +86,10 @@ const getNextUnit = ( unit : Unit ) : Unit =>
 	return Object.values( Unit )[ currentPosition + 1 ];
 }
 
+//////////////////////////////////////////////////////////////////
+
+const money1 : IMoney = { unit : Unit.M, value : 34 };
+const money2 : IMoney = { unit : Unit.M, value : 23 };
+
 console.log('next unit', getNextUnit( Unit.Md ) );
+console.log( 'isGreater', Money.isGreater( money1, money2 ));
