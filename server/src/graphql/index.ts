@@ -6,6 +6,7 @@ import { StaffType, dummyStaff } from './Staff';
 import { UserType, defaultUsers } from './User';
 
 import Building from '../model/Building';
+import User from '../model/User';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -60,6 +61,8 @@ const RootQuery = new GraphQLObjectType(
 	}
 });
 
+////////////////////////////////////////////////////////////////////////////
+
 const Mutation = new GraphQLObjectType(
 {
 	name : 'Mutation',
@@ -78,6 +81,24 @@ const Mutation = new GraphQLObjectType(
 				let building = new Building({ id : args.id, name : args.name });
 
 				return building.save();
+			}
+		},
+
+		//////////////////////////////////////////////////////////////////
+
+		addUser :
+		{
+			type : UserType,
+			args :
+			{
+				email : { type : GraphQLString },
+				password : { type : GraphQLString },
+			},
+			resolve( parent, args )
+			{
+				const user = new User({ email : args.email, passwordHash : args.password, money : 5000 });
+
+				return user.save();
 			}
 		}
 	}
