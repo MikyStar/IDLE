@@ -16,6 +16,7 @@ import RootQuery from './graphql';
 
 const DEFAULT_PORT = 5001;
 const API_BASE_NAME = '/api';
+const GRAPHIQL_ROUTE = '/graphiql';
 const ROUTES = [ account, progression, shop ];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -25,8 +26,7 @@ dotenv.config();
 export const main = async ( argv: string[] ) : Promise<void> =>
 {
 	const app = express();
-	console.log( 'url', process.env.MONGO_URL)
-	const dataBase = new DataBase( process.env.MONGO_URL as string ); // TODO add real url from .env
+	const dataBase = new DataBase( process.env.MONGO_URL as string );
 
 	////////////////////////////////////////////////////////////////////////////
 
@@ -40,17 +40,13 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const enableCORS = () => app.use( cors() );
 
-	const startRestService = () =>
-	{
-		// TODO launch database
-		app.listen( process.env.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ process.env.NODE_ENV } mode, port ${ process.env.REST_PORT }` ) );
-	}
+	const startRestService = () => app.listen( process.env.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ process.env.NODE_ENV } mode, port ${ process.env.REST_PORT }` ) );
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
 
 	const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
 
-	const setupGraphQL = () => app.use( '/graphql', graphqlHTTP(
+	const setupGraphQL = () => app.use( GRAPHIQL_ROUTE, graphqlHTTP(
 	{
 		schema : RootQuery,
 		graphiql : true 

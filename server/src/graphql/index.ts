@@ -1,8 +1,10 @@
-import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList } from 'graphql'
+import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList, GraphQLString } from 'graphql'
 import _ from 'lodash';
 
 import { BuildingType, dummyBuildings } from './Building';
 import { StaffType, dummyStaff } from './Staff';
+
+import Building from '../model/Building';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -45,6 +47,33 @@ const RootQuery = new GraphQLObjectType(
 	}
 });
 
+const Mutation = new GraphQLObjectType(
+{
+	name : 'Mutation',
+	fields :
+	{
+		buyBuilding :
+		{
+			type : BuildingType,
+			args :
+			{
+				id : { type : GraphQLString },
+				name : { type : GraphQLString },
+			},
+			resolve( parent, args )
+			{
+				let building = new Building({ id : args.id, name : args.name });
+
+				return building.save();
+			}
+		}
+	}
+})
+
 ////////////////////////////////////////////////////////////////////////////
 
-export default new GraphQLSchema({ query : RootQuery });
+export default new GraphQLSchema(
+{ 
+	query : RootQuery,
+	mutation : Mutation
+});
