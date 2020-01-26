@@ -79,3 +79,18 @@ export const workers =
         basePrice : 70000
 	},
 ]
+
+export const persons =
+{
+    name :
+    [
+        'Jean', 'Marie', 'Luc', 'Lucien', 'Lucienne', 'Fabien', 'Fabienne', 'Eric', 'Mathieu', 'Marine',
+        'Bernadette', 'Monique', 'Jason', 'Lucette', 'Pierre', 'Yvonne', 'Marc', 'Nathan', 'Michel', 'Michelle',
+        'Bertrand'
+    ],
+    surname :
+    [
+        'LAVOISIER', 'CRABE', 'FRACASSE', 'MARTEAU', 'SOMBRE', 'MOTEUR', 'REACTEUR', 'PENTECOTE', 'MINIER', 'PELETEUSE',
+        'POPEYE', 'SHRADDER', 'POINCARRE', 'CURIE', 'BRUNO', 'CONCASSEUR', 'SOIR', 'BRIOCHE', 'LEREQUIN'
+    ]
+}
