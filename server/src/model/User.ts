@@ -12,6 +12,7 @@ const UserScheme = new Schema(
 	timestampProduction : { type: Date, default: Date.now }, 
     staff : [String],
     buildings : [String],
+    slotsAvailable : Number
 })
 
 ////////////////////////////////////////////////////////////////////////////

@@ -15,6 +15,7 @@ export const UserType = new GraphQLObjectType(
 		money : { type : GraphQLInt },
 		buildings : { type : GraphQLString }, // TODO change type
 		production : { type : GraphQLInt }, 
+		slotsAvailable : { type : GraphQLInt }, 
 		timestampProduction : { type : GraphQLString },
 	})
 });
