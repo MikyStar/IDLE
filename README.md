@@ -34,3 +34,9 @@ cd client && docker build -t reactts . && docker run -it reactts
 ## Access GraphiQL
 
 > Go to /graphql
+
+## MongoDB
+
+The current instance of MongoDB is actually running on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
+Please refer to the author of this repo for the mathing .env file with the connection string.

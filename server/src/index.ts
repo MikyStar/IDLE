@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import graphqlHTTP from 'express-graphql';
+import mongoose from 'mongoose';
 
 import account from './routes/account';
 import progression from './routes/progression';
@@ -38,10 +39,19 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const enableCORS = () => app.use( cors() );
 
-	const launchServer = () =>
+	const startRestService = () =>
 	{
 		// TODO launch database
-		app.listen( dataBase.port, () =>  console.log( `NodeJS server running in ${ process.env.NODE_ENV } mode, port ${ dataBase.port }` ) );
+		app.listen( dataBase.port, () =>  console.log( `NodeJS REST service running in ${ process.env.NODE_ENV } mode, port ${ dataBase.port }` ) );
+	}
+
+	const connectToDB = ( url ?: string ) =>
+	{
+		if( !url ) onError( 'You need to provide a connection string to the DB through a .env file, please contact the maintainer.\n' )
+
+		mongoose.connect( url as string, { useNewUrlParser : true, useUnifiedTopology : true } );
+
+		mongoose.connection.once( 'open', () => console.log( `Connected to DB through ${ url }` ) )
 	}
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
@@ -62,10 +72,11 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 	allowJSONBodyHandling();
 	enableCORS();
 
-	launchServer();
+	startRestService();
 
 	setupTestRoute();
 	setupRoutes();
+	connectToDB( process.env.MONGO_URL )
 	setupGraphQL();
 
 	process.on( "uncaughtException", onError );
