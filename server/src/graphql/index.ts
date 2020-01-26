@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList, GraphQLString } from 'graphql'
+import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList, GraphQLString, GraphQLNonNull } from 'graphql'
 import _ from 'lodash';
 
 import { BuildingType } from './Building';
@@ -76,8 +76,8 @@ const Mutation = new GraphQLObjectType(
 			type : UserType,
 			args :
 			{
-				email : { type : GraphQLString },
-				password : { type : GraphQLString },
+				email : { type : new GraphQLNonNull( GraphQLString ) },
+				password : { type : new GraphQLNonNull( GraphQLString ) },
 			},
 			resolve( parent, args )
 			{
