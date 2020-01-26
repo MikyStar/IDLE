@@ -1,51 +1,32 @@
-import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt } from 'graphql';
-import _ from 'lodash';
+import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID } from 'graphql';
+
+import { StaffType } from './Staff';
 
 ////////////////////////////////////////////////////////////////////////////
 
-const BuildingType = new GraphQLObjectType(
+export const BuildingType = new GraphQLObjectType(
 {
 	name : 'Building',
 	fields : () =>
 	({
-		id : { type : GraphQLString },
+		id : { type : GraphQLID },
 		name : { type : GraphQLString },
 		maxLevel : { type : GraphQLInt },
 		currentLevel : { type : GraphQLInt },
 		basePrice : { type : GraphQLInt },
-		productionRate : { type : GraphQLInt }
+		productionRate : { type : GraphQLInt },
+		staff : { type : StaffType }
 	})
 });
 
-const RootQuery = new GraphQLObjectType(
-{
-	name : 'RootQueryTypes',
-	fields :
-	{ 
-		building :
-		{
-			type : BuildingType,
-			args : { id : { type : GraphQLString } }, // TODO change type
-			resolve( parent, args )
-			{
-				return _.find( dummyBuildings, { id : args.id } );
-			}
-		}
-	}
-});
-
-const dummyBuildings = 
+export const dummyBuildings = 
 [
 	{
 		id : '1',
-		name : 'Mine 1 wood'
+		name : 'Mine 1 wood',
 	},
 	{
 		id : '2',
 		name : 'Mine 2 coal'
 	}
 ]
-
-////////////////////////////////////////////////////////////////////////////
-
-export default new GraphQLSchema({ query : RootQuery });

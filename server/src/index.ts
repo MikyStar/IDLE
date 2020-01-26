@@ -11,7 +11,7 @@ import progression from './routes/progression';
 import shop from './routes/shop';
 import DataBase from './model/DataBase';
 import User from './graphql/User';
-import Building from './graphql/Building';
+import RootQuery from './graphql';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -50,7 +50,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const setupGraphQL = () => app.use( '/graphql', graphqlHTTP(
 	{
-		schema : Building,
+		schema : RootQuery,
 		graphiql : true 
 	}));
 

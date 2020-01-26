@@ -30,3 +30,7 @@ cd server && docker-compose up
 # To run the client
 cd client && docker build -t reactts . && docker run -it reactts
 ```
+
+## Access GraphiQL
+
+> Go to /graphql
