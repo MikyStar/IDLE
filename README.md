@@ -37,8 +37,10 @@ Go to the docs folder for further informations on the project ( Gantt, MindMaps,
 ### Server
 
 - NodeJS
+- Express
 - TypeScript
 - MongoDB
+- Mongoose
 - GraphQL
 - GraphiQL
 - Docker

@@ -53,6 +53,4 @@ export const dummyBuildings =
 		name : 'Mine 4 Urnanium',
 		staffID : '3'
 	},
-
-
 ]

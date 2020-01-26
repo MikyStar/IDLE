@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 ////////////////////////////////////////////////////////////////////////////
 
-const UserType = new GraphQLObjectType(
+export const UserType = new GraphQLObjectType(
 {
 	name : 'User',
 	fields : () =>
@@ -17,22 +17,12 @@ const UserType = new GraphQLObjectType(
 	})
 });
 
-const RootQuery = new GraphQLObjectType(
-{
-	name : 'RootQueryTypes',
-	fields :
-	{ 
-		user :
-		{
-			type : UserType,
-			args : { buildings : { type : GraphQLString } }, // TODO change type
-			resolve( parent, args )
-			{
-			}
-		}
+export const defaultUsers =
+[
+	{
+		id : '1',
+		email : 'test@mail.com',
+		passwordHash : '1234',
+		money : 10000
 	}
-});
-
-////////////////////////////////////////////////////////////////////////////
-
-export default new GraphQLSchema({ query : RootQuery });
+]

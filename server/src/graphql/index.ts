@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import { BuildingType, dummyBuildings } from './Building';
 import { StaffType, dummyStaff } from './Staff';
+import { UserType, defaultUsers } from './User';
 
 import Building from '../model/Building';
 
@@ -43,6 +44,18 @@ const RootQuery = new GraphQLObjectType(
 		{
 			type : new GraphQLList( StaffType ),
 			resolve( parent, args ){ return dummyStaff; }
+		},
+
+		////////////////////////////////////////////////////////////////////
+
+		user :
+		{
+			type : UserType,
+			args : { id : { type : GraphQLID } },
+			resolve( parent, args )
+			{
+				return _.find( defaultUsers, { id : args.id } )
+			}
 		}
 	}
 });
