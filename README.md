@@ -16,9 +16,13 @@ You can affect workers to those buildings.
 
 Mines let you harvest ores whilst Factories can convert those ores to money.
 
-This money lets yiou buy new workers, new factories, new mines, new lands and much more.
+This money lets you buy new workers, new factories, new mines, new lands and much more.
 
 There's much more things you can do in the different tabs, just be curious ...
+
+## Further explanantions
+
+Go to the docs folder for further informations on the project ( Gantt, MindMaps, Mockups ... )
 
 ## Technos
 
@@ -53,7 +57,7 @@ cd client && docker build -t reactts . && docker run -it reactts
 
 ## Access GraphiQL
 
-> Go to /graphql
+> Go to /graphiql
 
 ## MongoDB
 
