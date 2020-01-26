@@ -5,13 +5,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import graphqlHTTP from 'express-graphql';
-import mongoose from 'mongoose';
 
 import account from './routes/account';
 import progression from './routes/progression';
 import shop from './routes/shop';
 import DataBase from './model/DataBase';
-import User from './graphql/User';
 import RootQuery from './graphql';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,10 +20,13 @@ const ROUTES = [ account, progression, shop ];
 
 ////////////////////////////////////////////////////////////////////////////////
 
+dotenv.config();
+
 export const main = async ( argv: string[] ) : Promise<void> =>
 {
 	const app = express();
-	const dataBase = new DataBase( '', String( process.env.port || DEFAULT_PORT ) ); // TODO add real url from .env
+	console.log( 'url', process.env.MONGO_URL)
+	const dataBase = new DataBase( process.env.MONGO_URL as string ); // TODO add real url from .env
 
 	////////////////////////////////////////////////////////////////////////////
 
@@ -42,16 +43,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 	const startRestService = () =>
 	{
 		// TODO launch database
-		app.listen( dataBase.port, () =>  console.log( `NodeJS REST service running in ${ process.env.NODE_ENV } mode, port ${ dataBase.port }` ) );
-	}
-
-	const connectToDB = ( url ?: string ) =>
-	{
-		if( !url ) onError( 'You need to provide a connection string to the DB through a .env file, please contact the maintainer.\n' )
-
-		mongoose.connect( url as string, { useNewUrlParser : true, useUnifiedTopology : true } );
-
-		mongoose.connection.once( 'open', () => console.log( `Connected to DB through ${ url }` ) )
+		app.listen( process.env.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ process.env.NODE_ENV } mode, port ${ process.env.REST_PORT }` ) );
 	}
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
@@ -66,7 +58,6 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	////////////////////////////////////////////////////////////////////////////
 
-	dotenv.config();
 	installSourceMapSupport();
 
 	allowJSONBodyHandling();
@@ -76,7 +67,10 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	setupTestRoute();
 	setupRoutes();
-	connectToDB( process.env.MONGO_URL )
+	dataBase.connect().then( 
+		resolve => console.log( 'Connected to DB' ),
+		error => console.error( error )
+	);
 	setupGraphQL();
 
 	process.on( "uncaughtException", onError );
