@@ -5,7 +5,7 @@ import { BuildingType, dummyBuildings } from './Building'
 
 ////////////////////////////////////////////////////////////////////////////
 
-export const StaffType = new GraphQLObjectType(
+export const StaffType : GraphQLObjectType  = new GraphQLObjectType(
 {
     name : 'Staff',
     fields : () =>

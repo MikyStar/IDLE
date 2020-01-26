@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLSchema } from 'graphql'
+import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList } from 'graphql'
 import _ from 'lodash';
 
 import { BuildingType, dummyBuildings } from './Building';
@@ -20,6 +20,14 @@ const RootQuery = new GraphQLObjectType(
 				return _.find( dummyBuildings, { id : args.id } );
 			}
         },
+        buildings :
+        {
+            type : new GraphQLList( BuildingType ),
+            resolve( parent, args ){ return dummyBuildings; }
+        },
+
+        ////////////////////////////////////////////////////////////////////
+
         staff :
 		{
 			type : StaffType,
@@ -28,7 +36,12 @@ const RootQuery = new GraphQLObjectType(
 			{
 				return _.find( dummyStaff, { id : args.id } );
 			}
-		}
+        },
+        staffMembers :
+        {
+            type : new GraphQLList( StaffType ),
+            resolve( parent, args ){ return dummyStaff; }
+        }
 	}
 });
 

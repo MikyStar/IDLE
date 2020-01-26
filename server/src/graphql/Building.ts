@@ -1,11 +1,11 @@
-import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID, GraphQLInputObjectType } from 'graphql';
 import _ from 'lodash';
 
 import { StaffType, dummyStaff } from './Staff';
 
 ////////////////////////////////////////////////////////////////////////////
 
-export const BuildingType = new GraphQLObjectType(
+export const BuildingType : GraphQLObjectType = new GraphQLObjectType(
 {
 	name : 'Building',
 	fields : () =>
