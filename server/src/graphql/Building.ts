@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID } from 'graphql';
+import _ from 'lodash';
 
-import { StaffType } from './Staff';
+import { StaffType, dummyStaff } from './Staff';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -15,7 +16,14 @@ export const BuildingType = new GraphQLObjectType(
 		currentLevel : { type : GraphQLInt },
 		basePrice : { type : GraphQLInt },
 		productionRate : { type : GraphQLInt },
-		staff : { type : StaffType }
+		staff : 
+		{
+			type : StaffType,
+			resolve( parent, args )
+			{
+				return _.find( dummyStaff, { id : parent.staffID } )
+			} 
+		}
 	})
 });
 
@@ -24,9 +32,11 @@ export const dummyBuildings =
 	{
 		id : '1',
 		name : 'Mine 1 wood',
+		staffID : '1'
 	},
 	{
 		id : '2',
-		name : 'Mine 2 coal'
+		name : 'Mine 2 coal',
+		staffID : '2'
 	}
 ]
