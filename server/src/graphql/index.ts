@@ -1,12 +1,14 @@
 import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList, GraphQLString } from 'graphql'
 import _ from 'lodash';
 
-import { BuildingType, dummyBuildings } from './Building';
-import { StaffType, dummyStaff } from './Staff';
+import { BuildingType } from './Building';
+import { StaffType } from './Staff';
 import { UserType, defaultUsers } from './User';
 
 import Building from '../model/Building';
 import User from '../model/User';
+import { buildings } from '../data/Buildings';
+import { workers } from '../data/Workers'
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +30,7 @@ const RootQuery = new GraphQLObjectType(
 		buildings :
 		{
 			type : new GraphQLList( BuildingType ),
-			resolve( parent, args ){ return dummyBuildings; }
+			resolve( parent, args ){ return buildings; }
 		},
 
 		////////////////////////////////////////////////////////////////////
@@ -39,13 +41,13 @@ const RootQuery = new GraphQLObjectType(
 			args : { id : { type : GraphQLID } },
 			resolve( parent, args )
 			{
-				return _.find( dummyStaff, { id : args.id } );
+				return _.find( workers, { id : args.id } );
 			}
 		},
 		staffMembers :
 		{
 			type : new GraphQLList( StaffType ),
-			resolve( parent, args ){ return dummyStaff; }
+			resolve( parent, args ){ return workers; }
 		},
 
 		////////////////////////////////////////////////////////////////////
