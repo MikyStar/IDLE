@@ -19,16 +19,16 @@ const RootQuery = new GraphQLObjectType(
 			{
 				return _.find( dummyBuildings, { id : args.id } );
 			}
-        },
-        buildings :
-        {
-            type : new GraphQLList( BuildingType ),
-            resolve( parent, args ){ return dummyBuildings; }
-        },
+		},
+		buildings :
+		{
+			type : new GraphQLList( BuildingType ),
+			resolve( parent, args ){ return dummyBuildings; }
+		},
 
-        ////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////
 
-        staff :
+		staff :
 		{
 			type : StaffType,
 			args : { id : { type : GraphQLID } },
@@ -36,12 +36,12 @@ const RootQuery = new GraphQLObjectType(
 			{
 				return _.find( dummyStaff, { id : args.id } );
 			}
-        },
-        staffMembers :
-        {
-            type : new GraphQLList( StaffType ),
-            resolve( parent, args ){ return dummyStaff; }
-        }
+		},
+		staffMembers :
+		{
+			type : new GraphQLList( StaffType ),
+			resolve( parent, args ){ return dummyStaff; }
+		}
 	}
 });
 
