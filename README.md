@@ -1,5 +1,25 @@
 # IDLE
 
+## The game
+
+Hi !
+
+This is a really basic IDLE click & collect game.
+
+In the Staff tab, you can hire workers with your money.
+
+In the Map tab, you'll find different lands.
+
+On those lands you can buy buildings such as Mines or Factories.
+
+You can affect workers to those buildings.
+
+Mines let you harvest ores whilst Factories can convert those ores to money.
+
+This money lets yiou buy new workers, new factories, new mines, new lands and much more.
+
+There's much more things you can do in the different tabs, just be curious ...
+
 ## Technos
 
 ### Client
