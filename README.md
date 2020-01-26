@@ -6,6 +6,8 @@ Hi !
 
 This is a really basic IDLE click & collect game.
 
+Start up by creating an account in the Settings tab so that we can record your progression.
+
 In the Staff tab, you can hire workers with your money.
 
 In the Map tab, you'll find different lands.
@@ -58,6 +60,8 @@ cd client && docker build -t reactts . && docker run -it reactts
 ```
 
 ## Access GraphiQL
+
+GraphiQL is like a [Postman](https://www.getpostman.com/) for GraphQL.
 
 > Go to /graphiql
 
