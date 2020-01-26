@@ -67,6 +67,6 @@ GraphiQL is like a [Postman](https://www.getpostman.com/) for GraphQL.
 
 ## MongoDB
 
-The current instance of MongoDB is actually running on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+The current instance of MongoDB is running on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
 Please refer to the author of this repo for the mathing .env file with the connection string.
