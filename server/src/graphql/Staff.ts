@@ -1,4 +1,7 @@
-import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID, GraphQLList } from 'graphql';
+import _ from 'lodash';
+
+import { BuildingType, dummyBuildings } from './Building'
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -12,6 +15,14 @@ export const StaffType = new GraphQLObjectType(
         type : { type : GraphQLString },
         rating : { type : GraphQLInt },
         basePrice : { type : GraphQLInt },
+        buildings :
+        {
+            type : new GraphQLList( BuildingType ),
+            resolve( parent, args )
+            {
+                return _.filter( dummyBuildings, { staffID : parent.id } )
+            }
+        }
     })
 });
 

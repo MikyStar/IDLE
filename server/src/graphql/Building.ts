@@ -51,7 +51,7 @@ export const dummyBuildings =
 		id : '4',
 		basePrice : 2500,
 		name : 'Mine 4 Urnanium',
-		staffID : '4'
+		staffID : '3'
 	},
 
 
