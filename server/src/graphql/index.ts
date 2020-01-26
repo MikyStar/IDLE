@@ -21,7 +21,8 @@ const RootQuery = new GraphQLObjectType(
 			args : { id : { type : GraphQLID } },
 			resolve( parent, args )
 			{
-				return _.find( dummyBuildings, { id : args.id } );
+				//return _.find( dummyBuildings, { id : args.id } );
+				Building.findById( parent.staffID );
 			}
 		},
 		buildings :
@@ -68,6 +69,31 @@ const Mutation = new GraphQLObjectType(
 	name : 'Mutation',
 	fields :
 	{
+		addUser :
+		{
+			type : UserType,
+			args :
+			{
+				email : { type : GraphQLString },
+				password : { type : GraphQLString },
+			},
+			resolve( parent, args )
+			{
+				const user = new User(
+				{
+					email : args.email,
+					passwordHash : args.password,
+					money : 5000,
+					production : 0,
+					soltsAvailable : 6 
+				});
+
+				return user.save();
+			}
+		},
+
+		////////////////////////////////////////////////////////////////////
+
 		buyBuilding :
 		{
 			type : BuildingType,
@@ -83,24 +109,6 @@ const Mutation = new GraphQLObjectType(
 				return building.save();
 			}
 		},
-
-		//////////////////////////////////////////////////////////////////
-
-		addUser :
-		{
-			type : UserType,
-			args :
-			{
-				email : { type : GraphQLString },
-				password : { type : GraphQLString },
-			},
-			resolve( parent, args )
-			{
-				const user = new User({ email : args.email, passwordHash : args.password, money : 5000, production : 0 });
-
-				return user.save();
-			}
-		}
 	}
 })
 
