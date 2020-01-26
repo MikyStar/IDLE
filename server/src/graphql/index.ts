@@ -96,7 +96,7 @@ const Mutation = new GraphQLObjectType(
 			},
 			resolve( parent, args )
 			{
-				const user = new User({ email : args.email, passwordHash : args.password, money : 5000 });
+				const user = new User({ email : args.email, passwordHash : args.password, money : 5000, production : 0 });
 
 				return user.save();
 			}
