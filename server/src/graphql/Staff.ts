@@ -28,5 +28,18 @@ export const dummyStaff =
         name : 'Marie PELETEUSE',
         rating : 2,
         basePrice : 3000
-	}
+    },
+    {
+		id : '3',
+        name : 'Viviane POPEYE',
+        rating : 3,
+        basePrice : 4000
+    },
+    {
+		id : '4',
+        name : 'Marc MENHIR',
+        rating : 3,
+        basePrice : 4500
+	},
+
 ]
