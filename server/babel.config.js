@@ -11,10 +11,10 @@ module.exports = api => {
     presets: [["@babel/preset-env", { targets: { node: "8.9.0" }, modules }]],
     plugins: [
       "babel-plugin-const-enum",
-      ["@babel/plugin-transform-typescript", { isTSX: true }],
+      ["@babel/plugin-transform-typescript", { isTSX: true, allowNamespaces : true }],
       ["@babel/plugin-proposal-decorators", { legacy: true }],
       ["@babel/plugin-proposal-class-properties", { loose: true }],
-      "@babel/plugin-proposal-object-rest-spread"
+      "@babel/plugin-proposal-object-rest-spread",
     ],
     env: {
       test: {
