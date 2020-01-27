@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList, GraphQLString, GraphQLNonNull } from 'graphql'
 import _ from 'lodash';
+import { Types } from 'mongoose';
 
 import { BuildingType } from './Building';
 import { StaffType } from './Staff';
@@ -9,6 +10,8 @@ import Building from '../model/Building';
 import User from '../model/User';
 import { buildings } from '../data/Buildings';
 import { workers } from '../data/Workers'
+import { Password } from '../core/Password';
+import { Token } from '../core/Token';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -21,10 +24,12 @@ const RootQuery = new GraphQLObjectType(
 		{
 			type : BuildingType,
 			args : { id : { type : GraphQLID } },
-			resolve( parent, args )
+			async resolve( parent, args )
 			{
-				//return _.find( dummyBuildings, { id : args.id } );
-				Building.findById( parent.staffID );
+				return _.find( buildings, { id : args.id } );
+
+				// !!!!!!!!!!!!!!!! FIXME
+				// TODO actually when I'm doing here is showing the shop of buildings, so it should be like shop{ building } actually
 			}
 		},
 		buildings :
@@ -71,7 +76,10 @@ const Mutation = new GraphQLObjectType(
 	name : 'Mutation',
 	fields :
 	{
-		addUser :
+		// TODO search for Swagger implementation
+
+		// Creates an account if email don't exists or logs you in. Either way send you back a connection token
+		login :
 		{
 			type : UserType,
 			args :
@@ -79,18 +87,28 @@ const Mutation = new GraphQLObjectType(
 				email : { type : new GraphQLNonNull( GraphQLString ) },
 				password : { type : new GraphQLNonNull( GraphQLString ) },
 			},
-			resolve( parent, args )
+			async resolve( parent, args )
 			{
-				const user = new User(
-				{
-					email : args.email,
-					passwordHash : args.password,
-					money : 5000,
-					production : 0,
-					soltsAvailable : 6 
-				});
+				const identifiedUser = await User.findOne( { where : { email : args.email } } );
 
-				return user.save();
+				if( !identifiedUser )
+				{
+					return ( await User.create({
+													email : args.email,
+													passwordHash : args.password, // TODO handle Encryption with core/Password
+													money : 5000,
+													production : 0,
+													soltsAvailable : 6 
+												})
+							).save();
+				}
+				else
+				{
+					if( await Password.compare( args.password, identifiedUser.get( 'passwordHash' ) ) )
+						return await Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) );
+					else
+						return 'Not allowed';
+				}
 			}
 		},
 
