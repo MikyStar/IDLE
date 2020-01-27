@@ -23,9 +23,10 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 {
 	clear();
 
-	const app = express();
-	const dataBase = new DataBase( process.env.MONGO_URL as string );
 	Environment.check();
+
+	const app = express();
+	const dataBase = new DataBase( Environment.get.MONGO_URL );
 
 	////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +40,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const enableCORS = () => app.use( cors() );
 
-	const startRestService = () => app.listen( process.env.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ process.env.NODE_ENV } mode, port ${ process.env.REST_PORT }` ) );
+	const startRestService = () => app.listen( Environment.get.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ Environment.get.NODE_ENV } mode, port ${ Environment.get.REST_PORT }` ) );
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
 
