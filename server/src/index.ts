@@ -6,7 +6,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import graphqlHTTP from 'express-graphql';
 
-import DataBase from './model/DataBase';
+import DataBase from './core/DataBase';
 import RootQuery from './graphql';
 
 ////////////////////////////////////////////////////////////////////////////////
