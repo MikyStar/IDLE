@@ -55,10 +55,13 @@ const RootQuery = new GraphQLObjectType(
 		user :
 		{
 			type : UserType,
-			args : { id : { type : GraphQLID } },
+			args :
+			{
+				id : { type : GraphQLID },
+			},
 			resolve( parent, args )
 			{
-				return _.find( defaultUsers, { id : args.id } )
+				return _.find( defaultUsers, { id : args.id, } )
 			}
 		}
 	}
@@ -81,13 +84,15 @@ const Mutation = new GraphQLObjectType(
 			},
 			resolve( parent, args )
 			{
+				// TODO need to check if email exists already
+
 				const user = new User(
 				{
 					email : args.email,
 					passwordHash : args.password,
 					money : 5000,
 					production : 0,
-					soltsAvailable : 6 
+					soltsAvailable : 6
 				});
 
 				return user.save();
