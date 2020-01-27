@@ -1,52 +1,46 @@
-import jwt from 'jsonwebtoken';
+import { sign, verify as jwtVerify } from 'jsonwebtoken';
+
+import { Environment } from '../environment';
+import User from '../model/User';
 
 ////////////////////////////////////////////////////////////////////////////////
 
-interface IToken
-{
-	readonly secret : string;
-
-    generate : ( json : JSON ) => Promise<string>;
-    verify : ( token : JSON ) => Promise<boolean>;
-    getUserID : ( token : JSON ) => Promise<string>;
-}
+const DEFAULT_JWT_EXPIRATION = "1d";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default class Token implements IToken
+export namespace Token
 {
-	readonly secret : string;
-	
-	////////////////////////////////////////////////////////////////////////////
-
-	constructor( secret : string )
-	{
-		this.secret = secret;
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-
-	async generate() : Promise<void>
+	export const generate = async ( email : string, password : string ) : Promise<string> =>
 	{
         return new Promise( ( resolve, reject ) =>
         {
-
+            sign( { email, password }, Environment.get.JWT_SECRET, { expiresIn : DEFAULT_JWT_EXPIRATION }, ( error, token ) => error ? reject( error ) : resolve( token ) );
         });
     }
 
-    async verify() : Promise<void>
+    export const getUserID = async ( token : string ) : Promise<any> =>
 	{
         return new Promise( ( resolve, reject ) =>
         {
-
+            jwtVerify( token, Environment.get.JWT_SECRET, ( error, user ) => error ? reject( error ) : resolve( user ) );
         });
     }
-    
-    async getUserID() : Promise<void>
-	{
+
+    export const getUser = async ( token : string ) : Promise<any> =>
+    {
         return new Promise( ( resolve, reject ) =>
         {
-
+            getUserID( token ).then(
+                user =>
+                {
+                    User.findById( user.id ).then(
+                        user => resolve( user ),
+                        error => reject( error )
+                    );
+                },
+                error => reject( error )
+            )
         });
-	}
+    }
 }
