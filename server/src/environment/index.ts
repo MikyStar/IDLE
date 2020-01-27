@@ -9,12 +9,12 @@ dotenv.config();
 export namespace Environment
 {
     /**
-     * Verifies if the required environment variables are in the sytstem
+     * @description Verifies if the required environment variables are in the sytstem
      * 
-     * To add one to your system simply create a file with a `.env` extension at the end,
+     * @tutorial - To add one to your system simply create a file with a `.env` extension at the end,
      * you can now affect values to variables like so :
      * 
-     * MY_VAR="some string of characters"
+     * - MY_VAR="some string of characters"
      */
     export const check = () =>
     {
