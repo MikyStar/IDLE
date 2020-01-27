@@ -6,9 +6,6 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import graphqlHTTP from 'express-graphql';
 
-import account from './routes/account';
-import progression from './routes/progression';
-import shop from './routes/shop';
 import DataBase from './model/DataBase';
 import RootQuery from './graphql';
 
@@ -17,7 +14,7 @@ import RootQuery from './graphql';
 const DEFAULT_PORT = 5001;
 const API_BASE_NAME = '/api';
 const GRAPHIQL_ROUTE = '/graphiql';
-const ROUTES = [ account, progression, shop ];
+const ROUTES = [ ];
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +41,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
 
-	const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
+	//const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
 
 	const setupGraphQL = () => app.use( GRAPHIQL_ROUTE, graphqlHTTP(
 	{
@@ -62,7 +59,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 	startRestService();
 
 	setupTestRoute();
-	setupRoutes();
+	//setupRoutes();
 	dataBase.connect().then( 
 		resolve => console.log( 'Connected to DB' ),
 		error => console.error( error )
