@@ -3,7 +3,6 @@ import { install as installSourceMapSupport } from 'source-map-support';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import * as dotenv from 'dotenv';
 import graphqlHTTP from 'express-graphql';
 
 import DataBase from './core/DataBase';
@@ -17,8 +16,6 @@ const GRAPHIQL_ROUTE = '/graphiql';
 const ROUTES = [ ];
 
 ////////////////////////////////////////////////////////////////////////////////
-
-dotenv.config();
 
 export const main = async ( argv: string[] ) : Promise<void> =>
 {
