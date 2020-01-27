@@ -1,55 +1,34 @@
 import * as dotenv from 'dotenv';
+import chalk from 'chalk';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 dotenv.config();
 
 ////////////////////////////////////////////////////////////////////////////////
-
-interface IEnv
+export namespace Environment
 {
-    NODE_ENV : () => string,
-    MONGO_URL : () => string,
-    REST_PORT : () => string,
-    SALT_ROUNDS : () => string
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-/**
- * Handles the access to required .env variables
- */
-export const env : IEnv =
-{
-    NODE_ENV : () =>
+    /**
+     * Verifies if the required environment variables are in the sytstem
+     * 
+     * To add one to your system simply create a file with a `.env` extension at the end,
+     * you can now affect values to variables like so :
+     * 
+     * MY_VAR="some string of characters"
+     */
+    export const check = () =>
     {
-        if( !process.env.NODE_ENV ) 
-            console.error( 'No NODE_ENV value in .env file' );
+        const { NODE_ENV, MONGO_URL, REST_PORT, SALT_ROUNDS } = process.env;
 
-        return process.env.NODE_ENV as string;
-    },
+        if( !NODE_ENV || !MONGO_URL || !REST_PORT || !SALT_ROUNDS )
+            console.error( chalk.red( 'One of the following environment variable is missing : NODE_ENV, MONGO_URL, REST_PORT_SALT_ROUNDS\n' ) );
+    }
 
-    MONGO_URL : () =>
+    export const get =
     {
-        if( !process.env.MONGO_URL ) 
-            console.error( 'No MONGO_URL value in .env file' );
-
-        return process.env.MONGO_URL as string;
-    },
-
-    REST_PORT : () =>
-    {
-        if( !process.env.REST_PORT ) 
-            console.error( 'No REST_PORT value in .env file' );
-
-        return process.env.REST_PORT as string;
-    },
-    
-    SALT_ROUNDS : () =>
-    {
-        if( !process.env.SALT_ROUNDS ) 
-            console.error( 'No SALT_ROUNDS value in .env file' );
-
-        return process.env.SALT_ROUNDS as string;
-    },
+        NODE_ENV : process.env.NODE_ENV! as string,
+        MONGO_URL : process.env.MONGO_URL as string,
+        REST_PORT : process.env.REST_PORT as string,
+        SALT_ROUNDS : process.env.SALT_ROUND as string,
+    }
 }

@@ -4,9 +4,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import graphqlHTTP from 'express-graphql';
+import clear from 'clear';
 
 import DataBase from './core/DataBase';
 import RootQuery from './graphql';
+import { Environment } from './environment';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -19,8 +21,11 @@ const ROUTES = [ ];
 
 export const main = async ( argv: string[] ) : Promise<void> =>
 {
+	clear();
+
 	const app = express();
 	const dataBase = new DataBase( process.env.MONGO_URL as string );
+	Environment.check();
 
 	////////////////////////////////////////////////////////////////////////////
 
