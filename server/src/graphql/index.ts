@@ -106,7 +106,7 @@ const Mutation = new GraphQLObjectType(
 						soltsAvailable : 6 
 					})).save();
 
-					const token = await Token.generate( newUser.get( 'id' ), newUser.get( 'email' ) );
+					const token = await Token.generate( newUser.get( 'id' ) );
 
 					return { token }
 				}
@@ -116,7 +116,7 @@ const Mutation = new GraphQLObjectType(
 
 					if( isPasswordOk )
 					{
-						const token = await Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) );
+						const token = await Token.generate( identifiedUser.get( 'id' ) );
 
 						return { token }
 					}
