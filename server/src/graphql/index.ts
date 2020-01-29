@@ -103,7 +103,9 @@ const Mutation = new GraphQLObjectType(
 						passwordHash : hash,
 						money : 5000,
 						production : 0,
-						soltsAvailable : 6 
+						slotsAvailable : 6,
+						staff : [],
+						buildings : [],
 					})).save();
 
 					const token = await Token.generate( newUser.get( 'id' ) );
