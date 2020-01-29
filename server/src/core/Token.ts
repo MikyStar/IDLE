@@ -11,11 +11,11 @@ const DEFAULT_JWT_EXPIRATION = "1d";
 
 export namespace Token
 {
-	export const generate = async ( email : string, password : string ) : Promise<string> =>
+	export const generate = async ( id : string ) : Promise<string> =>
 	{
         return new Promise( ( resolve, reject ) =>
         {
-            sign( { email, password }, Environment.get.JWT_SECRET, { expiresIn : DEFAULT_JWT_EXPIRATION }, ( error, token ) => error ? reject( error ) : resolve( token ) );
+            sign( { id }, Environment.get.JWT_SECRET, { expiresIn : DEFAULT_JWT_EXPIRATION }, ( error, token ) => error ? reject( error ) : resolve( token ) );
         });
     }
 
@@ -23,7 +23,7 @@ export namespace Token
 	{
         return new Promise( ( resolve, reject ) =>
         {
-            jwtVerify( token, Environment.get.JWT_SECRET, ( error, user ) => error ? reject( error ) : resolve( user ) );
+            jwtVerify( token, Environment.get.JWT_SECRET, ( error, decryptedToken ) => error ? reject( error ) : resolve( decryptedToken ) );
         });
     }
 

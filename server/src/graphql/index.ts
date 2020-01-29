@@ -61,10 +61,10 @@ const RootQuery = new GraphQLObjectType(
 		user :
 		{
 			type : UserType,
-			args : { id : { type : GraphQLID } },
-			resolve( parent, args )
+			args : { token : { type : GraphQLString } },
+			async resolve( parent, args )
 			{
-				return _.find( defaultUsers, { id : args.id } )
+				return ( await Token.getUser( args.token ) )
 			}
 		}
 	}
