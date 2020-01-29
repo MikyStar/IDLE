@@ -8,9 +8,11 @@ export namespace Password
 {
     export const hash = async ( password : string ) : Promise<string> =>
 	{
+        const salt = await bcrypt.genSalt( Environment.get.SALT_ROUNDS );
+
         return new Promise( ( resolve, reject ) =>
         {
-            bcrypt.hash( password, Environment.get.SALT_ROUNDS, ( error, hash ) => error ? reject( error ) : resolve( hash ) );
+            bcrypt.hash( password, salt, ( error, hash ) => error ? reject( error ) : resolve( hash ) );
         });
     }
 

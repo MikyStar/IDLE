@@ -45,11 +45,13 @@ Go to the docs folder for further informations on the project ( Gantt, MindMaps,
 - Mongoose
 - GraphQL
 - GraphiQL
+- JWT
+- Bcrypt
 - Docker
 
 ## Running it
 
-`You'll need the .env files obviously not commited but also Docker and docker-compose`
+`You'll need the .env files obviously not commited but also Docker and docker-compose or just use npm start inside server and client`
 
 ```sh
 # To run the server
@@ -69,4 +71,4 @@ GraphiQL is like a [Postman](https://www.getpostman.com/) for GraphQL.
 
 The current instance of MongoDB is running on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-Please refer to the author of this repo for the mathing .env file with the connection string.
+Please refer to the author of this repo for the matching .env file with the connection string.

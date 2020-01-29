@@ -6,6 +6,7 @@ import chalk from 'chalk';
 dotenv.config();
 
 ////////////////////////////////////////////////////////////////////////////////
+
 export namespace Environment
 {
     /**
@@ -18,7 +19,7 @@ export namespace Environment
      */
     export const check = () =>
     {
-        const { NODE_ENV, MONGO_URL, REST_PORT, SALT_ROUNDS, JWT_SECRET } = process.env;
+        const { NODE_ENV, MONGO_URL, REST_PORT, SALT_ROUNDS, JWT_SECRET } = process.env
 
         if( !NODE_ENV || !MONGO_URL || !REST_PORT || !SALT_ROUNDS || !JWT_SECRET )
             console.error( chalk.red( 'One of the following environment variable is missing : NODE_ENV, MONGO_URL, REST_PORT, SALT_ROUNDS, JWT_SECRET\n' ) );
@@ -29,7 +30,7 @@ export namespace Environment
         NODE_ENV : process.env.NODE_ENV! as string,
         MONGO_URL : process.env.MONGO_URL as string,
         REST_PORT : process.env.REST_PORT as string,
-        SALT_ROUNDS : process.env.SALT_ROUND as string,
+        SALT_ROUNDS : Number.parseInt( process.env.SALT_ROUNDS as string ),
         JWT_SECRET : process.env.JWT_SECRET as string,
     }
 }

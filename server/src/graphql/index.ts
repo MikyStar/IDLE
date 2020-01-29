@@ -87,15 +87,19 @@ const Mutation = new GraphQLObjectType(
 				email : { type : new GraphQLNonNull( GraphQLString ) },
 				password : { type : new GraphQLNonNull( GraphQLString ) },
 			},
+			description : "Creates an account if email don't exists or logs you in. Either way send you back a connection token",
 			async resolve( parent, args )
 			{
-				const identifiedUser = await User.findOne( { where : { email : args.email } } );
+				const identifiedUser = await User.findOne( { email : args.email } );
 
 				if( !identifiedUser )
 				{
+					console.log( args.password );
+					const hash = await Password.hash( args.password );
+
 					return ( await User.create({
 													email : args.email,
-													passwordHash : args.password, // TODO handle Encryption with core/Password
+													passwordHash : hash,
 													money : 5000,
 													production : 0,
 													soltsAvailable : 6 
@@ -105,9 +109,12 @@ const Mutation = new GraphQLObjectType(
 				else
 				{
 					if( await Password.compare( args.password, identifiedUser.get( 'passwordHash' ) ) )
+					{
+						console.log( 'token', Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) ) )
 						return await Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) );
+					}
 					else
-						return 'Not allowed';
+						return console.log('Not allowed');
 				}
 			}
 		},

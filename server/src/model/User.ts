@@ -9,7 +9,7 @@ const UserScheme = new Schema(
     passwordHash : String,
     money : Number,
     production : Number,
-	timestampProduction : { type: Date, default: Date.now }, 
+	lastUpdate : { type: Date, default: Date.now }, 
     staff : [String],
     buildings : [String],
     slotsAvailable : Number
