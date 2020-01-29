@@ -4,6 +4,7 @@ import { Types } from 'mongoose';
 
 import { BuildingType } from './Building';
 import { StaffType } from './Staff';
+import { LoginResponseType } from './Login';
 import { UserType, defaultUsers } from './User';
 
 import Building from '../model/Building';
@@ -81,7 +82,7 @@ const Mutation = new GraphQLObjectType(
 		// Creates an account if email don't exists or logs you in. Either way send you back a connection token
 		login :
 		{
-			type : UserType,
+			type : LoginResponseType,
 			args :
 			{
 				email : { type : new GraphQLNonNull( GraphQLString ) },
@@ -94,27 +95,33 @@ const Mutation = new GraphQLObjectType(
 
 				if( !identifiedUser )
 				{
-					console.log( args.password );
 					const hash = await Password.hash( args.password );
 
-					return ( await User.create({
-													email : args.email,
-													passwordHash : hash,
-													money : 5000,
-													production : 0,
-													soltsAvailable : 6 
-												})
-							).save();
+					const newUser = await ( await User.create(
+					{
+						email : args.email,
+						passwordHash : hash,
+						money : 5000,
+						production : 0,
+						soltsAvailable : 6 
+					})).save();
+
+					const token = await Token.generate( newUser.get( 'id' ), newUser.get( 'email' ) );
+
+					return { user : newUser, token }
 				}
 				else
 				{
-					if( await Password.compare( args.password, identifiedUser.get( 'passwordHash' ) ) )
+					const isPasswordOk = await Password.compare( args.password, identifiedUser.get( 'passwordHash' ) );
+
+					if( isPasswordOk )
 					{
-						console.log( 'token', Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) ) )
-						return await Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) );
+						const token = await Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) );
+
+						return { user : identifiedUser, token }
 					}
 					else
-						return console.log('Not allowed');
+						return { error : 'Not allowed' }
 				}
 			}
 		},

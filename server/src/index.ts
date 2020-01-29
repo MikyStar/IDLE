@@ -13,8 +13,7 @@ import { Environment } from './environment';
 ////////////////////////////////////////////////////////////////////////////////
 
 const DEFAULT_PORT = 5001;
-const API_BASE_NAME = '/api';
-const GRAPHIQL_ROUTE = '/graphiql';
+const GRAPHQL_ROUTE = '/graphql';
 const ROUTES = [ ];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,14 +39,15 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 
 	const enableCORS = () => app.use( cors() );
 
-	const startRestService = () => app.listen( Environment.get.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ Environment.get.NODE_ENV } mode, port ${ Environment.get.REST_PORT }` ) );
+	const startService = () => app.listen( Environment.get.REST_PORT, () =>  console.log( `NodeJS REST service running in ${ Environment.get.NODE_ENV } mode, port ${ Environment.get.REST_PORT }` ) );
 
 	const setupTestRoute = () => app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) );
 
 	//const setupRoutes = () => ROUTES.forEach( route => app.use( API_BASE_NAME, route ) );
 
-	const setupGraphQL = () => app.use( GRAPHIQL_ROUTE, graphqlHTTP(
+	const setupGraphQL = () => app.use( GRAPHQL_ROUTE, graphqlHTTP(
 	{
+		// TODO look more on rootValue -> https://github.com/graphql/express-graphql#options
 		schema : RootQuery,
 		graphiql : true 
 	}));
@@ -59,7 +59,7 @@ export const main = async ( argv: string[] ) : Promise<void> =>
 	allowJSONBodyHandling();
 	enableCORS();
 
-	startRestService();
+	startService();
 
 	setupTestRoute();
 	//setupRoutes();
