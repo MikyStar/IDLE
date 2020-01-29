@@ -108,7 +108,7 @@ const Mutation = new GraphQLObjectType(
 
 					const token = await Token.generate( newUser.get( 'id' ), newUser.get( 'email' ) );
 
-					return { user : newUser, token }
+					return { token }
 				}
 				else
 				{
@@ -118,13 +118,14 @@ const Mutation = new GraphQLObjectType(
 					{
 						const token = await Token.generate( identifiedUser.get( 'id' ), identifiedUser.get( 'email' ) );
 
-						return { user : identifiedUser, token }
+						return { token }
 					}
 					else
-						return { error : 'Not allowed' }
+						return { error : 'Wrong password' }
 				}
 			}
 		},
+
 
 		////////////////////////////////////////////////////////////////////
 
