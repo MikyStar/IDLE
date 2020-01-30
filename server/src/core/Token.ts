@@ -1,7 +1,7 @@
 import { sign, verify as jwtVerify } from 'jsonwebtoken';
 
 import { Environment } from '../environment';
-import { User } from '../true-model/User';
+import { User } from '../model/User';
 import { ObjectId } from 'mongodb';
 
 ////////////////////////////////////////////////////////////////////////////////

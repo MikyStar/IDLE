@@ -14,7 +14,7 @@ import DataBase from './core/DataBase';
 import RootQuery from './graphql';
 import { Environment } from './environment';
 
-import { User } from './true-model/User'
+import { User } from './model/User'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -72,6 +72,7 @@ const typeormConfig =
 	entities : [ User ]
 }
 
+//@ts-ignore
 createConnection( typeormConfig ).then( connection => console.log( 'TypeORM is working .......... MAYBE ??' ))
 
 ////////////////////////////////////////////////////////////////////////////////

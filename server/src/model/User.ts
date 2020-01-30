@@ -1,20 +1,49 @@
-
-import mongoose, { Schema } from 'mongoose';
+import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
+import moment from 'moment';
 
 ////////////////////////////////////////////////////////////////////////////
 
-const UserScheme = new Schema(
+const COLLECTION_NAME = "users";
+const TIMESTAMP_FORMAT = "DD/MM/YYYY HH:mm:ss";
+
+////////////////////////////////////////////////////////////////////////////
+
+@Entity( COLLECTION_NAME )
+export class User extends BaseEntity
 {
-    email : String,
-    passwordHash : String,
-    money : Number,
-    production : Number,
-	lastUpdate : { type: Date, default: Date.now }, 
-    staff : [String],
-    buildings : [String],
-    slotsAvailable : Number
-})
+    @ObjectIdColumn({ primary : true })
+    _id : ObjectID;
+    
+    @Column('string', { unique : true,  })
+    email : string;
 
-////////////////////////////////////////////////////////////////////////////
+    @Column('string')
+    passwordHash : string;
 
-export default mongoose.model( 'User', UserScheme );
+    @Column('number')
+    money : number = 5000;
+
+    @Column('number')
+    production : number = 0;
+
+    @Column('string')
+    lastUpdate : string = moment().format( TIMESTAMP_FORMAT );
+
+    @Column('array')
+    staff : string[] = [];
+
+    @Column('array')
+    buildings : string[] = [];
+
+    @Column('number')
+    slotsAvailable : number = 6;
+
+    ////////////////////////////////////////////////////////////////////////
+
+    constructor( email : string, passwordHash : string )
+    {
+        super();
+        this.email = email;
+        this.passwordHash = passwordHash;
+    }
+}

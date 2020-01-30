@@ -7,9 +7,8 @@ import { StaffType } from './Staff';
 import { LoginResponseType } from './Login';
 import { UserType, defaultUsers } from './User';
 
-import Building from '../model/Building';
-//import User from '../model/User';
-import { User } from '../true-model/User'
+import { Building } from '../model/Building';
+import { User } from '../model/User'
 import { buildings } from '../data/Buildings';
 import { workers } from '../data/Workers'
 import { Password } from '../core/Password';
@@ -130,9 +129,7 @@ const Mutation = new GraphQLObjectType(
 			},
 			resolve( parent, args )
 			{
-				let building = new Building({ id : args.id, name : args.name });
-
-				return building.save();
+				//TODO
 			}
 		},
 	}
