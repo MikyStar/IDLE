@@ -2,6 +2,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+import "reflect-metadata";
 import { install as installSourceMapSupport } from 'source-map-support';
 import express from 'express';
 import cors from 'cors';
@@ -24,10 +25,10 @@ const MOTD = `NodeJS service running in ${ Environment.get.NODE_ENV } mode => ht
 
 ////////////////////////////////////////////////////////////////////////////////
 
+installSourceMapSupport();
+
 const app = express();
 const dataBase = new DataBase( Environment.get.MONGO_URL );
-
-installSourceMapSupport();
 
 ( function enableCORS()
 	{ app.use( cors() ) }
@@ -55,6 +56,8 @@ dataBase.connect().then(
 		graphiql : true 
 	}));
 })();
+
+////////////////////////////////////////////////////////////////////////////////
 
 process.on( "uncaughtException", ( event : any ) => { console.error( event ); process.exit( -1 ) } );
 process.on( "unhandledRejection", ( event : any ) => { console.error( event ); process.exit( -1 ) } );
