@@ -97,25 +97,9 @@ const Mutation = new GraphQLObjectType(
 				if( !identifiedUser )
 				{
 					const hash = await Password.hash( args.password );
-
-					/*const newUser = await ( await User.create(
-					{
-						email : args.email,
-						passwordHash : hash,
-						money : 5000,
-						production : 0,
-						slotsAvailable : 6,
-						staff : [],
-						buildings : [],
-					})).save();*/
-
-					const newUser = new User();
-					newUser.email = args.email;
-					newUser.passwordHash = hash;
-					await newUser.save();
+					const newUser = await new User( args.email, hash ).save();
 
 					const token = await Token.generate( newUser );
-
 					return { token }
 				}
 				else
@@ -125,7 +109,6 @@ const Mutation = new GraphQLObjectType(
 					if( isPasswordOk )
 					{
 						const token = await Token.generate( identifiedUser );
-
 						return { token }
 					}
 					else

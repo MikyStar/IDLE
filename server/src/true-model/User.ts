@@ -37,4 +37,11 @@ export class User extends BaseEntity
 
     @Column('number')
     slotsAvailable : number = 6;
+
+    constructor( email : string, passwordHash : string )
+    {
+        super();
+        this.email = email;
+        this.passwordHash = passwordHash;
+    }
 }
