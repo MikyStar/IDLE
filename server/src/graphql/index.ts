@@ -79,7 +79,6 @@ const Mutation = new GraphQLObjectType(
 	{
 		// TODO search for Swagger implementation
 
-		// Creates an account if email don't exists or logs you in. Either way send you back a connection token
 		login :
 		{
 			type : LoginResponseType,
