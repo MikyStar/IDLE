@@ -88,7 +88,7 @@ const Mutation = new GraphQLObjectType(
 				email : { type : new GraphQLNonNull( GraphQLString ) },
 				password : { type : new GraphQLNonNull( GraphQLString ) },
 			},
-			description : "Creates an account if email don't exists or logs you in. Either way send you back a connection token",
+			description : "Creates an account if email don't exists. Send you back a connection token",
 			async resolve( parent, args )
 			{
 				const identifiedUser = await User.findOne( { email : args.email } );

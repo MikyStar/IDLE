@@ -19,18 +19,20 @@ export namespace Environment
      */
     export const check = () =>
     {
-        const { NODE_ENV, MONGO_URL, REST_PORT, SALT_ROUNDS, JWT_SECRET } = process.env
+        const { NODE_ENV, MONGO_URL, PORT, SALT_ROUNDS, JWT_SECRET, API_VERSION, HOST_ADRESS } = process.env
 
-        if( !NODE_ENV || !MONGO_URL || !REST_PORT || !SALT_ROUNDS || !JWT_SECRET )
-            console.error( chalk.red( 'One of the following environment variable is missing : NODE_ENV, MONGO_URL, REST_PORT, SALT_ROUNDS, JWT_SECRET\n' ) );
+        if( !NODE_ENV || !MONGO_URL || !PORT || !SALT_ROUNDS || !JWT_SECRET || API_VERSION || HOST_ADRESS )
+            console.error( chalk.red( 'One of the following environment variable is missing : NODE_ENV, MONGO_URL, PORT, SALT_ROUNDS, JWT_SECRET, API_VERSION, HOST_ADRESS\n' ) );
     }
 
     export const get =
     {
         NODE_ENV : process.env.NODE_ENV! as string,
         MONGO_URL : process.env.MONGO_URL as string,
-        REST_PORT : process.env.REST_PORT as string,
+        PORT : process.env.PORT as string,
         SALT_ROUNDS : Number.parseInt( process.env.SALT_ROUNDS as string ),
         JWT_SECRET : process.env.JWT_SECRET as string,
+        API_VERSION : Number.parseInt( process.env.API_VERSION as string ),
+        HOST_ADRESS : process.env.HOST_ADRESS as string,
     }
 }
