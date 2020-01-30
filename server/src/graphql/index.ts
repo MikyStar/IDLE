@@ -8,7 +8,8 @@ import { LoginResponseType } from './Login';
 import { UserType, defaultUsers } from './User';
 
 import Building from '../model/Building';
-import User from '../model/User';
+//import User from '../model/User';
+import { User } from '../true-model/User'
 import { buildings } from '../data/Buildings';
 import { workers } from '../data/Workers'
 import { Password } from '../core/Password';
@@ -97,7 +98,7 @@ const Mutation = new GraphQLObjectType(
 				{
 					const hash = await Password.hash( args.password );
 
-					const newUser = await ( await User.create(
+					/*const newUser = await ( await User.create(
 					{
 						email : args.email,
 						passwordHash : hash,
@@ -106,19 +107,25 @@ const Mutation = new GraphQLObjectType(
 						slotsAvailable : 6,
 						staff : [],
 						buildings : [],
-					})).save();
+					})).save();*/
 
-					const token = await Token.generate( newUser.get( 'id' ) );
+					const newUser = new User();
+					newUser.email = args.email;
+					newUser.passwordHash = hash;
+					newUser.save();
+
+					const token = await Token.generate( newUser.id );
+					console.log( 'email', newUser.email )
 
 					return { token }
 				}
 				else
 				{
-					const isPasswordOk = await Password.compare( args.password, identifiedUser.get( 'passwordHash' ) );
+					const isPasswordOk = await Password.compare( args.password, identifiedUser.passwordHash );
 
 					if( isPasswordOk )
 					{
-						const token = await Token.generate( identifiedUser.get( 'id' ) );
+						const token = await Token.generate( identifiedUser.id );
 
 						return { token }
 					}

@@ -1,11 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ObjectIdColumn } from "typeorm";
 
 ////////////////////////////////////////////////////////////////////////////
 
 @Entity()
-export class User
+export class User extends BaseEntity
 {
-    @PrimaryGeneratedColumn()
+    @ObjectIdColumn()
     id : string;
     
     @Column('string')
@@ -14,21 +14,21 @@ export class User
     @Column('string')
     passwordHash : string;
 
-    @Column('number')
+    @Column('number', { default : 5000 })
     money : number;
 
-    @Column('number')
-    production : Number;
+    @Column('number', { default : 0 })
+    production : number;
 
-    @Column('datetime')
+    @Column('datetime', { default : Date.now })
     lastUpdate : Date;
 
     @Column('array')
-    staff : [String];
+    staff : [string];
 
     @Column('array')
-    buildings : [String];
+    buildings : [string];
 
-    @Column('number')
-    slotsAvailable : Number;
+    @Column('number', { default : 6 })
+    slotsAvailable : number;
 }

@@ -68,6 +68,7 @@ const typeormConfig =
 	useNewUrlParser : true,
 	useUnifiedTopology : true,
 	url : Environment.get.MONGO_URL,
+	synchronize : true,
 	entities : [ User ]
 }
 
