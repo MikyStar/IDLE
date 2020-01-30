@@ -55,6 +55,7 @@
     "graphql": "^14.5.8",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "mongodb": "^3.5.2",
     "mongoose": "^5.8.9",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.16",

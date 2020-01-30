@@ -8,10 +8,13 @@ import express from 'express';
 import cors from 'cors';
 import graphqlHTTP from 'express-graphql';
 import clear from 'clear';
+import { createConnection } from 'typeorm';
 
 import DataBase from './core/DataBase';
 import RootQuery from './graphql';
 import { Environment } from './environment';
+
+import { User } from './true-model/User'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -56,6 +59,19 @@ dataBase.connect().then(
 		graphiql : true 
 	}));
 })();
+
+////////////////////////////////////////////////////////////////////////////////
+
+const typeormConfig =
+{
+	type : "mongodb",
+	useNewUrlParser : true,
+	useUnifiedTopology : true,
+	url : Environment.get.MONGO_URL,
+	entities : [ User ]
+}
+
+createConnection( typeormConfig ).then( connection => console.log( 'TypeORM is working .......... MAYBE ??' ))
 
 ////////////////////////////////////////////////////////////////////////////////
 

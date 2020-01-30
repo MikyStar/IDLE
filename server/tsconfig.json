@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "preserve",
-    "target": "esnext"
+    "target": "esnext",
+    "emitDecoratorMetadata": true,
   }
 }
