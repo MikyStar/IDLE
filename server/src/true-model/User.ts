@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
+import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
 import moment from 'moment';
 
 ////////////////////////////////////////////////////////////////////////////
@@ -26,8 +26,8 @@ export class User extends BaseEntity
     @Column('number')
     production : number = 0;
 
-    @Column('datetime')
-    lastUpdate : Date = moment().format( TIMESTAMP_FORMAT );
+    @Column('string')
+    lastUpdate : string = moment().format( TIMESTAMP_FORMAT );
 
     @Column('array')
     staff : string[] = [];
@@ -37,6 +37,8 @@ export class User extends BaseEntity
 
     @Column('number')
     slotsAvailable : number = 6;
+
+    ////////////////////////////////////////////////////////////////////////
 
     constructor( email : string, passwordHash : string )
     {
