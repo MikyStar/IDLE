@@ -92,7 +92,7 @@ const Mutation = new GraphQLObjectType(
 			description : "Creates an account if email don't exists. Send you back a connection token",
 			async resolve( parent, args )
 			{
-				const identifiedUser = await User.findOne( { email : args.email } );
+				const identifiedUser = await User.findOne( { where : { email : args.email } } );
 
 				if( !identifiedUser )
 				{
@@ -112,10 +112,9 @@ const Mutation = new GraphQLObjectType(
 					const newUser = new User();
 					newUser.email = args.email;
 					newUser.passwordHash = hash;
-					newUser.save();
+					await newUser.save();
 
-					const token = await Token.generate( newUser.id );
-					console.log( 'email', newUser.email )
+					const token = await Token.generate( newUser );
 
 					return { token }
 				}
@@ -125,7 +124,7 @@ const Mutation = new GraphQLObjectType(
 
 					if( isPasswordOk )
 					{
-						const token = await Token.generate( identifiedUser.id );
+						const token = await Token.generate( identifiedUser );
 
 						return { token }
 					}

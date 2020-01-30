@@ -1,17 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ObjectIdColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
 import moment from 'moment';
 
 ////////////////////////////////////////////////////////////////////////////
 
+const COLLECTION_NAME = "users";
 const TIMESTAMP_FORMAT = "DD/MM/YYYY HH:mm:ss";
 
 ////////////////////////////////////////////////////////////////////////////
 
-@Entity()
+@Entity( COLLECTION_NAME )
 export class User extends BaseEntity
 {
     @ObjectIdColumn({ primary : true })
-    id : string;
+    _id : ObjectID;
     
     @Column('string', { unique : true,  })
     email : string;
