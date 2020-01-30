@@ -45,6 +45,7 @@ Go to the docs folder for further informations on the project ( Gantt, MindMaps,
 - Mongoose
 - GraphQL
 - GraphiQL
+- TypeOrm
 - JWT
 - Bcrypt
 - Docker

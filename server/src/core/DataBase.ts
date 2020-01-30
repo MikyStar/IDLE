@@ -1,4 +1,6 @@
-import mongoose from 'mongoose';
+import { createConnection } from 'typeorm';
+
+import { User } from '../model/User'
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,9 +30,17 @@ export default class DataBase implements IDB
 	{
 		return new Promise( ( resolve, reject ) =>
 		{
-			mongoose.connect( this.url, { useNewUrlParser : true, useUnifiedTopology : true }, error => reject( error ) );
+			const typeormConfig =
+			{
+				type : "mongodb",
+				useNewUrlParser : true,
+				useUnifiedTopology : true,
+				url : this.url,
+				synchronize : true,
+				entities : [ User ]
+			}
 
-			mongoose.connection.once( 'open', () => resolve() )
+			createConnection( typeormConfig ).then( ( connection : any ) => resolve( connection ));
 		});
 	}
 }

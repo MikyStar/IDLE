@@ -7,8 +7,8 @@ import { StaffType } from './Staff';
 import { LoginResponseType } from './Login';
 import { UserType, defaultUsers } from './User';
 
-import Building from '../model/Building';
-import User from '../model/User';
+import { Building } from '../model/Building';
+import { User } from '../model/User'
 import { buildings } from '../data/Buildings';
 import { workers } from '../data/Workers'
 import { Password } from '../core/Password';
@@ -91,35 +91,23 @@ const Mutation = new GraphQLObjectType(
 			description : "Creates an account if email don't exists. Send you back a connection token",
 			async resolve( parent, args )
 			{
-				const identifiedUser = await User.findOne( { email : args.email } );
+				const identifiedUser = await User.findOne( { where : { email : args.email } } );
 
 				if( !identifiedUser )
 				{
 					const hash = await Password.hash( args.password );
+					const newUser = await new User( args.email, hash ).save();
 
-					const newUser = await ( await User.create(
-					{
-						email : args.email,
-						passwordHash : hash,
-						money : 5000,
-						production : 0,
-						slotsAvailable : 6,
-						staff : [],
-						buildings : [],
-					})).save();
-
-					const token = await Token.generate( newUser.get( 'id' ) );
-
+					const token = await Token.generate( newUser );
 					return { token }
 				}
 				else
 				{
-					const isPasswordOk = await Password.compare( args.password, identifiedUser.get( 'passwordHash' ) );
+					const isPasswordOk = await Password.compare( args.password, identifiedUser.passwordHash );
 
 					if( isPasswordOk )
 					{
-						const token = await Token.generate( identifiedUser.get( 'id' ) );
-
+						const token = await Token.generate( identifiedUser );
 						return { token }
 					}
 					else
@@ -141,9 +129,7 @@ const Mutation = new GraphQLObjectType(
 			},
 			resolve( parent, args )
 			{
-				let building = new Building({ id : args.id, name : args.name });
-
-				return building.save();
+				//TODO
 			}
 		},
 	}

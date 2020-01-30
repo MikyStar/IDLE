@@ -1,16 +1,42 @@
-import mongoose, { Schema } from 'mongoose';
+import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
 
 ////////////////////////////////////////////////////////////////////////////
 
-const StaffScheme = new Schema(
+const COLLECTION_NAME = "staff";
+
+////////////////////////////////////////////////////////////////////////////
+
+export enum WorkerTypes
 {
-    name : String,
-    type : String,
-    basePrice : Number,
-    rating : Number,
-    buildings : String
-});
+    MINER = 'miner',
+    WOKER = 'worker',
+    SCIENTIST = 'scientist'
+}
 
 ////////////////////////////////////////////////////////////////////////////
 
-export default mongoose.model( 'Staff', StaffScheme );
+@Entity( COLLECTION_NAME )
+export class Worker extends BaseEntity
+{
+    @ObjectIdColumn({ primary : true })
+    _id : ObjectID;
+    
+    @Column('string')
+    name : string;
+
+    @Column('string')
+    type : WorkerTypes;
+
+    @Column('number')
+    basePrice : number;
+
+    ////////////////////////////////////////////////////////////////////////
+
+    constructor( name : string, type : WorkerTypes, basePrice : number )
+    {
+        super();
+        this.name = name;
+        this.type = type;
+        this.basePrice = basePrice;
+    }
+}
