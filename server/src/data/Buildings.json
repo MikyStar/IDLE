@@ -1,0 +1,45 @@
+{
+	"buildings" :
+	[
+		{
+			"basePrice" : 1000,
+			"name" : "Mine 1 wood",
+			"type" : "mine"
+		},
+		{
+			"basePrice" : 1500,
+			"name" : "Mine 2 wood",
+			"type" : "mine"
+		},
+		{
+			"basePrice" : 2000,
+			"name" : "Mine 3 Plutonium",
+			"type" : "mine"
+		},
+		{
+			"basePrice" : 2500,
+			"name" : "Mine 4 Urnanium",
+			"type" : "mine"
+		},
+		{
+			"name" : "Mine 5 wood",
+			"basePrice" : 1000,
+			"type" : "mine"
+		},
+		{
+			"basePrice" : 1500,
+			"name" : "Mine 6 coal",
+			"type" : "mine"
+		},
+		{
+			"basePrice" : 2000,
+			"name" : "Mine 7 Plutonium",
+			"type" : "mine"
+		},
+		{
+			"basePrice" : 2500,
+			"name" : "Mine 8 Urnanium",
+			"type" : "mine"
+		}
+	]
+}

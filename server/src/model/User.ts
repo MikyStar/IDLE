@@ -14,7 +14,7 @@ export class User extends BaseEntity
     @ObjectIdColumn({ primary : true })
     _id : ObjectID;
     
-    @Column('string', { unique : true,  })
+    @Column('string', { unique : true })
     email : string;
 
     @Column('string')
@@ -34,6 +34,9 @@ export class User extends BaseEntity
 
     @Column('array')
     buildings : string[] = [];
+
+    @Column('string')
+    shopID : string;
 
     @Column('number')
     slotsAvailable : number = 6;
