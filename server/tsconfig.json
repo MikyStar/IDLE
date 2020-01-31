@@ -12,5 +12,6 @@
     "jsx": "preserve",
     "target": "esnext",
     "emitDecoratorMetadata": true,
+    "noImplicitAny": false
   }
 }

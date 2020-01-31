@@ -43,7 +43,7 @@ const dataBase = new DataBase( Environment.get.MONGO_URL );
 )();
 
 dataBase.connect().then( 
-	resolve => console.log( 'Connected to DB' ),
+	resolve => console.log( `Connected to DB => ${ Environment.get.MONGO_URL }` ),
 	error => console.error( error )
 );
 
