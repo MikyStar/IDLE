@@ -1,4 +1,9 @@
-import { ObjectType, Field, ID, Int } from 'type-graphql';
+import { ObjectType, Field, ID, Int, Resolver, Query, Arg } from 'type-graphql';
+
+import { Token } from '../core/Token';
+import { Shop } from './Shop';
+import { Building } from './Building';
+import { Worker } from './Worker';
 
 ////////////////////////////////////////////////////////////////////////////////
 @ObjectType()
@@ -28,6 +33,18 @@ export class User
     @Field( type => [Building] )
     buildings : Building[];
 
-    @Field( type => [Shop] )
+    @Field( type => Shop )
     shop : Shop;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+@Resolver()
+export class UserResolver
+{
+    @Query( returns => User )
+    async user( /*@Arg( "token" )*/ token : string )
+    {
+		return ( await Token.getUser( token ) )
+    }
 }
