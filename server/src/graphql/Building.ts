@@ -1,12 +1,12 @@
 import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID, GraphQLInputObjectType } from 'graphql';
 import _ from 'lodash';
 
-import { StaffType } from './Staff';
+import { Worker } from './Staff';
 import { workers } from '../data/Workers'
 
 ////////////////////////////////////////////////////////////////////////////
 
-export const BuildingType : GraphQLObjectType = new GraphQLObjectType(
+export const Building : GraphQLObjectType = new GraphQLObjectType(
 {
 	name : 'Building',
 	fields : () =>
@@ -19,7 +19,7 @@ export const BuildingType : GraphQLObjectType = new GraphQLObjectType(
 		productionRate : { type : GraphQLInt },
 		staff : 
 		{
-			type : StaffType,
+			type : Worker,
 			resolve( parent, args )
 			{
 				return _.find( workers, { id : parent.staffID } )

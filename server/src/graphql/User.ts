@@ -1,5 +1,7 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLObjectTypeConfig } from 'graphql';
 import _ from 'lodash';
+
+import { Token } from '../core/Token';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -20,12 +22,17 @@ export const UserType = new GraphQLObjectType(
 	})
 });
 
-export const defaultUsers =
-[
+////////////////////////////////////////////////////////////////////////////
+
+export const UserQuerries =
+{
+	user :
 	{
-		id : '1',
-		email : 'test@mail.com',
-		passwordHash : '1234',
-		money : 10000
+		type : UserType,
+		args : { token : { type : GraphQLString } },
+		async resolve( parent, args )
+		{
+			return ( await Token.getUser( args.token ) )
+		}
 	}
-]
+}

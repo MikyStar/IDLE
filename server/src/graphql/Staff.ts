@@ -2,13 +2,12 @@ import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLInt, GraphQLID,
 import _ from 'lodash';
 
 import { BuildingType } from './Building'
-import { buildings } from '../data/Buildings';
 
 ////////////////////////////////////////////////////////////////////////////
 
-export const StaffType : GraphQLObjectType  = new GraphQLObjectType(
+export const Worker : GraphQLObjectType  = new GraphQLObjectType(
 {
-	name : 'Staff',
+	name : 'Worker',
 	fields : () =>
 	({
 		id : { type : GraphQLID },
@@ -21,7 +20,7 @@ export const StaffType : GraphQLObjectType  = new GraphQLObjectType(
 			type : new GraphQLList( BuildingType ),
 			resolve( parent, args )
 			{
-				return _.filter( buildings, { staffID : parent.id } )
+				// TODO
 			}
 		}
 	})
