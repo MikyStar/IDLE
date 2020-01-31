@@ -14,7 +14,7 @@ export const Shop = new GraphQLObjectType(
 	fields : () =>
 	({
 		workers : { type : new GraphQLList( Worker ) },
-		buildings : { type : new GraphQLList( GraphQLString ) },
+		buildings : { type : new GraphQLList( Building ) },
 	})
 });
 
