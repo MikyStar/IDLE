@@ -32,7 +32,6 @@ Go to the docs folder for further informations on the project ( Gantt, MindMaps,
 
 - React
 - TypeScript
-- Apollo
 - CSS' FlexBox & GridLayout system
 - Docker
 
@@ -42,10 +41,10 @@ Go to the docs folder for further informations on the project ( Gantt, MindMaps,
 - Express
 - TypeScript
 - MongoDB
-- Mongoose
+- TypeOrm
 - GraphQL
 - GraphiQL
-- TypeOrm
+- TypeGraphQL
 - JWT
 - Bcrypt
 - Docker

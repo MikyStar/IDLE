@@ -1,38 +1,33 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLObjectTypeConfig } from 'graphql';
-import _ from 'lodash';
+import { ObjectType, Field, ID, Int } from 'type-graphql';
 
-import { Token } from '../core/Token';
-
-////////////////////////////////////////////////////////////////////////////
-
-export const UserType = new GraphQLObjectType(
+////////////////////////////////////////////////////////////////////////////////
+@ObjectType()
+export class User
 {
-	name : 'User',
-	fields : () =>
-	({
-		_id : { type : GraphQLString },
-		email : { type : GraphQLString },
-		passwordHash : { type : GraphQLString },
-		staff : { type : GraphQLString }, // TODO change type
-		money : { type : GraphQLInt },
-		buildings : { type : GraphQLString }, // TODO change type
-		production : { type : GraphQLInt }, 
-		slotsAvailable : { type : GraphQLInt }, 
-		lastUpdate : { type : GraphQLString },
-	})
-});
+    @Field( type => ID )
+    _id : string;
 
-////////////////////////////////////////////////////////////////////////////
+    @Field( type => String )
+    email : string;
 
-export const UserQuerries =
-{
-	user :
-	{
-		type : UserType,
-		args : { token : { type : GraphQLString } },
-		async resolve( parent, args )
-		{
-			return ( await Token.getUser( args.token ) )
-		}
-	}
+    @Field( type => String )
+    passwordHash : string;
+
+    @Field( type => Int )
+    money : number;
+
+    @Field( type => Int )
+    production : number;
+
+    @Field( type => String )
+    lastUpdate : string;
+
+    @Field( type => [Worker] )
+    staff : Worker[];
+
+    @Field( type => [Building] )
+    buildings : Building[];
+
+    @Field( type => [Shop] )
+    shop : Shop;
 }

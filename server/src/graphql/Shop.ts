@@ -1,39 +1,22 @@
+import { ObjectType, Field, ID, Int } from 'type-graphql';
 
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
-
-import { Token } from '../core/Token';
-import { User } from '../model/User';
-import { Worker } from './Staff';
+import { Worker } from './Worker';
 import { Building } from './Building';
 
-////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
-export const Shop = new GraphQLObjectType(
+@ObjectType()
+export class Shop
 {
-	name : 'Shop',
-	fields : () =>
-	({
-		workers : { type : new GraphQLList( Worker ) },
-		buildings : { type : new GraphQLList( Building ) },
-	})
-});
+    @Field( type => ID )
+    _id : string;
 
-////////////////////////////////////////////////////////////////////////////
+    @Field( type => Worker )
+    worker : string;
 
-export const ShopQuerries =
-{
-	shop :
-	{
-		type : Shop,
-		args : { token : { type : new GraphQLNonNull( GraphQLString ) } },
-		description : "Retrieves the shop associated with the user",
-		async resolve( parent, args )
-		{
-            const user = await Token.getUser( args.token );
-            
-            console.log( 'blop', user )
+    @Field( type => [Building] )
+    buildings : string;
 
-            return { workers : [], staff : [] };
-		}
-	},
-};
+    @Field( type => [Worker] )
+    staff : Worker[];
+}
