@@ -6,12 +6,13 @@ import { User as UserModel } from '../model/User';
 import { Shop } from './Shop';
 import { Building } from './Building';
 import { Worker } from './Worker';
+import { ObjectID } from 'typeorm';
 
 ////////////////////////////////////////////////////////////////////////////////
 @ObjectType()
 export class User
 {
-    @Field( type => ID )
+    @Field( type => String )
     _id : string;
 
     @Field( type => String )
@@ -37,6 +38,9 @@ export class User
 
     @Field( type => Shop )
     shop : Shop;
+
+    @Field( type => Int )
+    slotsAvailable : number;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
