@@ -76,8 +76,8 @@ export class UserResolver
             const newUser = await new UserModel( email, hash ).save();
 
             // Making his shop
-            const shop = await new ShopModel( newUser._id as unknown as string ).save();
-            newUser.shopID = shop._id as unknown as string;
+            const shop = await new ShopModel( newUser._id ).save();
+            newUser.shopID = shop._id;
             newUser.save();
 
             const token = await Token.generate( newUser );

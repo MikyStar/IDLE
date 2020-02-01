@@ -18,7 +18,7 @@ export class Shop extends BaseEntity
     _id : ObjectID;
     
     @Column('string', { unique : true })
-    userID : string;
+    userID : ObjectID;
 
     @Column('array')
     staff : Worker[] = [];
@@ -28,7 +28,7 @@ export class Shop extends BaseEntity
 
     ////////////////////////////////////////////////////////////////////////
 
-    constructor( userID : string )
+    constructor( userID : ObjectID )
     {
         super();
 

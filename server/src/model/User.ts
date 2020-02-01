@@ -36,7 +36,7 @@ export class User extends BaseEntity
     buildings : string[] = [];
 
     @Column('string')
-    shopID : string;
+    shopID : ObjectID;
 
     @Column('number')
     slotsAvailable : number = 6;
