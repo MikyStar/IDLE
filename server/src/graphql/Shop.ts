@@ -34,7 +34,7 @@ export class ShopResolver
     {
         const user = await Token.getUser( token );
             
-        const shop = await ShopModel.findOne( { _id : user.shopID } )
+        const shop = await ShopModel.findOne( { _id : user.shopID } );
 
         return shop;
     }
