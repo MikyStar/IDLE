@@ -6,7 +6,6 @@ import "reflect-metadata";
 import { install as installSourceMapSupport } from 'source-map-support';
 import express from 'express';
 import cors from 'cors';
-//import graphqlHTTP from 'express-graphql';
 import clear from 'clear';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
