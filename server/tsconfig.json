@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "lib": [ "dom", "ESNext.AsyncIterable", "ES2017", "ES6" ],
+    "lib": [ "dom", "esNext.asynciterable", "ES2017", "ES6" ],
     "types": ["node", "jest"],
     "moduleResolution": "node",
     "resolveJsonModule": true,

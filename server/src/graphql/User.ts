@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID, Int, Resolver, Query, Arg } from 'type-graphql';
+import { ObjectType, Field, ID, Int, Resolver, Query, Arg, ArgsType, Args, Mutation } from 'type-graphql';
 
 import { Token } from '../core/Token';
 import { Shop } from './Shop';
@@ -39,11 +39,28 @@ export class User
 
 ////////////////////////////////////////////////////////////////////////////////
 
-@Resolver()
+@ObjectType()
+class LoginType
+{
+    @Field( () => String )
+    token : string;
+
+    @Field( () => String )
+    error : string;
+}
+
+@Resolver( User )
 export class UserResolver
 {
-    @Query( returns => User )
-    async user( /*@Arg( "token" )*/ token : string )
+    @Query( () => User, { description : 'Returns a user given his token.' } )
+    async user( @Arg('token') token : string )
+    {
+        console.log('Reached user resolver and token is', token)
+		return ( await Token.getUser( token ) )
+    }
+
+    @Mutation( () => LoginType )
+    async login( @Arg( "token" ) token : string )
     {
 		return ( await Token.getUser( token ) )
     }

@@ -10,6 +10,7 @@ import cors from 'cors';
 import clear from 'clear';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema, BuildSchemaOptions } from 'type-graphql';
+import { Container } from 'typedi';
 
 import DataBase from './core/DataBase';
 import RootQuery from './graphql.old';
@@ -67,6 +68,7 @@ dataBase.connect().then(
 	const schema = await buildSchema(
 	{
 		resolvers,
+		container : Container
 	});
 
 	const apolloServer = new ApolloServer( { schema } );
