@@ -1,22 +1,40 @@
-import { ObjectType, Field, ID, Int } from 'type-graphql';
+import { ObjectType, Field, ID, Int, Resolver, Query, Arg } from 'type-graphql';
 
 import { Worker } from './Worker';
 import { Building } from './Building';
+import { Token } from '../core/Token';
+import { User } from './User';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 @ObjectType()
 export class Shop
 {
-    @Field( type => ID )
+    @Field( () => String )
     _id : string;
 
-    @Field( type => Worker )
-    worker : string;
+    @Field( () => User )
+    user : User;
 
-    @Field( type => [Building] )
+    @Field( () => [Building] )
     buildings : string;
 
-    @Field( type => [Worker] )
+    @Field( () => [Worker] )
     staff : Worker[];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+@Resolver()
+export class ShopResolver
+{
+    @Query( () => Shop, { description : 'Retrives the shop associated with the user' })
+    async shop( @Arg( 'token' ) token : string )
+    {
+        const user = await Token.getUser( token );
+            
+        console.log( 'blop', user )
+
+        return { workers : [], staff : [] };
+    }
 }

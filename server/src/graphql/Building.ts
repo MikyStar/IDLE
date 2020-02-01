@@ -6,7 +6,7 @@ import { Worker } from './Worker';
 @ObjectType()
 export class Building
 {
-    @Field( type => ID )
+    @Field( type => String )
     _id : string;
 
     @Field( type => String )

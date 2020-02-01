@@ -5,7 +5,7 @@ import { ObjectType, Field, ID, Int } from 'type-graphql';
 @ObjectType()
 export class Worker
 {
-    @Field( type => ID )
+    @Field( type => String )
     _id : string;
 
     @Field( type => String )

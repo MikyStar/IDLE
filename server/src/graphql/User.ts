@@ -61,7 +61,6 @@ export class UserResolver
     @Query( () => User, { description : 'Returns a user given his token.' } )
     async user( @Arg('token') token : string )
     {
-        console.log('Reached user resolver and token is', token)
 		return ( await Token.getUser( token ) )
     }
 
