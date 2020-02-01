@@ -1,6 +1,8 @@
 import { ObjectType, Field, ID, Int, Resolver, Query, Arg, ArgsType, Args, Mutation } from 'type-graphql';
 
 import { Token } from '../core/Token';
+import { Password } from '../core/Password';
+import { User as UserModel } from '../model/User';
 import { Shop } from './Shop';
 import { Building } from './Building';
 import { Worker } from './Worker';
@@ -42,11 +44,11 @@ export class User
 @ObjectType()
 class LoginType
 {
-    @Field( () => String )
-    token : string;
+    @Field( () => String, { nullable : true } )
+    token ?: string;
 
-    @Field( () => String )
-    error : string;
+    @Field( () => String, { nullable : true } )
+    error ?: string;
 }
 
 @Resolver( User )
@@ -60,8 +62,29 @@ export class UserResolver
     }
 
     @Mutation( () => LoginType )
-    async login( @Arg( "token" ) token : string )
+    async login( @Arg( "email" ) email : string, @Arg( "password" ) password : string )
     {
-		return ( await Token.getUser( token ) )
+        const identifiedUser = await UserModel.findOne( { where : { email : email } } );
+
+        if( !identifiedUser )
+        {
+            const hash = await Password.hash( password );
+            const newUser = await new UserModel( email, hash ).save();
+
+            const token = await Token.generate( newUser );
+            return { token }
+        }
+        else
+        {
+            const isPasswordOk = await Password.compare( password, identifiedUser.passwordHash );
+
+            if( isPasswordOk )
+            {
+                const token = await Token.generate( identifiedUser );
+                return { token }
+            }
+            else
+                return { error : 'Wrong password' }
+        }
     }
 }
