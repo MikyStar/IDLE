@@ -30,13 +30,17 @@ export class Worker extends BaseEntity
     @Column('number')
     basePrice : number;
 
+    @Column('number')
+    level : number;
+
     ////////////////////////////////////////////////////////////////////////
 
-    constructor( name : string, type : WorkerTypes, basePrice : number )
+    constructor( name : string, type : WorkerTypes, basePrice : number, level : number )
     {
         super();
         this.name = name;
         this.type = type;
         this.basePrice = basePrice;
+        this.level = level;
     }
 }

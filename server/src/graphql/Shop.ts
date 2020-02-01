@@ -1,39 +1,40 @@
+import { ObjectType, Field, ID, Int, Resolver, Query, Arg } from 'type-graphql';
 
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql';
-
-import { Token } from '../core/Token';
-import { User } from '../model/User';
-import { Worker } from './Staff';
+import { Worker } from './Worker';
 import { Building } from './Building';
+import { Token } from '../core/Token';
+import { User } from './User';
 
-////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
-export const Shop = new GraphQLObjectType(
+@ObjectType()
+export class Shop
 {
-	name : 'Shop',
-	fields : () =>
-	({
-		workers : { type : new GraphQLList( Worker ) },
-		buildings : { type : new GraphQLList( Building ) },
-	})
-});
+    @Field( () => String )
+    _id : string;
 
-////////////////////////////////////////////////////////////////////////////
+    @Field( () => User )
+    user : User;
 
-export const ShopQuerries =
+    @Field( () => [Building] )
+    buildings : string;
+
+    @Field( () => [Worker] )
+    staff : Worker[];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+@Resolver()
+export class ShopResolver
 {
-	shop :
-	{
-		type : Shop,
-		args : { token : { type : new GraphQLNonNull( GraphQLString ) } },
-		description : "Retrieves the shop associated with the user",
-		async resolve( parent, args )
-		{
-            const user = await Token.getUser( args.token );
+    @Query( () => Shop, { description : 'Retrives the shop associated with the user' })
+    async shop( @Arg( 'token' ) token : string )
+    {
+        const user = await Token.getUser( token );
             
-            console.log( 'blop', user )
+        console.log( 'blop', user )
 
-            return { workers : [], staff : [] };
-		}
-	},
-};
+        return { workers : [], staff : [] };
+    }
+}

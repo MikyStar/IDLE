@@ -6,12 +6,17 @@ import "reflect-metadata";
 import { install as installSourceMapSupport } from 'source-map-support';
 import express from 'express';
 import cors from 'cors';
-import graphqlHTTP from 'express-graphql';
+//import graphqlHTTP from 'express-graphql';
 import clear from 'clear';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema, BuildSchemaOptions } from 'type-graphql';
+import { Container } from 'typedi';
 
 import DataBase from './core/DataBase';
-import RootQuery from './graphql';
+import RootQuery from './graphql.old';
 import { Environment } from './environment';
+
+import { UserResolver } from './graphql/User';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,14 +52,29 @@ dataBase.connect().then(
 	error => console.error( error )
 );
 
-( function setupGraphQL()
+( async function setupGraphQL()
 {
-	app.use( GRAPHQL_ROUTE, graphqlHTTP(
+	/*app.use( GRAPHQL_ROUTE, graphqlHTTP(
 	{
 		// TODO look more on rootValue -> https://github.com/graphql/express-graphql#options
 		schema : RootQuery,
 		graphiql : true 
-	}));
+	}));*/
+
+	// ! Apollo server
+
+	const resolvers = [ UserResolver ];
+
+	const schema = await buildSchema(
+	{
+		resolvers,
+		container : Container
+	});
+
+	const apolloServer = new ApolloServer( { schema } );
+
+	apolloServer.applyMiddleware( { app } );
+
 })();
 
 ////////////////////////////////////////////////////////////////////////////////

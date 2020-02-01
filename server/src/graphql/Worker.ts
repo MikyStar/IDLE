@@ -1,10 +1,9 @@
 import { ObjectType, Field, ID, Int } from 'type-graphql';
-import { Worker } from './Worker';
 
 ////////////////////////////////////////////////////////////////////////////////
 
 @ObjectType()
-export class Building
+export class Worker
 {
     @Field( type => String )
     _id : string;
@@ -16,14 +15,8 @@ export class Building
     type : string;
 
     @Field( type => Int )
-    currentLevel : number;
-
-    @Field( type => Int )
     basePrice : number;
 
     @Field( type => Int )
-    productionRate : number;
-
-    @Field( type => [Worker])
-    workers : Worker[];
+    level : number;
 }
