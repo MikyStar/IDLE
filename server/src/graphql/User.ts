@@ -3,10 +3,10 @@ import { ObjectType, Field, ID, Int, Resolver, Query, Arg, ArgsType, Args, Mutat
 import { Token } from '../core/Token';
 import { Password } from '../core/Password';
 import { User as UserModel } from '../model/User';
+import { Shop as ShopModel } from '../model/Shop';
 import { Shop } from './Shop';
 import { Building } from './Building';
 import { Worker } from './Worker';
-import { ObjectID } from 'typeorm';
 
 ////////////////////////////////////////////////////////////////////////////////
 @ObjectType()
@@ -71,8 +71,12 @@ export class UserResolver
 
         if( !identifiedUser )
         {
+            // Creating a User
             const hash = await Password.hash( password );
             const newUser = await new UserModel( email, hash ).save();
+
+            // Making his shop
+            await new ShopModel( newUser._id as unknown as string ).save();
 
             const token = await Token.generate( newUser );
             return { token }

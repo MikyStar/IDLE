@@ -43,7 +43,6 @@ Go to the docs folder for further informations on the project ( Gantt, MindMaps,
 - MongoDB
 - TypeOrm
 - GraphQL
-- GraphiQL
 - TypeGraphQL
 - JWT
 - Bcrypt

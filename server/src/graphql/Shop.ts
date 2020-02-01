@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID, Int, Resolver, Query, Arg } from 'type-graphql';
+import { ObjectType, Field, ID, Int, Resolver, Query, Arg, Mutation } from 'type-graphql';
 
 import { Worker } from './Worker';
 import { Building } from './Building';
