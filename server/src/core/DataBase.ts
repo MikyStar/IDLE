@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
 
-import { User } from '../model/User'
+import { Entities } from '../model';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -37,7 +37,7 @@ export default class DataBase implements IDB
 				useUnifiedTopology : true,
 				url : this.url,
 				synchronize : true,
-				entities : [ User ]
+				entities : Entities
 			}
 
 			createConnection( typeormConfig ).then( ( connection : any ) => resolve( connection ));

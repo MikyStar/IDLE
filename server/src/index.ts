@@ -45,7 +45,7 @@ const dataBase = new DataBase( Environment.get.MONGO_URL );
 	{ app.get( '/', ( request, response ) => response.send( 'The server received a GET resquest' ) ) }
 )();
 
-dataBase.connect().then( 
+dataBase.connect().then(
 	resolve => console.log( `Connected to DB => ${ Environment.get.MONGO_URL }` ),
 	error => console.error( error )
 );
