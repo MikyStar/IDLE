@@ -1,4 +1,5 @@
 import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID, OneToMany } from "typeorm";
+import { ObjectId } from "mongodb";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -18,7 +19,7 @@ export enum BuildingsTypes
 export class Building extends BaseEntity
 {
     @ObjectIdColumn({ primary : true })
-    _id : ObjectID;
+    _id : ObjectId = new ObjectId();
     
     @Column('string')
     name : string;
@@ -36,13 +37,14 @@ export class Building extends BaseEntity
     productionRate : number;
     
     @Column('array')
-    staff : string[];
+    staff : string[] = [];
 
     ////////////////////////////////////////////////////////////////////////
 
-    constructor( name : string, type : BuildingsTypes, currentLevel : number, basePrice : number, productionRate : number, staff : string[] )
+    constructor(name : string, type : BuildingsTypes, currentLevel : number, basePrice : number, productionRate : number, staff : string[] )
     {
         super();
+
         this.name = name;
         this.type = type;
         this.currentLevel = currentLevel;

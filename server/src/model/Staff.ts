@@ -1,4 +1,5 @@
 import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
+import { ObjectId } from 'mongodb';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +20,7 @@ export enum WorkerTypes
 export class Worker extends BaseEntity
 {
     @ObjectIdColumn({ primary : true })
-    _id : ObjectID;
+    _id : ObjectId = new ObjectId();
     
     @Column('string')
     name : string;

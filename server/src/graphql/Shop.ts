@@ -18,7 +18,7 @@ export class Shop
     user : User;
 
     @Field( () => [Building] )
-    buildings : string;
+    buildings : Building[];
 
     @Field( () => [Worker] )
     staff : Worker[];
