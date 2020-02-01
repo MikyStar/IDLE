@@ -1,7 +1,6 @@
-
 import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID, OneToMany } from "typeorm";
 
-import { Worker } from './Staff';
+import { Worker, WorkerTypes } from './Staff';
 import { Building, BuildingsTypes } from './Building';
 
 ////////////////////////////////////////////////////////////////////////////
@@ -34,7 +33,10 @@ export class Shop extends BaseEntity
 
         this.userID = userID;
         this.buildings = this.generateBuilding();
+        this.staff = this.generateStaff();
     }
+
+    ////////////////////////////////////////////////////////////////////////
 
     private generateBuilding() : Building[]
     {
@@ -43,10 +45,25 @@ export class Shop extends BaseEntity
         for( let i = 0; i < SHOP_LENGTH; i++ )
         {
             const baseLevel = 1;
-            const basePrice = Math.floor( ( Math.random() * 20 ) + 10 ) * 100; // Between 1000 and 2000
-            const baseProduction = Math.floor( ( Math.random() * 20 ) + 5 ); // Between 5 and 20
+            const basePrice = Math.floor( ( Math.random() * 20 ) + 10 ) * 100; // TODO rework
+            const baseProduction = Math.floor( ( Math.random() * 20 ) + 5 ); // TODO rework
 
             toReturn.push( new Building( `Building${ i }`, BuildingsTypes.MINE, baseLevel, basePrice, baseProduction, [] ) );
+        }
+
+        return toReturn;
+    }
+
+    private generateStaff() : Worker[]
+    {
+        const toReturn : Worker[] = [];
+
+        for( let i = 0; i < SHOP_LENGTH; i++ )
+        {
+            const baseLevel = 1;
+            const basePrice = Math.floor( ( Math.random() * 20 ) + 10 ) * 100; // TODO rework
+
+            toReturn.push( new Worker( `Worker${ i }`, WorkerTypes.MINER, basePrice, baseLevel ) );
         }
 
         return toReturn;

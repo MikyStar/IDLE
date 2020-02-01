@@ -4,6 +4,7 @@ import { Worker } from './Worker';
 import { Building } from './Building';
 import { Token } from '../core/Token';
 import { User } from './User';
+import { Shop as ShopModel } from '../model/Shop';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -33,8 +34,8 @@ export class ShopResolver
     {
         const user = await Token.getUser( token );
             
-        console.log( 'blop', user )
+        const shop = await ShopModel.findOne( { _id : user.shopID } )
 
-        return { workers : [], staff : [] };
+        return shop;
     }
 }
