@@ -1,10 +1,12 @@
 import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID } from "typeorm";
 import moment from 'moment';
+import { ObjectId } from "mongodb";
+
+import { Time } from '../core/Time';
 
 ////////////////////////////////////////////////////////////////////////////
 
 const COLLECTION_NAME = "users";
-const TIMESTAMP_FORMAT = "DD/MM/YYYY HH:mm:ss";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -27,13 +29,13 @@ export class User extends BaseEntity
     production : number = 0;
 
     @Column('string')
-    lastUpdate : string = moment().format( TIMESTAMP_FORMAT );
+    lastUpdate : string = Time.now;
 
     @Column('array')
     staff : string[] = [];
 
     @Column('array')
-    buildings : string[] = [];
+    buildings : ObjectId[] = [];
 
     @Column('string')
     shopID : ObjectID;
@@ -48,5 +50,16 @@ export class User extends BaseEntity
         super();
         this.email = email;
         this.passwordHash = passwordHash;
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+
+    calculateMoney() : number
+    {
+        const secondsSinceLastUpdate = moment( new Date( Time.now ), Time.FORMAT ).diff( this.lastUpdate, 'seconds' );
+
+        const amountProduced = secondsSinceLastUpdate * this.production;
+
+        return amountProduced + this.money;
     }
 }

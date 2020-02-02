@@ -44,17 +44,18 @@ export class Shop extends BaseEntity
         const toReturn : Building[] = [];
 
         for( let i = 0; i < SHOP_LENGTH; i++ )
-        {
-            const baseLevel = 1;
-            const basePrice = Math.floor( ( Math.random() * 20 ) + 10 ) * 100; // TODO rework
-            const baseProduction = Math.floor( ( Math.random() * 20 ) + 5 ); // TODO rework
-
-            const building = new Building( `Building${ i }`, BuildingsTypes.MINE, baseLevel, basePrice, baseProduction, [] );
-
-            toReturn.push( building );
-        }
+            toReturn.push( await this.generateRandomBuilding( String( i ) ) );
 
         return toReturn;
+    }
+
+    async generateRandomBuilding( name ?: string ) : Promise<Building>
+    {
+        const baseLevel = 1;
+        const basePrice = Math.floor( ( Math.random() * 20 ) + 10 ) * 100; // TODO rework
+        const baseProduction = Math.floor( ( Math.random() * 20 ) + 5 ); // TODO rework
+
+        return new Building( `Building${ name }`, BuildingsTypes.MINE, baseLevel, basePrice, baseProduction, [] );
     }
 
     private async generateStaff() : Promise<Worker[]>

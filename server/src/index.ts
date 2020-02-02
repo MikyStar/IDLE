@@ -22,7 +22,7 @@ clear();
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const GRAPHQL_ROUTE = `/graphql/v${ Environment.get.API_VERSION }`;
+const GRAPHQL_ROUTE = `/graphql/`;
 const MOTD = `NodeJS service running in ${ Environment.get.NODE_ENV } mode => http://${ Environment.get.HOST_ADRESS }:${ Environment.get.PORT }${ GRAPHQL_ROUTE }`;
 
 ////////////////////////////////////////////////////////////////////////////////
