@@ -30,7 +30,7 @@ export class Shop extends BaseEntity
 
     ////////////////////////////////////////////////////////////////////////
 
-    constructor( userID : ObjectID )
+    constructor( userID : ObjectId )
     {
         super();
 

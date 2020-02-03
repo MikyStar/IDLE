@@ -67,14 +67,16 @@ export class ShopResolver
 
             const shop = await ShopModel.findOne( { _id : user.shopID } );
 
-            shop!.buildings.forEach( building => console.log( 'buildid from server : ', building._id.toHexString() ));
+            if( !shop )
+                throw new Error( 'No shop could have been retrieved');
 
             // !
             // ! Seems like I've messed up the scheme, buildings._id seems to be different at each request
             // !
 
-            if( !shop )
-                throw new Error( 'No shop could have been retrieved');
+            shop!.buildings.forEach( building => console.log( 'buildid from server : ', building._id.toHexString() ));
+
+            console.log( 'shop', shop )
 
             return { shop };
         }
