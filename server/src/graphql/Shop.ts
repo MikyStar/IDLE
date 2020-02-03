@@ -67,6 +67,8 @@ export class ShopResolver
 
             const shop = await ShopModel.findOne( { _id : user.shopID } );
 
+            shop!.buildings.forEach( building => console.log( 'buildid from server : ', building._id.toHexString() ));
+
             // !
             // ! Seems like I've messed up the scheme, buildings._id seems to be different at each request
             // !
