@@ -1,8 +1,10 @@
 import { Entity, Column, BaseEntity, ObjectIdColumn, ObjectID, OneToMany } from "typeorm";
+import { ObjectId } from 'mongodb';
 
 import { Worker, WorkerTypes } from './Staff';
 import { Building, BuildingsTypes } from './Building';
-import { generateRandomID } from './index'
+import { User } from "./User";
+import { Time } from '../core/Time';
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -15,10 +17,10 @@ const SHOP_LENGTH = 5;
 export class Shop extends BaseEntity
 {
     @ObjectIdColumn({ primary : true })
-    _id : ObjectID;
+    _id : ObjectId = new ObjectId();
     
     @Column('string', { unique : true })
-    userID : ObjectID;
+    userID : ObjectId;
 
     @Column('array')
     staff : Worker[] = [];
@@ -73,5 +75,62 @@ export class Shop extends BaseEntity
         }
 
         return toReturn;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @description Remove from shop and create a new one, update User ( production, money, lastUpdate, buildings )
+     * 
+     * @param buildingID 
+     */
+    async buyBuilding( buildingID : string ) : Promise<Building>
+    {
+        const shopBuildings = this.buildings;
+
+        let buildingIndex;
+        let buildingToBuy ;
+        shopBuildings.forEach( ( building, index ) => 
+        {
+            console.log( 'parsed', building._id.toHexString(), 'arg', buildingID );
+
+            if( building._id.toHexString() === buildingID )
+            {
+                buildingToBuy = building;
+                buildingIndex = index;
+            }
+        });
+
+        if( !buildingToBuy )
+            throw new Error( 'Building not found' );
+
+        // Making the transaction
+        const user = await User.findOne( { _id : this.userID } ) as User;
+
+        if( !user )
+            throw new Error( "Couldn't retrieve the user from the shop" );
+
+        const userMoney = user.calculateMoney();
+        
+        if( buildingToBuy!.basePrice <= userMoney )
+        {
+            // Remove from shop //! Not happening well
+            shopBuildings.splice( buildingIndex, 1 );
+            this.buildings = shopBuildings;
+            this.buildings.push( await this.generateRandomBuilding() ); // TODO handle the name, maybe store the count of time I've bought something in the shop
+            this.save()
+
+            // Update user
+            user.buildings.push( new ObjectId( buildingToBuy!._id ) );
+            user.production += buildingToBuy!.productionRate;
+            user.money = userMoney - buildingToBuy!.basePrice;
+            user.lastUpdate = Time.now;
+            user.save();
+
+            return buildingToBuy;
+        }
+        else
+            throw new Error( 'Not enough money' );
+
     }
 }

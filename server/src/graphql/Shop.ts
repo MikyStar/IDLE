@@ -67,6 +67,10 @@ export class ShopResolver
 
             const shop = await ShopModel.findOne( { _id : user.shopID } );
 
+            // !
+            // ! Seems like I've messed up the scheme, buildings._id seems to be different at each request
+            // !
+
             if( !shop )
                 throw new Error( 'No shop could have been retrieved');
 
@@ -93,58 +97,17 @@ export class ShopResolver
             if( !shop )
                 throw new Error( "Your shop couldn't have been retrieved." );
 
-            // Retrieve the building
-            const shopBuildings = shop!.buildings;
-            const relation = ( building : BuildingModel ) => building._id.equals( buildingID ) ;
-            //const buildingToBuy = shopBuildings!.find( building => building._id.equals( buildingID ) );
-            const buildingIndex = shopBuildings.findIndex( relation );
+            const building = shop.buyBuilding( buildingID );
 
-            const buildingToBuy = ( () : Building =>
-            {
-                let founded;
+            if( !building )
+                throw new Error( "Error buying the building" );
 
-                shopBuildings.forEach( building => 
-                {
-                    console.log( 'buildID', buildingID, 'a build id', building._id )
-                    if( building._id.equals( buildingID ) )
-                    {
-                        founded = building;
-                        console.log( 'founded')
-                    }
-                });
+            return { building };
 
-                return founded;
-            })()
-
-            // Making the transaction
-            const userMoney = user.calculateMoney();
-            
-            console.log( 'the building', buildingToBuy )
-
-            if( buildingToBuy!.basePrice <= userMoney )
-            {
-                console.log('true')
-                // Remove from shop
-                shopBuildings.splice( buildingIndex, 1 );
-                shop!.buildings = shopBuildings;
-                shop!.buildings.push( await shop.generateRandomBuilding() ); // TODO handle the name, maybe store the count of time I've bought something in the shop
-                shop!.save()
-
-                // Update user
-                user.buildings.push( buildingToBuy!._id );
-                user.production += buildingToBuy!.productionRate;
-                user.money = userMoney - buildingToBuy!.basePrice;
-                user.lastUpdate = Time.now;
-                user.save();
-
-                return { building : buildingToBuy }
-            }
-            else
-                throw new Error( 'Not enough money' );
         }
         catch( error )
         {
-            return { error }
+            return { error };
         }
     }
 }

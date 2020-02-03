@@ -14,7 +14,7 @@ const COLLECTION_NAME = "users";
 export class User extends BaseEntity
 {
     @ObjectIdColumn({ primary : true })
-    _id : ObjectID;
+    _id : ObjectId = new ObjectId();
     
     @Column('string', { unique : true })
     email : string;
@@ -38,7 +38,7 @@ export class User extends BaseEntity
     buildings : ObjectId[] = [];
 
     @Column('string')
-    shopID : ObjectID;
+    shopID : ObjectId;
 
     @Column('number')
     slotsAvailable : number = 6;
